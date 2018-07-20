@@ -1,6 +1,7 @@
 import React from 'react';
 import { Button, View, Text } from 'react-native';
 import { createStackNavigator } from 'react-navigation';
+import IiAuthScreen from './screens/IiAuthScreen';
 class HomeScreen extends React.Component {
   render() {
     return (
@@ -8,18 +9,8 @@ class HomeScreen extends React.Component {
         <Text>Home Screen</Text>
         <Button
           title="Go to Details"
-          onPress={() => this.props.navigation.navigate('Details')}
+          onPress={() => this.props.navigation.navigate('Auth')}
         />
-      </View>
-    );
-  }
-}
-
-class DetailsScreen extends React.Component {
-  render() {
-    return (
-      <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
-        <Text>Details Screen</Text>
       </View>
     );
   }
@@ -27,8 +18,8 @@ class DetailsScreen extends React.Component {
 
 const RootStack = createStackNavigator(
   {
-    Home: HomeScreen,
-    Details: DetailsScreen
+    Auth: IiAuthScreen,
+    Home: HomeScreen
   },
   {
     initialRouteName: 'Home'
@@ -40,3 +31,4 @@ export default class IiAppNavigator extends React.Component {
     return <RootStack />;
   }
 }
+
