@@ -1,0 +1,19 @@
+{
+    "extends": [
+      "rallycoding",
+      "airbnb",
+      "plugin:flowtype/recommended"
+    ],
+    "plugins": [
+      "flowtype",
+      "react-native"
+    ],
+    "settings": {
+      "flowtype": {
+        "onlyFilesWithFlowAnnotation": false
+      }
+    },
+    "env": {
+      "react-native/react-native": true
+    }
+  }
