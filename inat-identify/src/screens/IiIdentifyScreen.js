@@ -23,7 +23,8 @@ export default class IiIdentifyScreen extends Component {
       // Must be observed within the place with this ID
       // Testing with Europe
       place_id: 97391,
-      reviewed: 'false'
+      reviewed: 'false',
+      photos: 'true'
     };
 
     inatjs.observations
