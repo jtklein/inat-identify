@@ -63,8 +63,26 @@ export default class IiIdentifyScreen extends Component {
     );
   };
 
+  onSwipedLeft(observation) {
+    console.log('observation', observation);
+  }
+
+  onSwipedRight(observation) {
+    console.log('observation', observation);
+
+  }
+
+  onSwipedTop(observation) {
+    console.log('observation', observation);
+
+  }
+
+  onSwipedBottom(observation) {
+    console.log('observation', observation);
+
+  }
+
   renderCard = (observation, index) => {
-    console.log('renderCard observation:', observation);
     // The Observation has only thumbnails of images
     const uri = observation.observation_photos[0].photo.url.replace('square', 'large');
     return (
@@ -89,7 +107,11 @@ export default class IiIdentifyScreen extends Component {
           ref={swiper => {
             this.swiper = swiper;
           }}
-          onSwiped={this.onSwiped}
+          backgroundColor={'#FFFFFF'}
+          onSwipedLeft={(index) => this.onSwipedLeft(observations[index])}
+          onSwipedRight={(index) => this.onSwipedRight(observations[index])}
+          onSwipedTop={(index) => this.onSwipedTop(observations[index])}
+          onSwipedBottom={(index) => this.onSwipedBottom(observations[index])}
           cards={this.state.observations}
           cardIndex={this.state.cardIndex}
           cardVerticalMargin={80}
