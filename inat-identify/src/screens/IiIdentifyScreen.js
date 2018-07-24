@@ -15,15 +15,6 @@ export default class IiIdentifyScreen extends Component {
   }
 
 
-  renderCard = (card, index) => {
-    return (
-      <View style={styles.card}>
-        <Text style={styles.text}>
-          {card} - {index}
-        </Text>
-      </View>
-    );
-  };
 
   onSwipedAllCards = () => {
     this.setState({
@@ -50,8 +41,11 @@ export default class IiIdentifyScreen extends Component {
     );
   };
 
-  swipeLeft = () => {
-    this.swiper.swipeLeft();
+  renderCard = (observation, index) => {
+    return (
+      <View style={styles.card}>
+      </View>
+    );
   };
 
   render() {
@@ -62,7 +56,6 @@ export default class IiIdentifyScreen extends Component {
             this.swiper = swiper;
           }}
           onSwiped={this.onSwiped}
-          onTapCard={this.swipeLeft}
           cards={this.state.cards}
           cardIndex={this.state.cardIndex}
           cardVerticalMargin={80}
@@ -142,9 +135,7 @@ export default class IiIdentifyScreen extends Component {
           }}
           animateOverlayLabelsOpacity
           animateCardOpacity
-        >
-          <Button onPress={this.swipeLeft} title="Swipe Left" />
-        </Swiper>
+        />
       </View>
     );
   }
@@ -162,11 +153,6 @@ const styles = StyleSheet.create({
     borderColor: '#E8E8E8',
     justifyContent: 'center',
     backgroundColor: 'white'
-  },
-  text: {
-    textAlign: 'center',
-    fontSize: 50,
-    backgroundColor: 'transparent'
   },
   done: {
     textAlign: 'center',
