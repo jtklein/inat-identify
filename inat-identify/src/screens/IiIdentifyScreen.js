@@ -13,16 +13,24 @@ export default class IiIdentifyScreen extends Component {
       isSwipingBack: false,
       cardIndex: 0,
       observations: [],
+      page: 0,
     };
   }
 
   componentDidMount() {
+    // Get first batch of unidentified observations
+    this.searchObservations();
+  }
+
+  searchObservations() {
     const params = {
       iconic_taxa: 'unknown',
       quality_grade: 'needs_id',
+      page: this.state.page + 1,
       // Must be observed within the place with this ID
       // Testing with Europe
       place_id: 97391,
+      // Observations have been reviewed by the user with ID equal to the value of the viewer_id parameter
       reviewed: 'false',
       photos: 'true'
     };
@@ -31,7 +39,7 @@ export default class IiIdentifyScreen extends Component {
       .search(params)
       .then(rsp => {
         console.log('observations search', rsp);
-        this.setState({ observations: rsp.results });
+        this.setState({ observations: rsp.results, page: rsp.page });
       })
       .catch(e => {
         console.log('Error:', e);
@@ -40,8 +48,11 @@ export default class IiIdentifyScreen extends Component {
 
   onSwipedAllCards = () => {
     this.setState({
+      observations: [],
       swipedAllCards: true
     });
+    // Get new batch of unidentified observation
+    this.searchObservations();
   };
 
   swipeBack = () => {
@@ -126,6 +137,7 @@ export default class IiIdentifyScreen extends Component {
           style={{ flex: 1 }}
           source={{ uri }}
         />
+        <Text>{observation.description}</Text>
       </View>
     );
   };
