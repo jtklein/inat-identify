@@ -63,23 +63,57 @@ export default class IiIdentifyScreen extends Component {
     );
   };
 
+  identify(observation, taxon_id) {
+    console.log('observation', observation);
+    /*
+    {
+      "identification": {
+        "observation_id": 0,
+        "taxon_id": 0,
+        "current": true,
+        "body": "string"
+      }
+    }
+    */
+    const identification = {
+      identification:
+      {
+        observation_id: observation.id,
+        taxon_id,
+      }
+    };
+    inatjs.identifications
+      .create(identification, token)
+      .then(c => {
+        console.log('identification', c);
+      })
+      .catch(e => {
+        console.log('Error:', e);
+      });
+  }
+
   onSwipedLeft(observation) {
     console.log('observation', observation);
+    // Hardcoded to kingdom Animalia
+    this.identify(observation, 1);
   }
 
   onSwipedRight(observation) {
     console.log('observation', observation);
-
+    // Hardcoded to kingdom Plantae
+    this.identify(observation, 47126);
   }
 
   onSwipedTop(observation) {
     console.log('observation', observation);
-
+    // Hardcoded to family Crassulaceae
+    // TODO: this id should not mark as reviewed
+    // this.identify(observation, 1);
   }
 
   onSwipedBottom(observation) {
+    // Nothing to do here, as this is the skip option
     console.log('observation', observation);
-
   }
 
   renderCard = (observation, index) => {
@@ -104,21 +138,19 @@ export default class IiIdentifyScreen extends Component {
     return (
       <View style={styles.container}>
         <Swiper
-          ref={swiper => {
-            this.swiper = swiper;
-          }}
+          cards={this.state.observations}
+          cardIndex={this.state.cardIndex}
+          ref={swiper => { this.swiper = swiper }}
           backgroundColor={'#FFFFFF'}
+          renderCard={this.renderCard}
+          cardVerticalMargin={80}
+          stackSize={3}
+          stackSeparation={15}
           onSwipedLeft={(index) => this.onSwipedLeft(observations[index])}
           onSwipedRight={(index) => this.onSwipedRight(observations[index])}
           onSwipedTop={(index) => this.onSwipedTop(observations[index])}
           onSwipedBottom={(index) => this.onSwipedBottom(observations[index])}
-          cards={this.state.observations}
-          cardIndex={this.state.cardIndex}
-          cardVerticalMargin={80}
-          renderCard={this.renderCard}
           onSwipedAll={this.onSwipedAllCards}
-          stackSize={3}
-          stackSeparation={15}
           overlayLabels={{
             bottom: {
               title: 'Skip',
@@ -200,7 +232,7 @@ export default class IiIdentifyScreen extends Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#F5FCFF'
+    backgroundColor: '#FFFFFF'
   },
   card: {
     flex: 1,
