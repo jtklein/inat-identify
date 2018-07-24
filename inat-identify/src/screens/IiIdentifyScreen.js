@@ -1,20 +1,41 @@
 import React, { Component } from 'react';
-import { Button, StyleSheet, Text, View } from 'react-native';
+import { Button, StyleSheet, Text, View, Image } from 'react-native';
 import Swiper from 'react-native-deck-swiper';
+
+import inatjs from 'inaturalistjs';
 
 export default class IiIdentifyScreen extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      cards: ['1', '2', '3'],
       swipedAllCards: false,
       swipeDirection: '',
       isSwipingBack: false,
-      cardIndex: 0
+      cardIndex: 0,
+      observations: [],
     };
   }
 
+  componentDidMount() {
+    const params = {
+      iconic_taxa: 'unknown',
+      quality_grade: 'needs_id',
+      // Must be observed within the place with this ID
+      // Testing with Europe
+      place_id: 97391,
+      reviewed: 'false'
+    };
 
+    inatjs.observations
+      .search(params)
+      .then(rsp => {
+        console.log('observations search', rsp);
+        this.setState({ observations: rsp.results });
+      })
+      .catch(e => {
+        console.log('Error:', e);
+      });
+  }
 
   onSwipedAllCards = () => {
     this.setState({
@@ -42,13 +63,23 @@ export default class IiIdentifyScreen extends Component {
   };
 
   renderCard = (observation, index) => {
+    console.log('renderCard observation:', observation);
+    // The Observation has only thumbnails of images
     return (
       <View style={styles.card}>
+        <Image
+          style={{ flex: 1 }}
+          source={{ uri: observation.observation_photos[0].photo.url }}
+        />
       </View>
     );
   };
 
   render() {
+    const { observations } = this.state;
+    if (!observations) {
+      return null;
+    }
     return (
       <View style={styles.container}>
         <Swiper
@@ -56,7 +87,7 @@ export default class IiIdentifyScreen extends Component {
             this.swiper = swiper;
           }}
           onSwiped={this.onSwiped}
-          cards={this.state.cards}
+          cards={this.state.observations}
           cardIndex={this.state.cardIndex}
           cardVerticalMargin={80}
           renderCard={this.renderCard}
