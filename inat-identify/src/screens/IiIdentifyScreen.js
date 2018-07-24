@@ -65,7 +65,7 @@ export default class IiIdentifyScreen extends Component {
           stackSeparation={15}
           overlayLabels={{
             bottom: {
-              title: 'BLEAH',
+              title: 'Skip',
               style: {
                 label: {
                   backgroundColor: 'black',
@@ -81,7 +81,7 @@ export default class IiIdentifyScreen extends Component {
               }
             },
             left: {
-              title: 'NOPE',
+              title: 'Animalia',
               style: {
                 label: {
                   backgroundColor: 'black',
@@ -99,7 +99,7 @@ export default class IiIdentifyScreen extends Component {
               }
             },
             right: {
-              title: 'LIKE',
+              title: 'Plantae',
               style: {
                 label: {
                   backgroundColor: 'black',
@@ -117,7 +117,7 @@ export default class IiIdentifyScreen extends Component {
               }
             },
             top: {
-              title: 'SUPER LIKE',
+              title: 'Crassulaceae',
               style: {
                 label: {
                   backgroundColor: 'black',
