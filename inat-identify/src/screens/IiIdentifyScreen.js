@@ -131,16 +131,11 @@ export default class IiIdentifyScreen extends Component {
   renderCard = (observation, index) => {
     // The Observation has only thumbnails of images
     const uri = observation.observation_photos[0].photo.url.replace('square', 'large');
-    return (
-      <View style={styles.card}>
-        <Image
-          resizeMode='contain'
-          style={{ flex: 1 }}
-          source={{ uri }}
-        />
-        <Text>{observation.description}</Text>
-      </View>
-    );
+    return <View style={styles.card}>
+        <Image resizeMode="contain" style={{ flex: 1 }} source={{ uri }} />
+        <Text>{'species_guess: ' + observation.species_guess}</Text>
+        <Text>{'description: ' + observation.description}</Text>
+      </View>;
   };
 
   render() {
