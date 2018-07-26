@@ -26,6 +26,7 @@ export default class IiIdentifyScreen extends Component {
     const params = {
       iconic_taxa: 'unknown',
       quality_grade: 'needs_id',
+      per_page: 100,
       page: this.state.page + 1,
       // Must be observed within the place with this ID
       // Testing with Europe
