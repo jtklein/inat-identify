@@ -134,8 +134,9 @@ export default class IiIdentifyScreen extends Component {
     const uri = observation.observation_photos[0].photo.url.replace('square', 'large');
     return <View style={styles.card}>
         <Image resizeMode="contain" style={{ flex: 1 }} source={{ uri }} />
-        <Text>{'species_guess: ' + observation.species_guess}</Text>
-        <Text>{'description: ' + observation.description}</Text>
+        <Text style={{ color: 'red' }} >{observation.species_guess}</Text>
+        <Text style={{ color: 'red' }} >{observation.identifications_count > 0 ? observation.identifications_count : null}</Text>
+        <Text style={{ color: 'red' }} >{observation.description}</Text>
       </View>;
   };
 
