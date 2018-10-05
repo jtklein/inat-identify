@@ -31,6 +31,7 @@ export default class IiIdentifyScreen extends Component {
       // Must be observed within the place with this ID
       // Testing with Europe
       place_id: 97391,
+      viewer_id: 530659,
       // Observations have been reviewed by the user with ID equal to the value of the viewer_id parameter
       reviewed: 'false',
       photos: 'true'
