@@ -1,5 +1,6 @@
 import React from 'react';
 import { View, Text, Button } from 'react-native';
+import oauth from '../../secrets/oauth';
 
 export default class IiAuthScreen extends React.Component {
   render() {
