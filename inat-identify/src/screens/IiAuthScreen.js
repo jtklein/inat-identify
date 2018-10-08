@@ -27,6 +27,7 @@ export default class IiAuthScreen extends React.Component {
     console.log('result', result);
     this.setState({ result });
     // The code was successfully retrieved
+    // TODO: UI for result.type === 'cancel | dismissed | error'
     if (result.type && result.type === 'success') {
     }
   };
