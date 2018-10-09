@@ -81,6 +81,7 @@ export default class IiIdentifyScreen extends Component {
 
   identify(observation, taxon_id) {
     console.log('observation', observation);
+    const { apiToken } = this.state;
     /*
     {
       "identification": {
@@ -98,8 +99,9 @@ export default class IiIdentifyScreen extends Component {
         taxon_id,
       }
     };
+    const options = { api_token: apiToken };
     inatjs.identifications
-      .create(identification, token)
+      .create(identification, options)
       .then(c => {
         console.log('identification', c);
       })
