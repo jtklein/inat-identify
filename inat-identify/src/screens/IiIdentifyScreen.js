@@ -5,16 +5,19 @@ import Swiper from 'react-native-deck-swiper';
 import inatjs from 'inaturalistjs';
 
 export default class IiIdentifyScreen extends Component {
+  INITIAL_STATE = {
+    apiToken: props.navigation.state.params.apiToken,
+    swipedAllCards: false,
+    swipeDirection: '',
+    isSwipingBack: false,
+    cardIndex: 0,
+    observations: [],
+    page: 0,
+  };
+
   constructor(props) {
     super(props);
-    this.state = {
-      swipedAllCards: false,
-      swipeDirection: '',
-      isSwipingBack: false,
-      cardIndex: 0,
-      observations: [],
-      page: 0,
-    };
+    this.state = this.INITIAL_STATE;
   }
 
   componentDidMount() {
