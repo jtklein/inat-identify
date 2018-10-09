@@ -49,8 +49,26 @@ export default class IiAuthScreen extends React.Component {
           );
           return { error };
         });
+      console.log('response', response);
       // Response OK
       if (response.status === 200) {
+        this.setState({ accessToken: response.data.access_token });
+
+        // Get the API token required to make API calls for the user
+        const url = 'https://www.inaturalist.org/users/api_token.json';
+        const config = { 
+          headers: {
+            'Authorization': 'Bearer ' + response.data.access_token
+        }};
+        const apiTokenResponse =  await axios.get(url, config)
+          .then(r => r)
+          .catch(e => {
+            console.log('Error in fetching API token from iNaturalist', e);
+            return { error };
+          });
+
+        if (apiTokenResponse.data && apiTokenResponse.data.api_token) {
+        }
       }
     }
   };
