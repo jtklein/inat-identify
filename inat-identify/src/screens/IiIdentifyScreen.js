@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Button, StyleSheet, Text, View, Image } from 'react-native';
+import { StyleSheet, Text, View, Image } from 'react-native';
 import Swiper from 'react-native-deck-swiper';
 
 import inatjs from 'inaturalistjs';
