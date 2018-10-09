@@ -51,6 +51,7 @@ export default class IiAuthScreen extends React.Component {
         });
       console.log('response', response);
       // Response OK
+      // TODO: UI for failure
       if (response.status === 200) {
         this.setState({ accessToken: response.data.access_token });
 
@@ -71,6 +72,7 @@ export default class IiAuthScreen extends React.Component {
           // Navigate to next screen with api_token
           this.props.navigation.navigate('Identify', { apiToken: apiTokenResponse.data.api_token });
         }
+        // TODO: UI response if no token received
       }
     }
   };
