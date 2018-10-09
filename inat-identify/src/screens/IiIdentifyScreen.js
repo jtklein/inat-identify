@@ -126,7 +126,9 @@ export default class IiIdentifyScreen extends Component {
     console.log('observation', observation);
     // Hardcoded to family Crassulaceae
     // TODO: this id should not mark as reviewed
-    // this.identify(observation, 1);
+    this.identify(observation, 51890);
+
+    inatjs.observations.unreview(observation).then(rsp => {console.log(rsp)}).catch(err => console.log(err));
   }
 
   onSwipedBottom(observation) {
