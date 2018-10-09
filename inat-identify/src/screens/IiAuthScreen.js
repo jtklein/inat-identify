@@ -1,6 +1,8 @@
 import React from 'react';
 import { ScrollView, View, Text, Button } from 'react-native';
 import { AuthSession } from 'expo';
+import axios from 'axios';
+
 import oauth from '../../secrets/oauth';
 
 const INATURALIST_OAUTH_API = 'https://www.inaturalist.org/oauth';
@@ -29,6 +31,27 @@ export default class IiAuthScreen extends React.Component {
     // The code was successfully retrieved
     // TODO: UI for result.type === 'cancel | dismissed | error'
     if (result.type && result.type === 'success') {
+      const url = `${INATURALIST_OAUTH_API}/token`;
+      const params = {
+        client_id: oauth.INATURALIST_APP_ID,
+        client_secret: oauth.INATURALIST_APP_SECRET,
+        code: result.params.code,
+        redirect_uri: AuthSession.getRedirectUrl(),
+        grant_type: "authorization_code",
+      }
+      // POST request to the iNaturalist OAuth API
+      let response = await axios
+        .post(url, params)
+        .catch(error => {
+          console.log(
+            "Error in fetching access token from iNaturalist",
+            error
+          );
+          return { error };
+        });
+      // Response OK
+      if (response.status === 200) {
+      }
     }
   };
 
