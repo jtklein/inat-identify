@@ -6,7 +6,8 @@ import inatjs from 'inaturalistjs';
 
 export default class IiIdentifyScreen extends Component {
   INITIAL_STATE = {
-    apiToken: props.navigation.state.params.apiToken,
+    user: {},
+    apiToken: this.props.navigation.state.params.apiToken,
     swipedAllCards: false,
     swipeDirection: '',
     isSwipingBack: false,
@@ -20,12 +21,17 @@ export default class IiIdentifyScreen extends Component {
     this.state = this.INITIAL_STATE;
   }
 
-  componentDidMount() {
-    // Get first batch of unidentified observations
-    this.searchObservations();
+  componentDidMount = async () => {
+    // TODO: refactor to app start up, if we ever have different screens
+    const user = await this.getCurrentUser();
+    if(user) {
+      // Get first batch of unidentified observations
+      this.searchObservations();
+    };
   }
 
   searchObservations() {
+    const { user } = this.state;
     const params = {
       iconic_taxa: 'unknown',
       quality_grade: 'needs_id',
@@ -34,8 +40,8 @@ export default class IiIdentifyScreen extends Component {
       // Must be observed within the place with this ID
       // Testing with Europe
       place_id: 97391,
-      viewer_id: 530659,
       // Observations have been reviewed by the user with ID equal to the value of the viewer_id parameter
+      viewer_id: user.id,
       reviewed: 'false',
       photos: 'true'
     };
@@ -49,6 +55,18 @@ export default class IiIdentifyScreen extends Component {
       .catch(e => {
         console.log('Error:', e);
       });
+  }
+
+  getCurrentUser = async () => {
+    const { apiToken } = this.state;
+    const options = { api_token: apiToken };
+    return await inatjs.users.me(options)
+      .then(r => {
+        this.setState({ user: r.results[0] });
+        return r;
+      })
+      // TODO: UI response
+      .catch(e => console.log('Error in fetching current user', e));
   }
 
   onSwipedAllCards = () => {
