@@ -196,12 +196,7 @@ export default class IiIdentifyScreen extends Component {
             bottom: {
               title: 'Skip',
               style: {
-                label: {
-                  backgroundColor: 'black',
-                  borderColor: 'black',
-                  color: 'white',
-                  borderWidth: 1
-                },
+                label,
                 wrapper: {
                   flexDirection: 'column',
                   alignItems: 'center',
@@ -212,12 +207,7 @@ export default class IiIdentifyScreen extends Component {
             left: {
               title: swipeLeft.label,
               style: {
-                label: {
-                  backgroundColor: 'black',
-                  borderColor: 'black',
-                  color: 'white',
-                  borderWidth: 1
-                },
+                label,
                 wrapper: {
                   flexDirection: 'column',
                   alignItems: 'flex-end',
@@ -230,12 +220,7 @@ export default class IiIdentifyScreen extends Component {
             right: {
               title: swipeRight.label,
               style: {
-                label: {
-                  backgroundColor: 'black',
-                  borderColor: 'black',
-                  color: 'white',
-                  borderWidth: 1
-                },
+                label,
                 wrapper: {
                   flexDirection: 'column',
                   alignItems: 'flex-start',
@@ -248,12 +233,7 @@ export default class IiIdentifyScreen extends Component {
             top: {
               title: swipeTop.label,
               style: {
-                label: {
-                  backgroundColor: 'black',
-                  borderColor: 'black',
-                  color: 'white',
-                  borderWidth: 1
-                },
+                label,
                 wrapper: {
                   flexDirection: 'column',
                   alignItems: 'center',
@@ -283,10 +263,10 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     backgroundColor: 'white'
   },
-  done: {
-    textAlign: 'center',
-    fontSize: 30,
+  label: {
+    backgroundColor: 'black',
+    borderColor: 'black',
     color: 'white',
-    backgroundColor: 'transparent'
+    borderWidth: 1
   }
 });
