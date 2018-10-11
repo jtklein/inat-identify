@@ -1,5 +1,6 @@
 import React from 'react';
-import { ScrollView, View, Text, Button } from 'react-native';
+import { ScrollView, View, Text } from 'react-native';
+import { Button } from 'react-native-paper';
 import { AuthSession } from 'expo';
 import axios from 'axios';
 
@@ -78,20 +79,25 @@ export default class IiAuthScreen extends React.Component {
   };
 
   render() {
-    return (
-      <ScrollView contentContainerStyle={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
-        {this.state.result ? (
-          <Text>{JSON.stringify(this.state.result)}</Text>
-        ) : null}
-        {this.state.accessToken ? (
-          <Text>{JSON.stringify(this.state.accessToken)}</Text>
-        ) : null}
-        <Button
-          title="Login with iNaturalist"
-          onPress={() => this.loginAsync()}
-        />
+    return <ScrollView contentContainerStyle={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
+        {this.state.result ? <Text>
+            {JSON.stringify(this.state.result)}
+          </Text> : null}
+        {this.state.accessToken ? <Text>
+            {JSON.stringify(this.state.accessToken)}
+          </Text> : null}
+        <Button onPress={() => this.loginAsync()}>
+          Login with iNaturalist
+        </Button>
+        <Button onPress={() => this.props.navigation.navigate(
+            'Settings',
+            { apiToken: 'No token' }
+          )}
+        >
+          !!DEV Skip
+        </Button>
+
         <View style={{ height: 50 }} />
-      </ScrollView>
-    );
+      </ScrollView>;
   }
 }

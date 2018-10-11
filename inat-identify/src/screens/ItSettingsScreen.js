@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
-import { Modal, Button, StyleSheet, Text, View, Image } from 'react-native';
+import { Picker, StyleSheet, Text, View } from 'react-native';
+import { Button } from 'react-native-paper';
 
 import inatjs from 'inaturalistjs';
 
@@ -33,14 +34,15 @@ export default class ItSettingsScreen extends Component {
         <Text>Customize the swiper here:</Text>
         <Text>{apiToken}</Text>
         <Button
-          title='Done'
           onPress={() => navigation.navigate('Identify', {
             apiToken,
             swipeLeft,
             swipeRight,
             swipeTop
           })}
-        />
+        >
+          Done
+        </Button>
       </View>
     );
   }
