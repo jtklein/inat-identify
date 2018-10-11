@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { Picker, StyleSheet, Text, View } from 'react-native';
-import { Button } from 'react-native-paper';
+import { List, Button } from 'react-native-paper';
 
 import inatjs from 'inaturalistjs';
 
@@ -44,22 +44,49 @@ export default class ItSettingsScreen extends Component {
   render() {
     const { navigation } = this.props;
     const { apiToken, swipeLeft, swipeRight, swipeTop } = this.state;
-    return (
-      <View style={styles.container}>
+    return <View style={styles.container}>
         <Text>Customize the swiper here:</Text>
         <Text>{apiToken}</Text>
-        <Button
-          onPress={() => navigation.navigate('Identify', {
-            apiToken,
-            swipeLeft,
-            swipeRight,
-            swipeTop
-          })}
-        >
+
+        <List.Accordion title={`Swipe left = ${swipeLeft.label}`} >
+          {taxa.map(taxon => (
+            <List.Item
+              key={taxon.id}
+              title={taxon.label}
+              onPress={() => this.setState({ swipeLeft: taxon })}
+            />
+          ))}
+        </List.Accordion>
+        
+        <List.Accordion title={`Swipe right = ${swipeRight.label}`} >
+          {taxa.map(taxon => (
+            <List.Item
+              key={taxon.id}
+              title={taxon.label}
+              onPress={() => this.setState({ swipeRight: taxon })}
+            />
+          ))}
+        </List.Accordion>
+
+        <List.Accordion title={`Swipe top = ${swipeTop.label}`} >
+          {taxa.map(taxon => (
+            <List.Item
+              key={taxon.id}
+              title={taxon.label}
+              onPress={() => this.setState({ swipeTop: taxon })}
+            />
+          ))}
+        </List.Accordion>
+
+        <Button onPress={() => navigation.navigate('Identify', {
+              apiToken,
+              swipeLeft,
+              swipeRight,
+              swipeTop
+            })}>
           Done
         </Button>
-      </View>
-    );
+      </View>;
   }
 }
 
