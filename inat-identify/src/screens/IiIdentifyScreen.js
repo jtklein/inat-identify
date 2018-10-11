@@ -173,20 +173,22 @@ export default class IiIdentifyScreen extends Component {
 
   render() {
     const { observations, cardIndex, swipeLeft, swipeRight, swipeTop } = this.state;
+    const { container, label } = styles;
     if (!observations) {
       return null;
     }
     return (
-      <View style={styles.container}>
+      <View style={container}>
         <Swiper
-          cards={this.state.observations}
-          cardIndex={this.state.cardIndex}
+          cards={observations}
+          cardIndex={cardIndex}
           ref={swiper => { this.swiper = swiper }}
           backgroundColor={'#FFFFFF'}
           renderCard={this.renderCard}
-          cardVerticalMargin={80}
+          cardVerticalMargin={20}
           stackSize={3}
-          stackSeparation={15}
+          stackSeparation={8}
+          stackScale={10}
           onSwipedLeft={(index) => this.onSwipedLeft(observations[index])}
           onSwipedRight={(index) => this.onSwipedRight(observations[index])}
           onSwipedTop={(index) => this.onSwipedTop(observations[index])}
