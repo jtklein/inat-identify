@@ -8,6 +8,9 @@ export default class IiIdentifyScreen extends Component {
   INITIAL_STATE = {
     user: {},
     apiToken: this.props.navigation.state.params.apiToken,
+    swipeLeft: this.props.navigation.state.params.swipeLeft,
+    swipeRight: this.props.navigation.state.params.swipeRight,
+    swipeTop: this.props.navigation.state.params.swipeTop,
     swipedAllCards: false,
     swipeDirection: '',
     isSwipingBack: false,
@@ -129,18 +132,21 @@ export default class IiIdentifyScreen extends Component {
   }
 
   onSwipedLeft(observation) {
+    const { swipeLeft } = this.state;
     console.log('observation', observation);
     // Hardcoded to kingdom Animalia
     this.identify(observation, 1);
   }
 
   onSwipedRight(observation) {
+    const { swipeRight } = this.state;
     console.log('observation', observation);
     // Hardcoded to kingdom Plantae
     this.identify(observation, 47126);
   }
 
   onSwipedTop(observation) {
+    const { swipeTop } = this.state;
     console.log('observation', observation);
     // Hardcoded to family Crassulaceae
     // TODO: this id should not mark as reviewed
@@ -166,7 +172,7 @@ export default class IiIdentifyScreen extends Component {
   };
 
   render() {
-    const { observations } = this.state;
+    const { observations, cardIndex, swipeLeft, swipeRight, swipeTop } = this.state;
     if (!observations) {
       return null;
     }
