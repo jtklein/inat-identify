@@ -68,7 +68,7 @@ export default class IiAuthScreen extends React.Component {
             console.log('Error in fetching API token from iNaturalist', e);
             return { error };
           });
-
+        console.log('apiTokenResponse', apiTokenResponse);
         if (apiTokenResponse.data && apiTokenResponse.data.api_token) {
           // Navigate to next screen with api_token
           this.props.navigation.navigate('Identify', { apiToken: apiTokenResponse.data.api_token });
