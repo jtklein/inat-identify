@@ -134,23 +134,23 @@ export default class IiIdentifyScreen extends Component {
   onSwipedLeft(observation) {
     const { swipeLeft } = this.state;
     console.log('observation', observation);
-    // Hardcoded to kingdom Animalia
-    this.identify(observation, 1);
+    // Use set id for this identification
+    this.identify(observation, swipeLeft.id);
   }
 
   onSwipedRight(observation) {
     const { swipeRight } = this.state;
     console.log('observation', observation);
-    // Hardcoded to kingdom Plantae
-    this.identify(observation, 47126);
+    // Use set id for this identification
+    this.identify(observation, swipeRight.id);
   }
 
   onSwipedTop(observation) {
     const { swipeTop } = this.state;
     console.log('observation', observation);
-    // Hardcoded to family Crassulaceae
+    // Use set id for this identification
     // TODO: this id should not mark as reviewed
-    this.identify(observation, 51890);
+    this.identify(observation, swipeTop.id);
 
     inatjs.observations.unreview(observation).then(rsp => {console.log(rsp)}).catch(err => console.log(err));
   }
@@ -210,7 +210,7 @@ export default class IiIdentifyScreen extends Component {
               }
             },
             left: {
-              title: 'Animalia',
+              title: swipeLeft.label,
               style: {
                 label: {
                   backgroundColor: 'black',
@@ -228,7 +228,7 @@ export default class IiIdentifyScreen extends Component {
               }
             },
             right: {
-              title: 'Plantae',
+              title: swipeRight.label,
               style: {
                 label: {
                   backgroundColor: 'black',
@@ -246,7 +246,7 @@ export default class IiIdentifyScreen extends Component {
               }
             },
             top: {
-              title: 'Crassulaceae',
+              title: swipeTop.label,
               style: {
                 label: {
                   backgroundColor: 'black',
