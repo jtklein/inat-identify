@@ -4,6 +4,21 @@ import { Button } from 'react-native-paper';
 
 import inatjs from 'inaturalistjs';
 
+const taxa = [
+  {
+    id: 1,
+    label: 'Animalia'
+  },
+  {
+    id: 47126,
+    label: 'Plantae'
+  },
+  {
+    id: 47170,
+    label: 'Fungi'
+  }
+];
+
 export default class ItSettingsScreen extends Component {
   INITIAL_STATE = {
     apiToken: this.props.navigation.state.params.apiToken,
