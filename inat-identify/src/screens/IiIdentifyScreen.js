@@ -54,7 +54,8 @@ export default class IiIdentifyScreen extends Component {
     inatjs.observations
       .search(params)
       .then(rsp => {
-        this.setState({ observations: rsp.results, page: rsp.page });
+        const filteredResults = rsp.results.filter(d => !d.species_guess);
+        this.setState({ observations: filteredResults, page: rsp.page });
       })
       .catch(e => {
         console.log('Error in fetching list of observations', e);
