@@ -1,8 +1,35 @@
 import React, { Component } from 'react';
-import { Picker, StyleSheet, Text, View } from 'react-native';
-import { List, Button } from 'react-native-paper';
+import { StyleSheet, Text, View } from 'react-native';
+import { Switch, List, Button } from 'react-native-paper';
 
 import inatjs from 'inaturalistjs';
+
+const places = [
+  {
+    id: 97389,
+    label: 'South America'
+  },
+  {
+    id: 97391,
+    label: 'Europe'
+  },
+  {
+    id: 97392,
+    label: 'Africa'
+  },
+  {
+    id: 97393,
+    label: 'Oceania'
+  },
+  {
+    id: 97394,
+    label: 'North America'
+  },
+  {
+    id: 97395,
+    label: 'Asia'
+  }
+];
 
 const taxa = [
   {
@@ -34,6 +61,11 @@ export default class ItSettingsScreen extends Component {
       id: 51890,
       label: 'Crassulaceae'
     },
+    place: {
+      id: 97391,
+      label: 'Europe',
+      subscribe: true
+    }
   };
 
   constructor(props) {
@@ -43,12 +75,22 @@ export default class ItSettingsScreen extends Component {
 
   render() {
     const { navigation } = this.props;
-    const { apiToken, swipeLeft, swipeRight, swipeTop } = this.state;
+    const { apiToken, swipeLeft, swipeRight, swipeTop, place } = this.state;
     return <View style={styles.container}>
         <Text>Customize the swiper here:</Text>
         <Text>{apiToken}</Text>
 
-        <List.Accordion title={`Swipe left = ${swipeLeft.label}`} >
+        <List.Accordion title={`Filter by place = ${place.label}`}>
+          {places.map(place => (
+            <List.Item
+              key={place.id}
+              title={place.label}
+              onPress={() => this.setState({ place })}
+            />
+          ))}
+        </List.Accordion>
+
+        <List.Accordion title={`Swipe left = ${swipeLeft.label}`}>
           {taxa.map(taxon => (
             <List.Item
               key={taxon.id}
