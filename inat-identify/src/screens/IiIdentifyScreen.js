@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
-import { StyleSheet, Text, View, Image } from 'react-native';
+import { StyleSheet, Text, View } from 'react-native';
 import Swiper from 'react-native-deck-swiper';
-
 import inatjs from 'inaturalistjs';
+
+import ItObservationImages from '../components/features/ItObservationImages';
 
 export default class IiIdentifyScreen extends Component {
   INITIAL_STATE = {
@@ -178,7 +179,7 @@ export default class IiIdentifyScreen extends Component {
       <Text style={text} >{observation.species_guess}</Text>
       <Text style={text} >{observation.identifications_count > 0 ? observation.identifications_count : null}</Text>
       <Text style={text} >{observation.description}</Text>
-      <Image resizeMode="contain" style={image} source={{ uri }} />
+      <ItObservationImages observation={observation} />
     </View>;
   };
 
@@ -284,8 +285,5 @@ const styles = StyleSheet.create({
   },
   text: {
     color: 'red'
-  },
-  image: {
-    flex: 1
   }
 });
