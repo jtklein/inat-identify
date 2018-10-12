@@ -7,6 +7,7 @@ const theme = {
   ...DefaultTheme,
   colors: {
     ...DefaultTheme.colors,
+    primary: '#85A833'
   }
 };
 
