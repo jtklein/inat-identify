@@ -106,7 +106,7 @@ export default class IiIdentifyScreen extends Component {
     );
   };
 
-  identify(observation, taxon_id) {
+  identify(observation, swipeOption) {
     console.log('observation', observation);
     const { apiToken } = this.state;
     /*
@@ -141,13 +141,13 @@ export default class IiIdentifyScreen extends Component {
   onSwipedLeft(observation) {
     const { swipeLeft } = this.state;
     // Use set id for this identification
-    this.identify(observation, swipeLeft.id);
+    this.identify(observation, swipeLeft);
   }
 
   onSwipedRight(observation) {
     const { swipeRight } = this.state;
     // Use set id for this identification
-    this.identify(observation, swipeRight.id);
+    this.identify(observation, swipeRight);
   }
 
   onSwipedTop(observation) {
