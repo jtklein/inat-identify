@@ -11,6 +11,7 @@ export default class IiIdentifyScreen extends Component {
     swipeLeft: this.props.navigation.state.params.swipeLeft,
     swipeRight: this.props.navigation.state.params.swipeRight,
     swipeTop: this.props.navigation.state.params.swipeTop,
+    place: this.props.navigation.state.params.place,
     swipedAllCards: false,
     swipeDirection: '',
     isSwipingBack: false,
@@ -34,7 +35,7 @@ export default class IiIdentifyScreen extends Component {
   }
 
   searchObservations() {
-    const { user } = this.state;
+    const { user, place } = this.state;
     const params = {
       iconic_taxa: 'unknown',
       quality_grade: 'needs_id',
@@ -42,7 +43,7 @@ export default class IiIdentifyScreen extends Component {
       page: this.state.page + 1,
       // Must be observed within the place with this ID
       // Testing with Europe
-      place_id: 97391,
+      place_id: place.id,
       // Observations have been reviewed by the user with ID equal to the value of the viewer_id parameter
       viewer_id: user.id,
       reviewed: 'false',
