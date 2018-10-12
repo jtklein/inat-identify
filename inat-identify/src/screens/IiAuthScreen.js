@@ -1,5 +1,5 @@
 import React from 'react';
-import { ActivityIndicator, ScrollView, View, Text } from 'react-native';
+import { StyleSheet, View } from 'react-native';
 import { Button } from 'react-native-paper';
 import { AuthSession } from 'expo';
 import axios from 'axios';
