@@ -10,6 +10,10 @@ const theme = {
   }
 };
 
+if (!__DEV__) {
+  console.log = () => { };
+}
+
 export default class App extends React.Component {
   render() {
     return (
