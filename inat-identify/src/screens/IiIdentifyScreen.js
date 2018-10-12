@@ -132,6 +132,14 @@ export default class IiIdentifyScreen extends Component {
       .create(identification, options)
       .then(c => {
         console.log('identification', c);
+        if (!swipeOption.subscribe) {
+          inatjs.observations.subscribe(observation, options)
+            .then(rsp => console.log('Unsubscriped to: ', rsp))
+            .catch(e => {
+              console.log('Error in unsubscribing to observation', e);
+              console.log(e.response);
+            });
+        }
       })
       .catch(e => {
         console.log('Error in creating identification', e);
