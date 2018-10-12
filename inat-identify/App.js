@@ -1,15 +1,9 @@
 import React from 'react';
-import { DefaultTheme, Provider as PaperProvider } from 'react-native-paper';
+import { Provider as PaperProvider } from 'react-native-paper';
 
 import IiAppNavigator from './src/IiAppNavigator';
 
-const theme = {
-  ...DefaultTheme,
-  colors: {
-    ...DefaultTheme.colors,
-    primary: '#85A833'
-  }
-};
+import { theme } from './src/styles';
 
 if (!__DEV__) {
   console.log = () => { };
