@@ -82,9 +82,10 @@ export default class IiAuthScreen extends React.Component {
   };
 
   render() {
-    return <ScrollView contentContainerStyle={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
         {this.state.isAuthenticating ? <ActivityIndicator size="large" color="#000000" /> : null}
         <Button onPress={() => this.loginAsync()}>
+    const { container } = styles;
+    return <View style={container}>
           Login with iNaturalist
         </Button>
         <Button onPress={() => this.props.navigation.navigate(
@@ -96,6 +97,14 @@ export default class IiAuthScreen extends React.Component {
         </Button>
 
         <View style={{ height: 50 }} />
-      </ScrollView>;
+      </View>;
   }
 }
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    alignItems: 'center',
+    justifyContent: 'center'
+  }
+});
