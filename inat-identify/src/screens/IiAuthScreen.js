@@ -1,5 +1,5 @@
 import React from 'react';
-import { ScrollView, View, Text } from 'react-native';
+import { ActivityIndicator, ScrollView, View, Text } from 'react-native';
 import { Button } from 'react-native-paper';
 import { AuthSession } from 'expo';
 import axios from 'axios';
@@ -10,6 +10,7 @@ const INATURALIST_OAUTH_API = 'https://www.inaturalist.org/oauth';
 
 export default class IiAuthScreen extends React.Component {
   INITIAL_STATE = {
+    isAuthenticating: false,
     result: null,
   };
 
@@ -19,6 +20,7 @@ export default class IiAuthScreen extends React.Component {
   }
 
   loginAsync = async () => {
+    this.setState({ isAuthenticating: true });
     // AuthFlow is handled by Expo.AuthSession
     let redirectUrl = AuthSession.getRedirectUrl();
     let result = await AuthSession.startAsync({
@@ -76,16 +78,12 @@ export default class IiAuthScreen extends React.Component {
         // TODO: UI response if no token received
       }
     }
+    this.setState({ isAuthenticating: false });
   };
 
   render() {
     return <ScrollView contentContainerStyle={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
-        {this.state.result ? <Text>
-            {JSON.stringify(this.state.result)}
-          </Text> : null}
-        {this.state.accessToken ? <Text>
-            {JSON.stringify(this.state.accessToken)}
-          </Text> : null}
+        {this.state.isAuthenticating ? <ActivityIndicator size="large" color="#000000" /> : null}
         <Button onPress={() => this.loginAsync()}>
           Login with iNaturalist
         </Button>
