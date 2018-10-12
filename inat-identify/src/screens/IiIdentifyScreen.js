@@ -155,10 +155,7 @@ export default class IiIdentifyScreen extends Component {
     const { swipeTop } = this.state;
     console.log('observation', observation);
     // Use set id for this identification
-    // TODO: this id should not mark as reviewed
-    this.identify(observation, swipeTop.id);
-
-    inatjs.observations.unreview(observation).then(rsp => {console.log(rsp)}).catch(err => console.log(err));
+    this.identify(observation, swipeTop);
   }
 
   onSwipedBottom(observation) {
