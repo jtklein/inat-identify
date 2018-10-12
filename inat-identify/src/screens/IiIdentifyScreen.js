@@ -28,6 +28,7 @@ export default class IiIdentifyScreen extends Component {
   componentDidMount = async () => {
     // TODO: refactor to app start up, if we ever have different screens
     const user = await this.getCurrentUser();
+    console.log('user', user);
     if(user) {
       // Get first batch of unidentified observations
       this.searchObservations();
@@ -53,7 +54,6 @@ export default class IiIdentifyScreen extends Component {
     inatjs.observations
       .search(params)
       .then(rsp => {
-        console.log('observations search', rsp);
         this.setState({ observations: rsp.results, page: rsp.page });
       })
       .catch(e => {
@@ -139,28 +139,24 @@ export default class IiIdentifyScreen extends Component {
 
   onSwipedLeft(observation) {
     const { swipeLeft } = this.state;
-    console.log('observation', observation);
     // Use set id for this identification
     this.identify(observation, swipeLeft.id);
   }
 
   onSwipedRight(observation) {
     const { swipeRight } = this.state;
-    console.log('observation', observation);
     // Use set id for this identification
     this.identify(observation, swipeRight.id);
   }
 
   onSwipedTop(observation) {
     const { swipeTop } = this.state;
-    console.log('observation', observation);
     // Use set id for this identification
     this.identify(observation, swipeTop);
   }
 
   onSwipedBottom(observation) {
     // Nothing to do here, as this is the skip option
-    console.log('observation', observation);
   }
 
   renderCard = (observation, index) => {
