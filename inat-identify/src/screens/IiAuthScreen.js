@@ -82,10 +82,12 @@ export default class IiAuthScreen extends React.Component {
   };
 
   render() {
-        {this.state.isAuthenticating ? <ActivityIndicator size="large" color="#000000" /> : null}
-        <Button onPress={() => this.loginAsync()}>
     const { container } = styles;
     return <View style={container}>
+        <Button
+          onPress={() => this.loginAsync()}
+          loading={this.state.isAuthenticating}
+        >
           Login with iNaturalist
         </Button>
         <Button onPress={() => this.props.navigation.navigate(
