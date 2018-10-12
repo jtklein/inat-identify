@@ -89,7 +89,6 @@ export default class ItSettingsScreen extends Component {
     const { apiToken, swipeLeft, swipeRight, swipeTop, place } = this.state;
     return <View style={styles.container}>
         <Text>Customize the swiper here:</Text>
-        <Text>{apiToken}</Text>
 
         <List.Accordion title={`Filter by place = ${place.label}`}>
           {places.map(place => (
