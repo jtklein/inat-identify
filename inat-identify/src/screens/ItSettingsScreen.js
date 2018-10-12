@@ -2,8 +2,6 @@ import React, { Component } from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 import { Switch, List, Button } from 'react-native-paper';
 
-import inatjs from 'inaturalistjs';
-
 const places = [
   {
     id: 97389,
