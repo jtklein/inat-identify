@@ -85,89 +85,91 @@ export default class ItSettingsScreen extends Component {
   render() {
     const { navigation } = this.props;
     const { apiToken, swipeLeft, swipeRight, swipeTop, place } = this.state;
-    return <View style={styles.container}>
-        <Text>Customize the swiper here:</Text>
+    const { container, subscriptionContainer } = styles;
+    return <View style={container}>
+      <Text>Customize the swiper here:</Text>
 
-        <List.Accordion title={`Filter by place = ${place.label}`}>
-          {places.map(place => (
-            <List.Item
-              key={place.id}
-              title={place.label}
-              onPress={() => this.setState({ place })}
-            />
-          ))}
-        </List.Accordion>
+      <List.Accordion title={`Filter by place = ${place.label}`}>
+        {places.map(place => (
+          <List.Item
+            key={place.id}
+            title={place.label}
+            onPress={() => this.setState({ place })}
+          />
+        ))}
+      </List.Accordion>
 
-        <List.Accordion title={`Swipe left = ${swipeLeft.label}`}>
-          {taxa.map(taxon => (
-            <List.Item
-              key={taxon.id}
-              title={taxon.label}
-              onPress={() => this.setState({ swipeLeft: taxon })}
-            />
-          ))}
-        </List.Accordion>
-        <View style={{ flexDirection: 'row', justifyContent: 'space-evenly', alignItems: 'center' }}>
-          <Text>Subscribe to this identification</Text>
-          <Switch value={swipeLeft.subscribe} onValueChange={() => this.setState(
-                {
-                  swipeLeft: Object.assign(swipeLeft, {
-                    subscribe: !swipeLeft.subscribe
-                  })
-                }
-              )} />
-        </View>
+      <List.Accordion title={`Swipe left = ${swipeLeft.label}`}>
+        {taxa.map(taxon => (
+          <List.Item
+            key={taxon.id}
+            title={taxon.label}
+            onPress={() => this.setState({ swipeLeft: taxon })}
+          />
+        ))}
+      </List.Accordion>
+      <View style={subscriptionContainer}>
+        <Text>Subscribe to this identification</Text>
+        <Switch value={swipeLeft.subscribe} onValueChange={() => this.setState(
+              {
+                swipeLeft: Object.assign(swipeLeft, {
+                  subscribe: !swipeLeft.subscribe
+                })
+              }
+            )} />
+      </View>
 
-        <List.Accordion title={`Swipe right = ${swipeRight.label}`}>
-          {taxa.map(taxon => (
-            <List.Item
-              key={taxon.id}
-              title={taxon.label}
-              onPress={() => this.setState({ swipeRight: taxon })}
-            />
-          ))}
-        </List.Accordion>
-        <View style={{ flexDirection: 'row', justifyContent: 'space-evenly', alignItems: 'center' }}>
-          <Text>Subscribe to this identification</Text>
-          <Switch value={swipeRight.subscribe} onValueChange={() => this.setState(
-            {
-              swipeRight: Object.assign(swipeRight, {
-                subscribe: !swipeRight.subscribe
-              })
-            }
-          )} />
-        </View>
+      <List.Accordion title={`Swipe right = ${swipeRight.label}`}>
+        {taxa.map(taxon => (
+          <List.Item
+            key={taxon.id}
+            title={taxon.label}
+            onPress={() => this.setState({ swipeRight: taxon })}
+          />
+        ))}
+      </List.Accordion>
+      <View style={subscriptionContainer}>
+        <Text>Subscribe to this identification</Text>
+        <Switch value={swipeRight.subscribe} onValueChange={() => this.setState(
+          {
+            swipeRight: Object.assign(swipeRight, {
+              subscribe: !swipeRight.subscribe
+            })
+          }
+        )} />
+      </View>
 
-        <List.Accordion title={`Swipe top = ${swipeTop.label}`}>
-          {taxa.map(taxon => (
-            <List.Item
-              key={taxon.id}
-              title={taxon.label}
-              onPress={() => this.setState({ swipeTop: taxon })}
-            />
-          ))}
-        </List.Accordion>
-        <View style={{ flexDirection: 'row', justifyContent: 'space-evenly', alignItems: 'center' }}>
-          <Text>Subscribe to this identification</Text>
-          <Switch value={swipeTop.subscribe} onValueChange={() => this.setState(
-            {
-              swipeTop: Object.assign(swipeTop, {
-                subscribe: !swipeTop.subscribe
-              })
-            }
-          )} />
-        </View>
+      <List.Accordion title={`Swipe top = ${swipeTop.label}`}>
+        {taxa.map(taxon => (
+          <List.Item
+            key={taxon.id}
+            title={taxon.label}
+            onPress={() => this.setState({ swipeTop: taxon })}
+          />
+        ))}
+      </List.Accordion>
+      <View style={subscriptionContainer}>
+        <Text>Subscribe to this identification</Text>
+        <Switch value={swipeTop.subscribe} onValueChange={() => this.setState(
+          {
+            swipeTop: Object.assign(swipeTop, {
+              subscribe: !swipeTop.subscribe
+            })
+          }
+        )} />
+      </View>
 
-        <Button onPress={() => navigation.navigate('Identify', {
-              apiToken,
-              swipeLeft,
-              swipeRight,
-              swipeTop,
-              place
-            })}>
-          Done
-        </Button>
-      </View>;
+      <Button onPress={() => navigation.navigate('Identify', {
+          apiToken,
+          swipeLeft,
+          swipeRight,
+          swipeTop,
+          place
+        })}
+      >
+        Done
+      </Button>
+    </View>;
   }
 }
 
@@ -176,4 +178,9 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: '#FFFFFF'
   },
+  subscriptionContainer: {
+    flexDirection: 'row',
+    justifyContent: 'space-evenly',
+    alignItems: 'center'
+  }
 });

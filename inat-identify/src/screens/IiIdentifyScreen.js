@@ -170,14 +170,15 @@ export default class IiIdentifyScreen extends Component {
   }
 
   renderCard = (observation, index) => {
+    const { text, card, image } = styles;
     // The Observation has only thumbnails of images
     const uri = observation.observation_photos[0].photo.url.replace('square', 'large');
-    return <View style={styles.card}>
-      <Text style={{ color: 'red' }} >{observation.observation_photos.length}</Text>
-      <Text style={{ color: 'red' }} >{observation.species_guess}</Text>
-      <Text style={{ color: 'red' }} >{observation.identifications_count > 0 ? observation.identifications_count : null}</Text>
-      <Text style={{ color: 'red' }} >{observation.description}</Text>
-      <Image resizeMode="contain" style={{ flex: 1 }} source={{ uri }} />
+    return <View style={card}>
+      <Text style={text} >{observation.observation_photos.length}</Text>
+      <Text style={text} >{observation.species_guess}</Text>
+      <Text style={text} >{observation.identifications_count > 0 ? observation.identifications_count : null}</Text>
+      <Text style={text} >{observation.description}</Text>
+      <Image resizeMode="contain" style={image} source={{ uri }} />
     </View>;
   };
 
@@ -280,5 +281,11 @@ const styles = StyleSheet.create({
     borderColor: 'black',
     color: 'white',
     borderWidth: 1
+  },
+  text: {
+    color: 'red'
+  },
+  image: {
+    flex: 1
   }
 });
