@@ -57,7 +57,8 @@ export default class IiIdentifyScreen extends Component {
         this.setState({ observations: rsp.results, page: rsp.page });
       })
       .catch(e => {
-        console.log('Error:', e);
+        console.log('Error in fetching list of observations', e);
+        console.log(e.response);
       });
   }
 
@@ -70,7 +71,10 @@ export default class IiIdentifyScreen extends Component {
         return r;
       })
       // TODO: UI response
-      .catch(e => console.log('Error in fetching current user', e));
+      .catch(e => {
+        console.log('Error in fetching current user', e);
+        console.log(e.response);
+      });
   }
 
   onSwipedAllCards = () => {
@@ -128,7 +132,8 @@ export default class IiIdentifyScreen extends Component {
         console.log('identification', c);
       })
       .catch(e => {
-        console.log('Error:', e);
+        console.log('Error in creating identification', e);
+        console.log(e.response);
       });
   }
 
