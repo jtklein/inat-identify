@@ -124,7 +124,8 @@ export default class ItSettingsScreen extends Component {
               apiToken,
               swipeLeft,
               swipeRight,
-              swipeTop
+              swipeTop,
+              place
             })}>
           Done
         </Button>
