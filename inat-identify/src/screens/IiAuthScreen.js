@@ -71,7 +71,7 @@ export default class IiAuthScreen extends React.Component {
         console.log('apiTokenResponse', apiTokenResponse);
         if (apiTokenResponse.data && apiTokenResponse.data.api_token) {
           // Navigate to next screen with api_token
-          this.props.navigation.navigate('Identify', { apiToken: apiTokenResponse.data.api_token });
+          this.props.navigation.navigate('Settings', { apiToken: apiTokenResponse.data.api_token });
         }
         // TODO: UI response if no token received
       }
