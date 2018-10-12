@@ -84,16 +84,15 @@ export default class IiAuthScreen extends React.Component {
   render() {
     const { container } = styles;
     return <View style={container}>
-        <Button
-          onPress={() => this.loginAsync()}
-          loading={this.state.isAuthenticating}
-        >
+        <Button onPress={() => this.loginAsync()} loading={this.state.isAuthenticating}>
           Login with iNaturalist
         </Button>
-        <Button onPress={() => this.props.navigation.navigate(
-            'Settings',
-            { apiToken: 'No token' }
-          )}
+        <Button
+          onPress={() =>
+            this.props.navigation.navigate('Settings', {
+              apiToken: oauth.MY_CURRENT_API_TOKEN
+            })
+          }
         >
           !!DEV Skip
         </Button>
