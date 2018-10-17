@@ -4,15 +4,11 @@ import Swiper from 'react-native-deck-swiper';
 import inatjs from 'inaturalistjs';
 
 import ItObservationImages from '../components/features/ItObservationImages';
+class IiIdentifyScreen extends Component {
 
-export default class IiIdentifyScreen extends Component {
   INITIAL_STATE = {
     user: {},
     apiToken: this.props.navigation.state.params.apiToken,
-    swipeLeft: this.props.navigation.state.params.swipeLeft,
-    swipeRight: this.props.navigation.state.params.swipeRight,
-    swipeTop: this.props.navigation.state.params.swipeTop,
-    place: this.props.navigation.state.params.place,
     swipedAllCards: false,
     swipeDirection: '',
     isSwipingBack: false,
@@ -37,7 +33,8 @@ export default class IiIdentifyScreen extends Component {
   }
 
   searchObservations() {
-    const { user, place } = this.state;
+    const { user } = this.state;
+    const { place } = this.props.swiper;
     const params = {
       iconic_taxa: 'unknown',
       quality_grade: 'needs_id',
@@ -149,19 +146,19 @@ export default class IiIdentifyScreen extends Component {
   }
 
   onSwipedLeft(observation) {
-    const { swipeLeft } = this.state;
+    const { swipeLeft } = this.props.swiper;
     // Use set id for this identification
     this.identify(observation, swipeLeft);
   }
 
   onSwipedRight(observation) {
-    const { swipeRight } = this.state;
+    const { swipeRight } = this.props.swiper;
     // Use set id for this identification
     this.identify(observation, swipeRight);
   }
 
   onSwipedTop(observation) {
-    const { swipeTop } = this.state;
+    const { swipeTop } = this.props.swiper;
     // Use set id for this identification
     this.identify(observation, swipeTop);
   }
@@ -184,7 +181,8 @@ export default class IiIdentifyScreen extends Component {
   };
 
   render() {
-    const { observations, cardIndex, swipeLeft, swipeRight, swipeTop } = this.state;
+    const { observations, cardIndex } = this.state;
+    const { swipeLeft, swipeRight, swipeTop } = this.props.swiper;
     const { container, label } = styles;
     if (!observations) {
       return null;
@@ -287,3 +285,12 @@ const styles = StyleSheet.create({
     color: 'red'
   }
 });
+
+const mapStateToProps = (state) => ({
+  swiper: state.swiper,
+});
+
+const mapDispatchToProps = (dispatch) => ({
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(IiIdentifyScreen);
