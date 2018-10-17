@@ -5,7 +5,21 @@ import Swiper from 'react-native-deck-swiper';
 import inatjs from 'inaturalistjs';
 
 import ItObservationImages from '../components/features/ItObservationImages';
+import { ItMaterial } from '../components/common';
+
+
 class IiIdentifyScreen extends Component {
+  static navigationOptions = ({ navigation }) => {
+    return {
+      headerRight: (
+        <ItMaterial
+          onPress={() => navigation.navigate('Settings')}
+          name="settings"
+          color="#FFFFFF"
+        />
+      ),
+    };
+  };
 
   INITIAL_STATE = {
     user: {},
@@ -169,9 +183,7 @@ class IiIdentifyScreen extends Component {
   }
 
   renderCard = (observation, index) => {
-    const { text, card, image } = styles;
-    // The Observation has only thumbnails of images
-    const uri = observation.observation_photos[0].photo.url.replace('square', 'large');
+    const { text, card } = styles;
     return <View style={card}>
       <Text style={text} >{observation.observation_photos.length}</Text>
       <Text style={text} >{observation.species_guess}</Text>
