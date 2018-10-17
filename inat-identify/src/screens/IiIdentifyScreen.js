@@ -136,8 +136,7 @@ class IiIdentifyScreen extends Component {
       identification:
       {
         observation_id: observation.id,
-        taxon_id: swipeOption.id,
-        body: 'Hej, sorry about the low-level identification. Am trying out an experimental identification app.'
+        taxon_id: swipeOption.id
       }
     };
     const options = { api_token: apiToken };
