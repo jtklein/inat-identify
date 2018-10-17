@@ -32,11 +32,11 @@ const AuthStack = createStackNavigator(
 
 const AppStack = createStackNavigator(
   {
-    Settings: ItSettingsScreen,
-    Identify: IiIdentifyScreen
+    Identify: IiIdentifyScreen,
+    Settings: ItSettingsScreen
   },
   {
-    initialRouteName: 'Settings',
+    initialRouteName: 'Identify',
     navigationOptions: {
       headerStyle,
       headerTintColor,
