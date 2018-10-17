@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { StyleSheet, Text, View } from 'react-native';
+import { connect } from 'react-redux';
 import Swiper from 'react-native-deck-swiper';
 import inatjs from 'inaturalistjs';
 
@@ -290,7 +291,4 @@ const mapStateToProps = (state) => ({
   swiper: state.swiper,
 });
 
-const mapDispatchToProps = (dispatch) => ({
-});
-
-export default connect(mapStateToProps, mapDispatchToProps)(IiIdentifyScreen);
+export default connect(mapStateToProps, undefined)(IiIdentifyScreen);
