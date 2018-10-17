@@ -66,6 +66,10 @@ const taxa = [
 ];
 
 class ItSettingsScreen extends Component {
+  static navigationOptions = () => {
+    return {
+      title: 'Swiper settings'
+    };
   };
 
   render() {
@@ -84,9 +88,8 @@ class ItSettingsScreen extends Component {
     } = this.props;
     const { swipeLeft, swipeRight, swipeTop, place } = this.props.swiper;
     const { container, subscriptionContainer } = styles;
-    return <View style={container}>
-        <Text>Customize the swiper here:</Text>
-
+    return (
+      <View style={container}>
         <List.Accordion title={`Filter by place = ${place.label}`}>
           {places.map(place => (
             <List.Item
@@ -108,7 +111,14 @@ class ItSettingsScreen extends Component {
         </List.Accordion>
         <View style={subscriptionContainer}>
           <Text>Subscribe to this identification</Text>
-          <Switch value={swipeLeft.subscribe} onValueChange={() => (swipeLeft.subscribe ? unsubscribeSwipeLeft() : subscribeSwipeLeft())} />
+          <Switch
+            value={swipeLeft.subscribe}
+            onValueChange={() =>
+              swipeLeft.subscribe
+                ? unsubscribeSwipeLeft()
+                : subscribeSwipeLeft()
+            }
+          />
         </View>
 
         <List.Accordion title={`Swipe right = ${swipeRight.label}`}>
@@ -122,7 +132,14 @@ class ItSettingsScreen extends Component {
         </List.Accordion>
         <View style={subscriptionContainer}>
           <Text>Subscribe to this identification</Text>
-          <Switch value={swipeRight.subscribe} onValueChange={() => (swipeRight.subscribe ? unsubscribeSwipeRight() : subscribeSwipeRight())} />
+          <Switch
+            value={swipeRight.subscribe}
+            onValueChange={() =>
+              swipeRight.subscribe
+                ? unsubscribeSwipeRight()
+                : subscribeSwipeRight()
+            }
+          />
         </View>
 
         <List.Accordion title={`Swipe top = ${swipeTop.label}`}>
@@ -136,7 +153,12 @@ class ItSettingsScreen extends Component {
         </List.Accordion>
         <View style={subscriptionContainer}>
           <Text>Subscribe to this identification</Text>
-        <Switch value={swipeTop.subscribe} onValueChange={() => (swipeTop.subscribe ? unsubscribeSwipeTop() : subscribeSwipeTop())} />
+          <Switch
+            value={swipeTop.subscribe}
+            onValueChange={() =>
+              swipeTop.subscribe ? unsubscribeSwipeTop() : subscribeSwipeTop()
+            }
+          />
         </View>
 
         <Button onPress={() => navigation.navigate('Identify')}>Done</Button>
