@@ -47,6 +47,14 @@ class IiIdentifyScreen extends Component {
     };
   }
 
+  shouldComponentUpdate(nextProps, nextState) {
+    if (this.props.swiper !== nextProps.swiper) {
+      return false;
+    }
+    return true;
+  }
+
+
   searchObservations() {
     const { user } = this.state;
     const { place } = this.props.swiper;
