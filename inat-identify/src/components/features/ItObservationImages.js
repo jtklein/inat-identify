@@ -22,6 +22,8 @@ class ItObservationImages extends Component {
     if (newIndex >= observation.observation_photos.length) {
       newIndex = 0;
     }
+
+    // The Observation has only thumbnails of images
     const uri = this.props.observation.observation_photos[newIndex].photo.url.replace('square', 'large');
     console.log(uri);
     this.setState({ currentIndex: newIndex, uri });
