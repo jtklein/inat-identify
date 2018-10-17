@@ -66,14 +66,7 @@ const taxa = [
 ];
 
 class ItSettingsScreen extends Component {
-  INITIAL_STATE = {
-    apiToken: this.props.navigation.state.params.apiToken
   };
-
-  constructor(props) {
-    super(props);
-    this.state = this.INITIAL_STATE;
-  }
 
   render() {
     const {
@@ -89,13 +82,7 @@ class ItSettingsScreen extends Component {
       unsubscribeSwipeTop,
       changeSwipePlace
     } = this.props;
-    const { apiToken } = this.state;
-    const {
-      swipeLeft,
-      swipeRight,
-      swipeTop,
-      place
-    } = this.props.swiper;
+    const { swipeLeft, swipeRight, swipeTop, place } = this.props.swiper;
     const { container, subscriptionContainer } = styles;
     return <View style={container}>
         <Text>Customize the swiper here:</Text>
@@ -152,16 +139,9 @@ class ItSettingsScreen extends Component {
         <Switch value={swipeTop.subscribe} onValueChange={() => (swipeTop.subscribe ? unsubscribeSwipeTop() : subscribeSwipeTop())} />
         </View>
 
-        <Button onPress={() => navigation.navigate('Identify', {
-              apiToken,
-              swipeLeft,
-              swipeRight,
-              swipeTop,
-              place
-            })}>
-          Done
-        </Button>
-      </View>;
+        <Button onPress={() => navigation.navigate('Identify')}>Done</Button>
+      </View>
+    );
   }
 }
 
