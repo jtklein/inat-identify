@@ -1,10 +1,11 @@
 import React from 'react';
 import { StyleSheet, View } from 'react-native';
-import { Button } from 'react-native-paper';
+import { Button, Paragraph } from 'react-native-paper';
 import { AuthSession } from 'expo';
 import axios from 'axios';
 
 import oauth from '../../secrets/oauth';
+import { ItScreenContainer } from '../components/common';
 
 const INATURALIST_OAUTH_API = 'https://www.inaturalist.org/oauth';
 
@@ -82,29 +83,34 @@ export default class IiAuthScreen extends React.Component {
   };
 
   render() {
-    const { container } = styles;
-    return <View style={container}>
-        <Button onPress={() => this.loginAsync()} loading={this.state.isAuthenticating}>
-          Login with iNaturalist
-        </Button>
-        <Button
-          onPress={() =>
-            this.props.navigation.navigate('Identify', {
-              apiToken: oauth.MY_CURRENT_API_TOKEN
-            })
-          }
-        >
-          !!DEV Skip
-        </Button>
-
-        <View style={{ height: 50 }} />
-      </View>;
+    const { container, paragraph } = styles;
+    return <ItScreenContainer>
+        <View style={container}>
+          <Button onPress={() => this.loginAsync()} loading={this.state.isAuthenticating}>
+            Login with iNaturalist
+          </Button>
+          <View style={paragraph}>
+            <Paragraph>Why do I see this screen every time?</Paragraph>
+          </View>
+          {true ? <Button onPress={() => this.props.navigation.navigate(
+                  'Identify',
+                  {
+                    apiToken: oauth.MY_CURRENT_API_TOKEN
+                  }
+                )}>
+              !!DEV Skip
+            </Button> : null}
+        </View>
+      </ItScreenContainer>;
   }
 }
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+    justifyContent: 'space-around',
+  },
+  paragraph: {
     alignItems: 'center',
     justifyContent: 'center'
   }
