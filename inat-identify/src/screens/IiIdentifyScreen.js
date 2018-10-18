@@ -126,6 +126,12 @@ class IiIdentifyScreen extends Component {
     );
   };
 
+  identifyInAnimationFrame(observation, swipeOption) {
+    requestAnimationFrame(() => {
+      this.identify(observation, swipeOption);
+    });
+  }
+
   identify(observation, swipeOption) {
     console.log('observation', observation);
     const { apiToken } = this.state;
@@ -169,19 +175,19 @@ class IiIdentifyScreen extends Component {
   onSwipedLeft(observation) {
     const { swipeLeft } = this.props.swiper;
     // Use set id for this identification
-    this.identify(observation, swipeLeft);
+    this.identifyInAnimationFrame(observation, swipeLeft);
   }
 
   onSwipedRight(observation) {
     const { swipeRight } = this.props.swiper;
     // Use set id for this identification
-    this.identify(observation, swipeRight);
+    this.identifyInAnimationFrame(observation, swipeRight);
   }
 
   onSwipedTop(observation) {
     const { swipeTop } = this.props.swiper;
     // Use set id for this identification
-    this.identify(observation, swipeTop);
+    this.identifyInAnimationFrame(observation, swipeTop);
   }
 
   onSwipedBottom(observation) {
