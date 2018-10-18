@@ -5,17 +5,19 @@ import Swiper from 'react-native-deck-swiper';
 import inatjs from 'inaturalistjs';
 
 import ItObservationImages from '../components/features/ItObservationImages';
-import { ItMaterial, ItScreenContainer } from '../components/common';
+import {
+  ItScreenContainer,
+  ItHeaderButtons,
+  HeaderItem
+} from '../components/common';
 
 class IiIdentifyScreen extends Component {
   static navigationOptions = ({ navigation }) => {
     return {
       headerRight: (
-        <ItMaterial
-          onPress={() => navigation.navigate('Settings')}
-          name="settings"
-          color="#FFFFFF"
-        />
+        <ItHeaderButtons>
+          <HeaderItem title='settings' iconName='settings' onPress={() => navigation.navigate('Settings')} />
+        </ItHeaderButtons>
       ),
     };
   };

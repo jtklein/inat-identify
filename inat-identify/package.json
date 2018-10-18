@@ -10,6 +10,7 @@
     "react-native-deck-swiper": "^1.5.22",
     "react-native-paper": "^2.1.2",
     "react-navigation": "^2.17.0",
+    "react-navigation-header-buttons": "^2.1.0",
     "react-redux": "^5.0.7",
     "redux": "^4.0.1",
     "redux-promise-middleware": "^5.1.1",
