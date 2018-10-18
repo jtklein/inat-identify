@@ -84,7 +84,7 @@ export default class IiAuthScreen extends React.Component {
 
   render() {
     const { container, paragraph } = styles;
-    return <ItScreenContainer>
+    return <ItScreenContainer barStyle='dark-content'>
         <View style={container}>
           <Button onPress={() => this.loginAsync()} loading={this.state.isAuthenticating}>
             Login with iNaturalist
