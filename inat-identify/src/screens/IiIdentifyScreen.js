@@ -5,8 +5,7 @@ import Swiper from 'react-native-deck-swiper';
 import inatjs from 'inaturalistjs';
 
 import ItObservationImages from '../components/features/ItObservationImages';
-import { ItMaterial } from '../components/common';
-
+import { ItMaterial, ItScreenContainer } from '../components/common';
 
 class IiIdentifyScreen extends Component {
   static navigationOptions = ({ navigation }) => {
@@ -203,12 +202,12 @@ class IiIdentifyScreen extends Component {
   render() {
     const { observations, cardIndex } = this.state;
     const { swipeLeft, swipeRight, swipeTop } = this.props.swiper;
-    const { container, label } = styles;
+    const { label } = styles;
     if (!observations) {
       return null;
     }
     return (
-      <View style={container}>
+      <ItScreenContainer>
         <Swiper
           cards={observations}
           cardIndex={cardIndex}
@@ -277,16 +276,12 @@ class IiIdentifyScreen extends Component {
           animateOverlayLabelsOpacity
           animateCardOpacity
         />
-      </View>
+      </ItScreenContainer>
     );
   }
 }
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#FFFFFF'
-  },
   card: {
     flex: 1,
     borderRadius: 4,
