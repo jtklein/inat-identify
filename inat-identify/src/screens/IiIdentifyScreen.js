@@ -59,7 +59,6 @@ class IiIdentifyScreen extends Component {
       per_page: 100,
       page: this.state.page + 1,
       // Must be observed within the place with this ID
-      // Testing with Europe
       place_id: place.id,
       // Observations have been reviewed by the user with ID equal to the value of the viewer_id parameter
       viewer_id: user.id,
