@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
-import { View, BackHandler, Platform, StatusBar } from 'react-native';
+import { View, BackHandler } from 'react-native';
 import { NavigationActions } from 'react-navigation';
+import inatjs from 'inaturalistjs';
 
 import IiAppNavigator from './IiAppNavigator';
 
@@ -30,7 +31,6 @@ class ItAppContainer extends Component {
   render() {
     return (
       <View style={{ flex: 1 }}>
-        {Platform.OS === 'ios' && <StatusBar barStyle="dark-content" />}
         <IiAppNavigator />
       </View>
     );

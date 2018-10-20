@@ -1,14 +1,14 @@
 import React from 'react';
-import { StyleSheet, View, StatusBar } from 'react-native';
+import { StyleSheet, View, Platform, StatusBar } from 'react-native';
 
 const ItScreenContainer = props => {
   const { children } = props;
 
   return (
     <View {...props} style={styles.container}>
-      <StatusBar
+      {Platform.OS === 'ios' && <StatusBar
         barStyle={props.barStyle || 'light-content'}
-      />
+      />}
       {children}
     </View>
   );
