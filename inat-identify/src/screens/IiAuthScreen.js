@@ -85,21 +85,46 @@ export default class IiAuthScreen extends React.Component {
   render() {
     const { container, paragraph } = styles;
     return <ItScreenContainer barStyle='dark-content'>
-        <View style={container}>
-          <Button onPress={() => this.loginAsync()} loading={this.state.isAuthenticating}>
-            Login with iNaturalist
-          </Button>
-          <View style={paragraph}>
-            <Paragraph>Why do I see this screen every time?</Paragraph>
-          </View>
-          {true ? <Button onPress={() => this.props.navigation.navigate(
-                  'Entry',
-                  {
-                    apiToken: oauth.MY_CURRENT_API_TOKEN
-                  }
-                )}>
-              !!DEV Skip
-            </Button> : null}
+      <View style={container}>
+        <View style={paragraph}>
+          <Paragraph>What can I do with this app?</Paragraph>
+          <Paragraph>
+            You will be able to identify a large batch of hitherto unknown observations.
+            That's all. For now. If you like this feature, or have some requests, let me know.
+          </Paragraph>
+        </View>
+        <View style={paragraph}>
+          <Paragraph>How does it work?</Paragraph>
+          <Paragraph>
+            First, in order to use this app in combination with iNaturalist, you have to
+            authenticate yourself on the iNaturalist homepage. This will give this app here the
+            permission to send identifications made here back to iNaturalist on your behalf.
+            In other words, all identifications will be performed with your user account.
+            Once this was successfull you will be guided back here.
+          </Paragraph>
+        </View>
+        <Button onPress={() => this.loginAsync()} loading={this.state.isAuthenticating}>
+          Login with iNaturalist
+        </Button>
+        <View style={paragraph}>
+          <Paragraph>Why do I see this screen every time?</Paragraph>
+          <Paragraph>
+            Handling your authentication with iNaturalist is a task that
+            has to be done with utmost care. I made this app here in my spare time,
+            and I have no time and resources to store your user account credentials securely enough
+            within this app. For this reason, as of now, I am merely
+            guiding you to iNaturalist's very own authentication and am not storing any
+            of your credentials for future use.
+          </Paragraph>
+        </View>
+        {true ? <Button onPress={() => this.props.navigation.navigate(
+                'Entry',
+                {
+                  apiToken: oauth.MY_CURRENT_API_TOKEN
+                }
+              )}>
+            !!DEV Skip
+          </Button> : null}
       </View>
     </ItScreenContainer>;
   }

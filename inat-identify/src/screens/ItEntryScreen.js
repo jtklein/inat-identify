@@ -42,9 +42,17 @@ class ItEntryScreen extends Component {
             <Paragraph>
               The app will show you a stack of cards. These are true iNaturalist
               observations, so don't mess around. In the basic example you can swipe right if you
-              want identify the observation as a plant, left for animal and up to the top for fungi.
+              want to identify the observation as a plant, left for animal and up to the top for fungi.
               These represent the main branches of life and should suffice for now.
-              If you like the app let me know, then I can make it so that you can customize the swipe directions.
+            </Paragraph>
+            <Paragraph>
+              For now, you can customize to a small extent in the settings menu (top right). You can change the place from 
+              where to look for observations. You can change the directions
+              in which observations are identified into the three main branches of life. You can further set if you want to
+              be subscribed to the observations you identified in each of the directions separately.
+            </Paragraph>
+            <Paragraph>
+              If you like the app let me know, then I can make it so that you can customize the swipe directions even further.
             </Paragraph>
           </View>
           <Button onPress={() => navigation.navigate('Identify', { apiToken })}>
