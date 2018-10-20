@@ -74,7 +74,7 @@ export default class IiAuthScreen extends React.Component {
         console.log('apiTokenResponse', apiTokenResponse);
         if (apiTokenResponse.data && apiTokenResponse.data.api_token) {
           // Navigate to next screen with api_token
-          this.props.navigation.navigate('Identify', { apiToken: apiTokenResponse.data.api_token });
+          this.props.navigation.navigate('Entry', { apiToken: apiTokenResponse.data.api_token });
         }
         // TODO: UI response if no token received
       }
@@ -93,15 +93,15 @@ export default class IiAuthScreen extends React.Component {
             <Paragraph>Why do I see this screen every time?</Paragraph>
           </View>
           {true ? <Button onPress={() => this.props.navigation.navigate(
-                  'Identify',
+                  'Entry',
                   {
                     apiToken: oauth.MY_CURRENT_API_TOKEN
                   }
                 )}>
               !!DEV Skip
             </Button> : null}
-        </View>
-      </ItScreenContainer>;
+      </View>
+    </ItScreenContainer>;
   }
 }
 
