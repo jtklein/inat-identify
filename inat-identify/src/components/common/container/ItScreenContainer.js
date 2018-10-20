@@ -1,5 +1,5 @@
 import React from 'react';
-import { StyleSheet, View, StatusBar, Platform } from 'react-native';
+import { StyleSheet, View, StatusBar } from 'react-native';
 
 const ItScreenContainer = props => {
   const { children } = props;
