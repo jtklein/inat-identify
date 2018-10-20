@@ -6,7 +6,8 @@ import inatjs from 'inaturalistjs';
 
 import ItObservationImages from '../components/features/ItObservationImages';
 import {
-  ItScreenContainer
+  ItScreenContainer,
+  ItSpinner
 } from '../components/common';
 
 class IiIdentifyScreen extends Component {
@@ -204,8 +205,8 @@ class IiIdentifyScreen extends Component {
     const { observations, cardIndex } = this.state;
     const { swipeLeft, swipeRight, swipeTop } = this.props.swiper;
     const { label } = styles;
-    if (!observations) {
-      return null;
+    if (!observations || !observations.length > 0) {
+      return <ItSpinner />;
     }
     return (
       <ItScreenContainer>
