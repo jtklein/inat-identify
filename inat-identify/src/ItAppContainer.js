@@ -5,6 +5,11 @@ import inatjs from 'inaturalistjs';
 
 import IiAppNavigator from './IiAppNavigator';
 
+// inatjs.setConfig({
+//   apiHost: 'gorilla.inaturalist.org',
+//   writeApiHost: 'gorilla.inaturalist.org'
+// });
+
 /**
  * Container for the entire app.
  * @type {Object}
