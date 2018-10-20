@@ -76,7 +76,6 @@ class ItSettingsScreen extends Component {
 
   render() {
     const {
-      navigation,
       changeSwipeLeft,
       subscribeSwipeLeft,
       unsubscribeSwipeLeft,
@@ -114,7 +113,7 @@ class ItSettingsScreen extends Component {
             ))}
           </List.Accordion>
           <View style={subscriptionContainer}>
-            <Text>Subscribe to this identification</Text>
+            <Text>Subscribe to {swipeLeft.label} identifications</Text>
             <Switch
               value={swipeLeft.subscribe}
               onValueChange={() =>
@@ -135,7 +134,7 @@ class ItSettingsScreen extends Component {
             ))}
           </List.Accordion>
           <View style={subscriptionContainer}>
-            <Text>Subscribe to this identification</Text>
+            <Text>Subscribe to {swipeRight.label} identifications</Text>
             <Switch
               value={swipeRight.subscribe}
               onValueChange={() =>
@@ -156,7 +155,7 @@ class ItSettingsScreen extends Component {
             ))}
           </List.Accordion>
           <View style={subscriptionContainer}>
-            <Text>Subscribe to this identification</Text>
+            <Text>Subscribe to {swipeTop.label} identifications</Text>
             <Switch
               value={swipeTop.subscribe}
               onValueChange={() =>
