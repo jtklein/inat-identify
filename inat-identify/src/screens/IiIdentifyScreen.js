@@ -6,19 +6,13 @@ import inatjs from 'inaturalistjs';
 
 import ItObservationImages from '../components/features/ItObservationImages';
 import {
-  ItScreenContainer,
-  ItHeaderButtons,
-  HeaderItem
+  ItScreenContainer
 } from '../components/common';
 
 class IiIdentifyScreen extends Component {
-  static navigationOptions = ({ navigation }) => {
+  static navigationOptions = () => {
     return {
-      headerRight: (
-        <ItHeaderButtons>
-          <HeaderItem title='settings' iconName='settings' onPress={() => navigation.navigate('Settings')} />
-        </ItHeaderButtons>
-      ),
+      title: 'Swiper'
     };
   };
 
