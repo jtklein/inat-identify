@@ -2,6 +2,8 @@ import React from 'react';
 import { createStackNavigator, createSwitchNavigator } from 'react-navigation';
 
 import IiAuthScreen from './screens/IiAuthScreen';
+
+import ItEntryScreen from './screens/ItEntryScreen';
 import IiIdentifyScreen from './screens/IiIdentifyScreen';
 import ItSettingsScreen from './screens/ItSettingsScreen';
 
@@ -32,11 +34,12 @@ const AuthStack = createStackNavigator(
 
 const AppStack = createStackNavigator(
   {
+    Entry: ItEntryScreen,
+    Settings: ItSettingsScreen,
     Identify: IiIdentifyScreen,
-    Settings: ItSettingsScreen
   },
   {
-    initialRouteName: 'Identify',
+    initialRouteName: 'Entry',
     navigationOptions: {
       headerStyle,
       headerTintColor,
