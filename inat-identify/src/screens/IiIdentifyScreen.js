@@ -214,6 +214,7 @@ class IiIdentifyScreen extends Component {
           cards={observations}
           cardIndex={cardIndex}
           ref={swiper => { this.swiper = swiper }}
+          marginBottom={60}
           backgroundColor={'#FFFFFF'}
           renderCard={this.renderCard}
           cardVerticalMargin={20}
