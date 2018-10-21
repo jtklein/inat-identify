@@ -34,14 +34,17 @@ class IiIdentifyScreen extends Component {
   }
 
   componentDidMount = async () => {
+    const { navigation } = this.props;
+    const { place } = this.props.swiper;
+    navigation.setParams({ title: place.label });
     // TODO: refactor to app start up, if we ever have different screens
     const user = await this.getCurrentUser();
     console.log('user', user);
-    if(user) {
+    if (user) {
       // Get first batch of unidentified observations
       this.searchObservations();
-    };
-  }
+    }
+  };
 
   shouldComponentUpdate(nextProps, nextState) {
     if (this.props.swiper !== nextProps.swiper) {
@@ -49,7 +52,6 @@ class IiIdentifyScreen extends Component {
     }
     return true;
   }
-
 
   searchObservations() {
     const { user } = this.state;
@@ -82,7 +84,8 @@ class IiIdentifyScreen extends Component {
   getCurrentUser = async () => {
     const { apiToken } = this.state;
     const options = { api_token: apiToken };
-    return await inatjs.users.me(options)
+    return await inatjs.users
+      .me(options)
       .then(r => {
         this.setState({ user: r.results[0] });
         return r;
@@ -92,7 +95,7 @@ class IiIdentifyScreen extends Component {
         console.log('Error in fetching current user', e);
         console.log(e.response);
       });
-  }
+  };
 
   onSwipedAllCards = () => {
     this.setState({
@@ -142,8 +145,7 @@ class IiIdentifyScreen extends Component {
     }
     */
     const identification = {
-      identification:
-      {
+      identification: {
         observation_id: observation.id,
         taxon_id: swipeOption.id
       }
@@ -154,7 +156,8 @@ class IiIdentifyScreen extends Component {
       .then(c => {
         console.log('identification', c);
         if (!swipeOption.subscribe) {
-          inatjs.observations.subscribe(observation, options)
+          inatjs.observations
+            .subscribe(observation, options)
             .then(rsp => console.log('Unsubscriped to: ', rsp))
             .catch(e => {
               console.log('Error in unsubscribing to observation', e);
@@ -203,7 +206,8 @@ class IiIdentifyScreen extends Component {
 
   render() {
     const { observations, cardIndex } = this.state;
-    const { swipeLeft, swipeRight, swipeTop } = this.props.swiper;
+    const { swiper } = this.props;
+    const { swipeLeft, swipeRight, swipeTop } = swiper;
     const { label } = styles;
     if (!observations || !observations.length > 0) {
       return <ItSpinner />;
@@ -213,7 +217,9 @@ class IiIdentifyScreen extends Component {
         <Swiper
           cards={observations}
           cardIndex={cardIndex}
-          ref={swiper => { this.swiper = swiper }}
+          ref={swiper => {
+            this.swiper = swiper;
+          }}
           marginBottom={60}
           backgroundColor={'#FFFFFF'}
           renderCard={this.renderCard}
