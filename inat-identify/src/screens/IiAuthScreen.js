@@ -12,7 +12,6 @@ const INATURALIST_OAUTH_API = 'https://www.inaturalist.org/oauth';
 export default class IiAuthScreen extends React.Component {
   INITIAL_STATE = {
     isAuthenticating: false,
-    result: null,
   };
 
   constructor(props) {
@@ -21,6 +20,8 @@ export default class IiAuthScreen extends React.Component {
   }
 
   loginAsync = async () => {
+    const { navigation } = this.props;
+
     this.setState({ isAuthenticating: true });
     // AuthFlow is handled by Expo.AuthSession
     const redirectUrl = AuthSession.getRedirectUrl();
@@ -31,11 +32,10 @@ export default class IiAuthScreen extends React.Component {
         + `&redirect_uri=${encodeURIComponent(redirectUrl)}`,
     });
     console.log('result', result);
-    this.setState({ result });
     // The code was successfully retrieved
     // TODO: UI for result.type === 'cancel | dismissed | error'
     if (result.type && result.type === 'success') {
-      const url = `${INATURALIST_OAUTH_API}/token`;
+      const tokenUrl = `${INATURALIST_OAUTH_API}/token`;
       const params = {
         client_id: oauth.INATURALIST_APP_ID,
         client_secret: oauth.INATURALIST_APP_SECRET,
@@ -45,7 +45,7 @@ export default class IiAuthScreen extends React.Component {
       };
       // POST request to the iNaturalist OAuth API
       const response = await axios
-        .post(url, params)
+        .post(tokenUrl, params)
         .catch((error) => {
           console.log(
             'Error in fetching access token from iNaturalist',
@@ -57,25 +57,24 @@ export default class IiAuthScreen extends React.Component {
       // Response OK
       // TODO: UI for failure
       if (response.status === 200) {
-        this.setState({ accessToken: response.data.access_token });
 
         // Get the API token required to make API calls for the user
-        const url = 'https://www.inaturalist.org/users/api_token.json';
+        const apiTokenUrl = 'https://www.inaturalist.org/users/api_token.json';
         const config = {
           headers: {
             Authorization: `Bearer ${response.data.access_token}`,
           },
         };
-        const apiTokenResponse = await axios.get(url, config)
+        const apiTokenResponse = await axios.get(apiTokenUrl, config)
           .then(r => r)
           .catch((e) => {
             console.log('Error in fetching API token from iNaturalist', e);
-            return { error };
+            return { error: e };
           });
         console.log('apiTokenResponse', apiTokenResponse);
         if (apiTokenResponse.data && apiTokenResponse.data.api_token) {
           // Navigate to next screen with api_token
-          this.props.navigation.navigate('Entry', { apiToken: apiTokenResponse.data.api_token });
+          navigation.navigate('Entry', { apiToken: apiTokenResponse.data.api_token });
         }
         // TODO: UI response if no token received
       }
@@ -84,6 +83,8 @@ export default class IiAuthScreen extends React.Component {
   };
 
   render() {
+    const { navigation } = this.props;
+    const { isAuthenticating } = this.state;
     const { container, paragraph } = styles;
     return (
       <ItScreenContainer barStyle="dark-content">
@@ -92,7 +93,7 @@ export default class IiAuthScreen extends React.Component {
             <Paragraph>What can I do with this app?</Paragraph>
             <Paragraph>
             You will be able to identify a large batch of hitherto unknown observations.
-            That's all. For now. If you like this feature, or have some requests, let me know.
+            That is all. For now. If you like this feature, or have some requests, let me know.
             </Paragraph>
           </View>
           <View style={paragraph}>
@@ -105,7 +106,7 @@ export default class IiAuthScreen extends React.Component {
             Once this was successfull you will be guided back here.
             </Paragraph>
           </View>
-          <Button onPress={() => this.loginAsync()} loading={this.state.isAuthenticating}>
+          <Button onPress={() => this.loginAsync()} loading={isAuthenticating}>
           Login with iNaturalist
           </Button>
           <View style={paragraph}>
@@ -120,7 +121,7 @@ export default class IiAuthScreen extends React.Component {
             </Paragraph>
           </View>
           {true ? (
-            <Button onPress={() => this.props.navigation.navigate(
+            <Button onPress={() => navigation.navigate(
               'Entry',
               {
                 apiToken: oauth.MY_CURRENT_API_TOKEN,

@@ -4,13 +4,14 @@ import {
 } from 'react-native';
 
 const ItScreenContainer = (props) => {
-  const { children } = props;
+  const { barStyle, children } = props;
+  const { container } = styles;
 
   return (
-    <View {...props} style={styles.container}>
+    <View {...props} style={container}>
       {Platform.OS === 'ios' && (
       <StatusBar
-        barStyle={props.barStyle || 'light-content'}
+        barStyle={barStyle || 'light-content'}
       />
       )}
       {children}

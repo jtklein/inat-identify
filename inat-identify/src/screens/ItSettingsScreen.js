@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 import { connect } from 'react-redux';
-import { Switch, List, Button } from 'react-native-paper';
+import { Switch, List } from 'react-native-paper';
 
 import { ItScreenContainer } from '../components/common';
 import {
@@ -79,21 +79,22 @@ class ItSettingsScreen extends Component {
       subscribeSwipeTop,
       unsubscribeSwipeTop,
       changeSwipePlace,
+      swiper
     } = this.props;
     const {
       swipeLeft, swipeRight, swipeTop, place,
-    } = this.props.swiper;
+    } = swiper;
     const { container, subscriptionContainer } = styles;
     return (
       <ItScreenContainer>
         <View style={container}>
 
           <List.Accordion title={`Filter by place = ${place.label}`}>
-            {places.map(place => (
+            {places.map(p => (
               <List.Item
-                key={place.id}
-                title={place.label}
-                onPress={() => changeSwipePlace(place)}
+                key={p.id}
+                title={p.label}
+                onPress={() => changeSwipePlace(p)}
               />
             ))}
           </List.Accordion>
@@ -108,7 +109,7 @@ class ItSettingsScreen extends Component {
             ))}
           </List.Accordion>
           <View style={subscriptionContainer}>
-            <Text>Subscribe to {swipeLeft.label} identifications</Text>
+            <Text>{`Subscribe to ${swipeLeft.label} identifications`}</Text>
             <Switch
               value={swipeLeft.subscribe}
               onValueChange={() => (swipeLeft.subscribe
@@ -128,12 +129,7 @@ class ItSettingsScreen extends Component {
             ))}
           </List.Accordion>
           <View style={subscriptionContainer}>
-            <Text>
-Subscribe to
-              {swipeRight.label}
-              {' '}
-identifications
-            </Text>
+            <Text>{`Subscribe to ${swipeRight.label} identifications`}</Text>
             <Switch
               value={swipeRight.subscribe}
               onValueChange={() => (swipeRight.subscribe
@@ -153,12 +149,7 @@ identifications
             ))}
           </List.Accordion>
           <View style={subscriptionContainer}>
-            <Text>
-Subscribe to
-              {swipeTop.label}
-              {' '}
-identifications
-            </Text>
+            <Text>{`Subscribe to ${swipeTop.label} identifications`}</Text>
             <Switch
               value={swipeTop.subscribe}
               onValueChange={() => (swipeTop.subscribe ? unsubscribeSwipeTop() : subscribeSwipeTop())

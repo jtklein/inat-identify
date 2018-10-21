@@ -1,14 +1,8 @@
 import React, { Component } from 'react';
 import { View, BackHandler } from 'react-native';
 import { NavigationActions } from 'react-navigation';
-import inatjs from 'inaturalistjs';
 
 import IiAppNavigator from './IiAppNavigator';
-
-// inatjs.setConfig({
-//   apiHost: 'gorilla.inaturalist.org',
-//   writeApiHost: 'gorilla.inaturalist.org'
-// });
 
 /**
  * Container for the entire app.
