@@ -1,18 +1,35 @@
 {
-    "extends": [
-      "airbnb",
-      "plugin:flowtype/recommended"
-    ],
-    "plugins": [
-      "flowtype",
-      "react-native"
-    ],
-    "settings": {
-      "flowtype": {
-        "onlyFilesWithFlowAnnotation": false
-      }
-    },
-    "env": {
-      "react-native/react-native": true
+  "extends": [
+    "airbnb",
+    "plugin:flowtype/recommended"
+  ],
+  "plugins": [
+    "flowtype",
+    "react-native"
+  ],
+  "settings": {
+    "flowtype": {
+      "onlyFilesWithFlowAnnotation": false
     }
+  },
+  "env": {
+    "react-native/react-native": true
+  },
+  "rules": {
+    "react/jsx-filename-extension": [
+      "error",
+      {
+        "extensions": [
+          ".js"
+        ]
+      }
+    ],
+    "no-console": 0,
+    "no-use-before-define": [
+      "error",
+      {
+        "variables": false
+      }
+    ]
   }
+}
