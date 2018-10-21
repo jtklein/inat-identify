@@ -106,25 +106,6 @@ class IiIdentifyScreen extends Component {
     this.searchObservations();
   };
 
-  swipeBack = () => {
-    if (!this.state.isSwipingBack) {
-      this.setIsSwipingBack(true, () => {
-        this.swiper.swipeBack(() => {
-          this.setIsSwipingBack(false);
-        });
-      });
-    }
-  };
-
-  setIsSwipingBack = (isSwipingBack, cb) => {
-    this.setState(
-      {
-        isSwipingBack: isSwipingBack
-      },
-      cb
-    );
-  };
-
   identifyInAnimationFrame(observation, swipeOption) {
     requestAnimationFrame(() => {
       this.identify(observation, swipeOption);
