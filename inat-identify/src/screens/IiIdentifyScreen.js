@@ -11,10 +11,8 @@ import {
 } from '../components/common';
 
 class IiIdentifyScreen extends Component {
-  static navigationOptions = () => {
-    return {
-      title: 'Swiper'
-    };
+  static navigationOptions = ({ navigation }) => {
+    return { title: navigation.getParam('title') };
   };
 
   INITIAL_STATE = {
