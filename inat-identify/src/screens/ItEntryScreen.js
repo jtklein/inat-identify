@@ -43,6 +43,9 @@ class ItEntryScreen extends Component {
               These represent the main branches of life and should suffice for now.
             </Paragraph>
             <Paragraph>
+              Press on the image in the card to page through the images.
+            </Paragraph>
+            <Paragraph>
               For now, you can customize to a small extent in the settings menu (top right). You can change the place from
               where to look for observations. You can change the directions
               in which observations are identified into the three main branches of life. You can further set if you want to
