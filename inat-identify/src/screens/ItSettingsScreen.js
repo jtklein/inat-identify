@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 import { connect } from 'react-redux';
-import { Switch, List } from 'react-native-paper';
+import { Switch, List, Button } from 'react-native-paper';
 
 import { ItScreenContainer } from '../components/common';
 import {
@@ -67,7 +67,49 @@ class ItSettingsScreen extends Component {
     title: 'Swiper settings',
   });
 
-  render() {
+  INITIAL_STATE = {
+    showFilter: true,
+  };
+
+  constructor(props) {
+    super(props);
+    this.state = this.INITIAL_STATE;
+  }
+
+  onFilterPressed = () => {
+    this.setState({ showFilter: true });
+  }
+
+  onActionsPressed = () => {
+    this.setState({ showFilter: false });
+  }
+
+  renderFilterSettings = () => {
+    const {
+      changeSwipePlace,
+      swiper,
+    } = this.props;
+    const { place } = swiper;
+    const { container } = styles;
+    return (
+      <View style={container}>
+        <List.Accordion
+          title={`Filter by place = ${place.label}`}
+          left={props => <List.Icon {...props} icon="place" />}
+        >
+          {places.map(p => (
+            <List.Item
+              key={p.id}
+              title={p.label}
+              onPress={() => changeSwipePlace(p)}
+            />
+          ))}
+        </List.Accordion>
+      </View>
+    );
+  }
+
+  renderActionsSettings = () => {
     const {
       changeSwipeLeft,
       subscribeSwipeLeft,
@@ -78,84 +120,106 @@ class ItSettingsScreen extends Component {
       changeSwipeTop,
       subscribeSwipeTop,
       unsubscribeSwipeTop,
-      changeSwipePlace,
       swiper,
     } = this.props;
     const {
-      swipeLeft, swipeRight, swipeTop, place,
+      swipeLeft, swipeRight, swipeTop,
     } = swiper;
+
     const { container, subscriptionContainer } = styles;
     return (
+      <View style={container}>
+        <List.Accordion
+          title={`Swipe left = ${swipeLeft.label}`}
+          left={props => <List.Icon {...props} icon="keyboard-arrow-left" />}
+        >
+          {taxa.map(taxon => (
+            <List.Item
+              key={taxon.id}
+              title={taxon.label}
+              onPress={() => changeSwipeLeft(taxon)}
+            />
+          ))}
+        </List.Accordion>
+        <View style={subscriptionContainer}>
+          <Text>{`Subscribe to ${swipeLeft.label} identifications`}</Text>
+          <Switch
+            value={swipeLeft.subscribe}
+            onValueChange={() => (swipeLeft.subscribe
+              ? unsubscribeSwipeLeft()
+              : subscribeSwipeLeft())
+            }
+          />
+        </View>
+
+        <List.Accordion
+          title={`Swipe right = ${swipeRight.label}`}
+          left={props => <List.Icon {...props} icon="keyboard-arrow-right" />}
+        >
+          {taxa.map(taxon => (
+            <List.Item
+              key={taxon.id}
+              title={taxon.label}
+              onPress={() => changeSwipeRight(taxon)}
+            />
+          ))}
+        </List.Accordion>
+        <View style={subscriptionContainer}>
+          <Text>{`Subscribe to ${swipeRight.label} identifications`}</Text>
+          <Switch
+            value={swipeRight.subscribe}
+            onValueChange={() => (swipeRight.subscribe
+              ? unsubscribeSwipeRight()
+              : subscribeSwipeRight())
+            }
+          />
+        </View>
+
+        <List.Accordion
+          title={`Swipe top = ${swipeTop.label}`}
+          left={props => <List.Icon {...props} icon="keyboard-arrow-up" />}
+        >
+          {taxa.map(taxon => (
+            <List.Item
+              key={taxon.id}
+              title={taxon.label}
+              onPress={() => changeSwipeTop(taxon)}
+            />
+          ))}
+        </List.Accordion>
+        <View style={subscriptionContainer}>
+          <Text>{`Subscribe to ${swipeTop.label} identifications`}</Text>
+          <Switch
+            value={swipeTop.subscribe}
+            onValueChange={() => (swipeTop.subscribe ? unsubscribeSwipeTop() : subscribeSwipeTop())
+            }
+          />
+        </View>
+      </View>
+
+    )
+  }
+
+  renderSettings = () => {
+    const { showFilter } = this.state;
+    return showFilter ? this.renderFilterSettings() : this.renderActionsSettings();
+  }
+
+  render() {
+    const { showFilter } = this.state;
+    const { container } = styles;
+    return (
       <ItScreenContainer>
+        <View style={{ flexDirection: 'row', justifyContent: 'space-evenly' }}>
+          <Button icon="add-a-photo" mode={showFilter ? 'contained' : 'outlined'} onPress={() => this.onFilterPressed()}>
+            Filter
+          </Button>
+          <Button icon="add-a-photo" mode={!showFilter ? 'contained' : 'outlined'} onPress={() => this.onActionsPressed()}>
+            Actions
+          </Button>
+        </View>
         <View style={container}>
-
-          <List.Accordion title={`Filter by place = ${place.label}`}>
-            {places.map(p => (
-              <List.Item
-                key={p.id}
-                title={p.label}
-                onPress={() => changeSwipePlace(p)}
-              />
-            ))}
-          </List.Accordion>
-
-          <List.Accordion title={`Swipe left = ${swipeLeft.label}`}>
-            {taxa.map(taxon => (
-              <List.Item
-                key={taxon.id}
-                title={taxon.label}
-                onPress={() => changeSwipeLeft(taxon)}
-              />
-            ))}
-          </List.Accordion>
-          <View style={subscriptionContainer}>
-            <Text>{`Subscribe to ${swipeLeft.label} identifications`}</Text>
-            <Switch
-              value={swipeLeft.subscribe}
-              onValueChange={() => (swipeLeft.subscribe
-                ? unsubscribeSwipeLeft()
-                : subscribeSwipeLeft())
-              }
-            />
-          </View>
-
-          <List.Accordion title={`Swipe right = ${swipeRight.label}`}>
-            {taxa.map(taxon => (
-              <List.Item
-                key={taxon.id}
-                title={taxon.label}
-                onPress={() => changeSwipeRight(taxon)}
-              />
-            ))}
-          </List.Accordion>
-          <View style={subscriptionContainer}>
-            <Text>{`Subscribe to ${swipeRight.label} identifications`}</Text>
-            <Switch
-              value={swipeRight.subscribe}
-              onValueChange={() => (swipeRight.subscribe
-                ? unsubscribeSwipeRight()
-                : subscribeSwipeRight())
-              }
-            />
-          </View>
-
-          <List.Accordion title={`Swipe top = ${swipeTop.label}`}>
-            {taxa.map(taxon => (
-              <List.Item
-                key={taxon.id}
-                title={taxon.label}
-                onPress={() => changeSwipeTop(taxon)}
-              />
-            ))}
-          </List.Accordion>
-          <View style={subscriptionContainer}>
-            <Text>{`Subscribe to ${swipeTop.label} identifications`}</Text>
-            <Switch
-              value={swipeTop.subscribe}
-              onValueChange={() => (swipeTop.subscribe ? unsubscribeSwipeTop() : subscribeSwipeTop())
-              }
-            />
-          </View>
+          {this.renderSettings()}
         </View>
       </ItScreenContainer>
     );
@@ -165,6 +229,7 @@ class ItSettingsScreen extends Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+    width: '100%',
   },
   subscriptionContainer: {
     flexDirection: 'row',
