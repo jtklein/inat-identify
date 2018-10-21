@@ -18,7 +18,6 @@ class IiIdentifyScreen extends Component {
   INITIAL_STATE = {
     user: {},
     apiToken: this.props.navigation.state.params.apiToken,
-    swipedAllCards: false,
     swipeDirection: '',
     cardIndex: 0,
     observations: [],
@@ -31,8 +30,8 @@ class IiIdentifyScreen extends Component {
   }
 
   componentDidMount = async () => {
-    const { navigation } = this.props;
-    const { place } = this.props.swiper;
+    const { navigation, swiper } = this.props;
+    const { place } = swiper;
     navigation.setParams({ title: place.label });
     // TODO: refactor to app start up, if we ever have different screens
     const user = await this.getCurrentUser();
@@ -44,7 +43,8 @@ class IiIdentifyScreen extends Component {
   };
 
   shouldComponentUpdate(nextProps, nextState) {
-    if (this.props.swiper !== nextProps.swiper) {
+    const { swiper } = this.props;
+    if (swiper !== nextProps.swiper) {
       return false;
     }
     return true;
@@ -83,10 +83,7 @@ class IiIdentifyScreen extends Component {
   }
 
   onSwipedAllCards = () => {
-    this.setState({
-      observations: [],
-      swipedAllCards: true
-    });
+    this.setState({ observations: [] });
     // Get new batch of unidentified observation
     this.searchObservations();
   };
@@ -108,13 +105,14 @@ class IiIdentifyScreen extends Component {
   };
 
   searchObservations() {
-    const { user } = this.state;
-    const { place } = this.props.swiper;
+    const { user, page } = this.state;
+    const { swiper } = this.props;
+    const { place } = swiper;
     const params = {
       iconic_taxa: 'unknown',
       quality_grade: 'needs_id',
       per_page: 100,
-      page: this.state.page + 1,
+      page: page + 1,
       // Must be observed within the place with this ID
       place_id: place.id,
       // Observations have been reviewed by the user with ID equal to the value of the viewer_id parameter
@@ -188,13 +186,13 @@ class IiIdentifyScreen extends Component {
   renderAdditionalInfo = () => {
     const { cardIndex, observations } = this.state;
     const observation = observations[cardIndex];
-    const { text } = styles;
+    const { additionalInfoContainer, text } = styles;
     if (!observation) {
       return null;
     }
 
     return (
-      <View style={{ alignItems: 'center' }}>
+      <View style={additionalInfoContainer}>
         <Text style={text}>{cardIndex}</Text>
         <Text style={text}>{observation.observation_photos.length}</Text>
         <Text style={text}>{observation.species_guess}</Text>
@@ -219,8 +217,7 @@ class IiIdentifyScreen extends Component {
 
   render() {
     const { observations, cardIndex } = this.state;
-    const { swiper } = this.props;
-    const { swipeLeft, swipeRight, swipeTop } = swiper;
+    const { swipeLeft, swipeRight, swipeTop } = this.props.swiper;
     const { label } = styles;
     if (!observations || !observations.length > 0) {
       return <ItSpinner />;
@@ -230,11 +227,11 @@ class IiIdentifyScreen extends Component {
         <Swiper
           cards={observations}
           cardIndex={cardIndex}
-          ref={swiper => {
+          ref={(swiper) => {
             this.swiper = swiper;
           }}
           marginBottom={60}
-          backgroundColor={'#FFFFFF'}
+          backgroundColor="#FFFFFF"
           renderCard={this.renderCard}
           cardVerticalMargin={20}
           stackSize={3}
@@ -296,7 +293,8 @@ class IiIdentifyScreen extends Component {
             }
           }}
           animateOverlayLabelsOpacity
-          animateCardOpacity>
+          animateCardOpacity
+        >
           {this.renderAdditionalInfo()}
         </Swiper>
       </ItScreenContainer>
@@ -321,10 +319,13 @@ const styles = StyleSheet.create({
   },
   text: {
     color: 'red'
+  },
+  additionalInfoContainer: {
+    alignItems: 'center'
   }
 });
 
-const mapStateToProps = (state) => ({
+const mapStateToProps = state => ({
   swiper: state.swiper,
 });
 
