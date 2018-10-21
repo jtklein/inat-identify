@@ -191,23 +191,17 @@ class IiIdentifyScreen extends Component {
 
     return (
       <View style={additionalInfoContainer}>
-        <Text style={text}>{cardIndex}</Text>
-        <Text style={text}>{observation.observation_photos.length}</Text>
-        <Text style={text}>{observation.species_guess}</Text>
-        <Text style={text}>
-          {observation.identifications_count > 0
-            ? observation.identifications_count
-            : null}
-        </Text>
-        <Text style={text}>{observation.description}</Text>
+        <Text style={text}>{`Number of photos: ${observation.observation_photos.length}`}</Text>
       </View>
     );
   };
 
   renderCard = (observation, index) => {
-    const { card } = styles;
+    const { card, text } = styles;
     return (
       <View style={card}>
+        {observation.description ? <Text style={text}>{`Description: ${observation.description}`}</Text> : null}
+        {observation.identifications_count > 0 ? <Text style={text}>This observation already has some identifications</Text> : null}
         <ItObservationImages observation={observation} />
       </View>
     );
