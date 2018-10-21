@@ -23,12 +23,12 @@ export default class IiAuthScreen extends React.Component {
   loginAsync = async () => {
     this.setState({ isAuthenticating: true });
     // AuthFlow is handled by Expo.AuthSession
-    let redirectUrl = AuthSession.getRedirectUrl();
-    let result = await AuthSession.startAsync({
+    const redirectUrl = AuthSession.getRedirectUrl();
+    const result = await AuthSession.startAsync({
       authUrl:
-        `${INATURALIST_OAUTH_API}/authorize?response_type=code` +
-        `&client_id=${oauth.INATURALIST_APP_ID}` +
-        `&redirect_uri=${encodeURIComponent(redirectUrl)}`
+        `${INATURALIST_OAUTH_API}/authorize?response_type=code`
+        + `&client_id=${oauth.INATURALIST_APP_ID}`
+        + `&redirect_uri=${encodeURIComponent(redirectUrl)}`,
     });
     console.log('result', result);
     this.setState({ result });
@@ -41,15 +41,15 @@ export default class IiAuthScreen extends React.Component {
         client_secret: oauth.INATURALIST_APP_SECRET,
         code: result.params.code,
         redirect_uri: AuthSession.getRedirectUrl(),
-        grant_type: "authorization_code",
-      }
+        grant_type: 'authorization_code',
+      };
       // POST request to the iNaturalist OAuth API
-      let response = await axios
+      const response = await axios
         .post(url, params)
-        .catch(error => {
+        .catch((error) => {
           console.log(
-            "Error in fetching access token from iNaturalist",
-            error
+            'Error in fetching access token from iNaturalist',
+            error,
           );
           return { error };
         });
@@ -61,13 +61,14 @@ export default class IiAuthScreen extends React.Component {
 
         // Get the API token required to make API calls for the user
         const url = 'https://www.inaturalist.org/users/api_token.json';
-        const config = { 
+        const config = {
           headers: {
-            'Authorization': 'Bearer ' + response.data.access_token
-        }};
-        const apiTokenResponse =  await axios.get(url, config)
+            Authorization: `Bearer ${response.data.access_token}`,
+          },
+        };
+        const apiTokenResponse = await axios.get(url, config)
           .then(r => r)
-          .catch(e => {
+          .catch((e) => {
             console.log('Error in fetching API token from iNaturalist', e);
             return { error };
           });
@@ -102,9 +103,9 @@ export default class IiAuthScreen extends React.Component {
             permission to send identifications made here back to iNaturalist on your behalf.
             In other words, all identifications will be performed with your user account.
             Once this was successfull you will be guided back here.
-          </Paragraph>
-        </View>
-        <Button onPress={() => this.loginAsync()} loading={this.state.isAuthenticating}>
+            </Paragraph>
+          </View>
+          <Button onPress={() => this.loginAsync()} loading={this.state.isAuthenticating}>
           Login with iNaturalist
           </Button>
           <View style={paragraph}>
