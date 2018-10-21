@@ -3,6 +3,7 @@
   "main": "main.js",
   "scripts": {
     "checks": "node ./scripts/CheckSecretsExist.js",
+    "start": "yarn checks && expo start -c",
     "solidarity": "yarn solidarity"
   },
   "dependencies": {
