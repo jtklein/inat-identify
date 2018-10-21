@@ -181,15 +181,34 @@ class IiIdentifyScreen extends Component {
     // Nothing to do here, as this is the skip option
   }
 
+  renderAdditionalInfo = () => {
+    const { cardIndex, observations } = this.state;
+    const observation = observations[cardIndex];
+    const { text } = styles;
+    if (!observation) {
+      return null;
+    }
+
+    return <View style={{ alignItems: 'center' }}>
+        <Text style={text}>{cardIndex}</Text>
+        <Text style={text}>{observation.observation_photos.length}</Text>
+        <Text style={text}>{observation.species_guess}</Text>
+        <Text style={text}>
+          {observation.identifications_count > 0
+            ? observation.identifications_count
+            : null}
+        </Text>
+        <Text style={text}>{observation.description}</Text>
+      </View>;
+  }
+
   renderCard = (observation, index) => {
-    const { text, card } = styles;
-    return <View style={card}>
-      <Text style={text} >{observation.observation_photos.length}</Text>
-      <Text style={text} >{observation.species_guess}</Text>
-      <Text style={text} >{observation.identifications_count > 0 ? observation.identifications_count : null}</Text>
-      <Text style={text} >{observation.description}</Text>
-      <ItObservationImages observation={observation} />
-    </View>;
+    const { card } = styles;
+    return (
+      <View style={card}>
+        <ItObservationImages observation={observation} />
+      </View>
+    );
   };
 
   render() {
@@ -272,7 +291,9 @@ class IiIdentifyScreen extends Component {
           }}
           animateOverlayLabelsOpacity
           animateCardOpacity
-        />
+        >
+          {this.renderAdditionalInfo()}
+        </Swiper>
       </ItScreenContainer>
     );
   }
