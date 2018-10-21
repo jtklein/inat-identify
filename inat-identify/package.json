@@ -1,6 +1,9 @@
 {
   "private": true,
   "main": "main.js",
+  "scripts": {
+    "solidarity": "yarn solidarity"
+  },
   "dependencies": {
     "axios": "^0.18.0",
     "expo": "^30.0.0",
@@ -31,6 +34,8 @@
     "jest-junit-reporter": "^1.1.0",
     "react-test-renderer": "^16.5.2",
     "redux-devtools": "^3.4.1",
-    "redux-logger": "^3.0.6"
+    "redux-logger": "^3.0.6",
+    "solidarity": "^2.1.0",
+    "solidarity-react-native": "^2.0.2"
   }
 }

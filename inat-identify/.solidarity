@@ -1,0 +1,57 @@
+{
+  "$schema": "http://json.schemastore.org/solidaritySchema",
+  "requirements": {
+    "Node": [
+      {
+        "rule": "cli",
+        "binary": "node",
+        "semver": "8.11.4"
+      }
+    ],
+    "Watchman": [
+      {
+        "rule": "cli",
+        "binary": "watchman",
+        "error": "Please install watchman on this machine. Refer to the official Watchman installation instructions for additional help.",
+        "platform": [
+          "darwin",
+          "linux"
+        ]
+      }
+    ],
+    "React Native": [
+      {
+        "rule": "cli",
+        "binary": "react-native",
+        "semver": "2.0.1"
+      },
+      {
+        "rule": "cli",
+        "binary": "react-native",
+        "semver": "0.55.4",
+        "line": 2
+      }
+    ],
+    "Package JSON": [
+      {
+        "rule": "file",
+        "location": "./package.json"
+      }
+    ],
+    "NPM": [
+      {
+        "rule": "cli",
+        "binary": "npm",
+        "semver": "5.6.0"
+      }
+    ],
+    "Yarn": [
+      {
+        "rule": "cli",
+        "binary": "yarn",
+        "version": "--version",
+        "semver": "1.10.1"
+      }
+    ]
+  }
+}
