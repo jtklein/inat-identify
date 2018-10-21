@@ -171,25 +171,35 @@ class IiIdentifyScreen extends Component {
       });
   }
 
-  onSwipedLeft(observation) {
-    const { swipeLeft } = this.props.swiper;
+  onSwipedLeft(index) {
+    const { observations } = this.state;
+    const { swiper } = this.props;
+    const { swipeLeft } = swiper;
+    this.setState({ cardIndex: index + 1 });
     // Use set id for this identification
-    this.identifyInAnimationFrame(observation, swipeLeft);
+    this.identifyInAnimationFrame(observations[index], swipeLeft);
   }
 
-  onSwipedRight(observation) {
-    const { swipeRight } = this.props.swiper;
+  onSwipedRight(index) {
+    const { observations } = this.state;
+    const { swiper } = this.props;
+    const { swipeRight } = swiper;
+    this.setState({ cardIndex: index + 1 });
     // Use set id for this identification
-    this.identifyInAnimationFrame(observation, swipeRight);
+    this.identifyInAnimationFrame(observations[index], swipeRight);
   }
 
-  onSwipedTop(observation) {
-    const { swipeTop } = this.props.swiper;
+  onSwipedTop(index) {
+    const { observations } = this.state;
+    const { swiper } = this.props;
+    const { swipeTop } = swiper;
+    this.setState({ cardIndex: index + 1 });
     // Use set id for this identification
-    this.identifyInAnimationFrame(observation, swipeTop);
+    this.identifyInAnimationFrame(observations[index], swipeTop);
   }
 
-  onSwipedBottom(observation) {
+  onSwipedBottom(index) {
+    this.setState({ cardIndex: index + 1 });
     // Nothing to do here, as this is the skip option
   }
 
@@ -227,10 +237,10 @@ class IiIdentifyScreen extends Component {
           stackSize={3}
           stackSeparation={8}
           stackScale={10}
-          onSwipedLeft={(index) => this.onSwipedLeft(observations[index])}
-          onSwipedRight={(index) => this.onSwipedRight(observations[index])}
-          onSwipedTop={(index) => this.onSwipedTop(observations[index])}
-          onSwipedBottom={(index) => this.onSwipedBottom(observations[index])}
+          onSwipedLeft={index => this.onSwipedLeft(index)}
+          onSwipedRight={index => this.onSwipedRight(index)}
+          onSwipedTop={index => this.onSwipedTop(index)}
+          onSwipedBottom={index => this.onSwipedBottom(index)}
           onSwipedAll={this.onSwipedAllCards}
           overlayLabels={{
             bottom: {
