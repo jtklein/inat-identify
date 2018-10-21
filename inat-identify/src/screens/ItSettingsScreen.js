@@ -59,11 +59,6 @@ const taxa = [
     id: 47170,
     label: 'Fungi',
     subscribe: true
-  },
-  {
-    id: 51890,
-    label: 'Crassulaceae',
-    subscribe: true
   }
 ];
 
