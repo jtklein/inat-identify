@@ -8,9 +8,10 @@ import { colors } from '../../../styles';
  * @param {string} size String indicating the size: 'small' or 'large'
  */
 const ItSpinner = ({ size, color }) => {
+  const { spinner } = styles;
   const { primaryColor } = colors;
   return (
-    <View style={styles.spinner}>
+    <View style={spinner}>
       <ActivityIndicator size={size} color={color || primaryColor} />
     </View>
   );
