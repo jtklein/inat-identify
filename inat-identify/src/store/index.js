@@ -8,8 +8,8 @@ export default function configureStore() {
     rootReducer,
     undefined,
     compose(
-      applyMiddleware(...middlewares)
-    )
+      applyMiddleware(...middlewares),
+    ),
   );
   return store;
 }

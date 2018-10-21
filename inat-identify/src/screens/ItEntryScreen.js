@@ -6,23 +6,21 @@ import { Button, Paragraph } from 'react-native-paper';
 import {
   ItScreenContainer,
   ItHeaderButtons,
-  HeaderItem
+  HeaderItem,
 } from '../components/common';
 
 class ItEntryScreen extends Component {
-  static navigationOptions = ({ navigation }) => {
-    return {
-      title: 'Swiper',
-      headerRight: (
-        <ItHeaderButtons>
-          <HeaderItem title='settings' iconName='settings' onPress={() => navigation.navigate('Settings')} />
-        </ItHeaderButtons>
-      )
-    };
-  };
+  static navigationOptions = ({ navigation }) => ({
+    title: 'Swiper',
+    headerRight: (
+      <ItHeaderButtons>
+        <HeaderItem title="settings" iconName="settings" onPress={() => navigation.navigate('Settings')} />
+      </ItHeaderButtons>
+    ),
+  });
 
   INITIAL_STATE = {
-    apiToken: this.props.navigation.state.params.apiToken
+    apiToken: this.props.navigation.state.params.apiToken,
   };
 
   constructor(props) {
@@ -46,7 +44,7 @@ class ItEntryScreen extends Component {
               These represent the main branches of life and should suffice for now.
             </Paragraph>
             <Paragraph>
-              For now, you can customize to a small extent in the settings menu (top right). You can change the place from 
+              For now, you can customize to a small extent in the settings menu (top right). You can change the place from
               where to look for observations. You can change the directions
               in which observations are identified into the three main branches of life. You can further set if you want to
               be subscribed to the observations you identified in each of the directions separately.
@@ -67,12 +65,12 @@ class ItEntryScreen extends Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    justifyContent: 'space-around'
+    justifyContent: 'space-around',
   },
   paragraph: {
     alignItems: 'center',
-    justifyContent: 'center'
-  }
+    justifyContent: 'center',
+  },
 });
 
 export default ItEntryScreen;

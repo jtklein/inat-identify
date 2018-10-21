@@ -7,13 +7,11 @@ import inatjs from 'inaturalistjs';
 import ItObservationImages from '../components/features/ItObservationImages';
 import {
   ItScreenContainer,
-  ItSpinner
+  ItSpinner,
 } from '../components/common';
 
 class IiIdentifyScreen extends Component {
-  static navigationOptions = ({ navigation }) => {
-    return { title: navigation.getParam('title') };
-  };
+  static navigationOptions = ({ navigation }) => ({ title: navigation.getParam('title') });
 
   INITIAL_STATE = {
     user: {},
@@ -21,7 +19,7 @@ class IiIdentifyScreen extends Component {
     swipeDirection: '',
     cardIndex: 0,
     observations: [],
-    page: 0
+    page: 0,
   };
 
   constructor(props) {
@@ -93,12 +91,12 @@ class IiIdentifyScreen extends Component {
     const options = { api_token: apiToken };
     return await inatjs.users
       .me(options)
-      .then(r => {
+      .then((r) => {
         this.setState({ user: r.results[0] });
         return r;
       })
       // TODO: UI response
-      .catch(e => {
+      .catch((e) => {
         console.log('Error in fetching current user', e);
         console.log(e.response);
       });
@@ -118,20 +116,20 @@ class IiIdentifyScreen extends Component {
       // Observations have been reviewed by the user with ID equal to the value of the viewer_id parameter
       viewer_id: user.id,
       reviewed: 'false',
-      photos: 'true'
+      photos: 'true',
     };
 
     inatjs.observations
       .search(params)
-      .then(rsp => {
+      .then((rsp) => {
         const filteredResults = rsp.results.filter(d => !d.species_guess);
         this.setState({
           observations: filteredResults,
           page: rsp.page,
-          cardIndex: 0
+          cardIndex: 0,
         });
       })
-      .catch(e => {
+      .catch((e) => {
         console.log('Error in fetching list of observations', e);
         console.log(e.response);
       });
@@ -159,25 +157,25 @@ class IiIdentifyScreen extends Component {
     const identification = {
       identification: {
         observation_id: observation.id,
-        taxon_id: swipeOption.id
-      }
+        taxon_id: swipeOption.id,
+      },
     };
     const options = { api_token: apiToken };
     inatjs.identifications
       .create(identification, options)
-      .then(c => {
+      .then((c) => {
         console.log('identification', c);
         if (!swipeOption.subscribe) {
           inatjs.observations
             .subscribe(observation, options)
             .then(rsp => console.log('Unsubscriped to: ', rsp))
-            .catch(e => {
+            .catch((e) => {
               console.log('Error in unsubscribing to observation', e);
               console.log(e.response);
             });
         }
       })
-      .catch(e => {
+      .catch((e) => {
         console.log('Error in creating identification', e);
         console.log(e.response);
       });
@@ -250,9 +248,9 @@ class IiIdentifyScreen extends Component {
                 wrapper: {
                   flexDirection: 'column',
                   alignItems: 'center',
-                  justifyContent: 'center'
-                }
-              }
+                  justifyContent: 'center',
+                },
+              },
             },
             left: {
               title: swipeLeft.label,
@@ -263,9 +261,9 @@ class IiIdentifyScreen extends Component {
                   alignItems: 'flex-end',
                   justifyContent: 'flex-start',
                   marginTop: 30,
-                  marginLeft: -30
-                }
-              }
+                  marginLeft: -30,
+                },
+              },
             },
             right: {
               title: swipeRight.label,
@@ -276,9 +274,9 @@ class IiIdentifyScreen extends Component {
                   alignItems: 'flex-start',
                   justifyContent: 'flex-start',
                   marginTop: 30,
-                  marginLeft: 30
-                }
-              }
+                  marginLeft: 30,
+                },
+              },
             },
             top: {
               title: swipeTop.label,
@@ -287,10 +285,10 @@ class IiIdentifyScreen extends Component {
                 wrapper: {
                   flexDirection: 'column',
                   alignItems: 'center',
-                  justifyContent: 'center'
-                }
-              }
-            }
+                  justifyContent: 'center',
+                },
+              },
+            },
           }}
           animateOverlayLabelsOpacity
           animateCardOpacity
@@ -309,20 +307,20 @@ const styles = StyleSheet.create({
     borderWidth: 2,
     borderColor: '#E8E8E8',
     justifyContent: 'center',
-    backgroundColor: 'white'
+    backgroundColor: 'white',
   },
   label: {
     backgroundColor: 'black',
     borderColor: 'black',
     color: 'white',
-    borderWidth: 1
+    borderWidth: 1,
   },
   text: {
-    color: 'red'
+    color: 'red',
   },
   additionalInfoContainer: {
-    alignItems: 'center'
-  }
+    alignItems: 'center',
+  },
 });
 
 const mapStateToProps = state => ({

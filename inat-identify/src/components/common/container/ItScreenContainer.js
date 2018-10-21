@@ -1,14 +1,18 @@
 import React from 'react';
-import { StyleSheet, View, Platform, StatusBar } from 'react-native';
+import {
+  StyleSheet, View, Platform, StatusBar,
+} from 'react-native';
 
-const ItScreenContainer = props => {
+const ItScreenContainer = (props) => {
   const { children } = props;
 
   return (
     <View {...props} style={styles.container}>
-      {Platform.OS === 'ios' && <StatusBar
+      {Platform.OS === 'ios' && (
+      <StatusBar
         barStyle={props.barStyle || 'light-content'}
-      />}
+      />
+      )}
       {children}
     </View>
   );
@@ -19,8 +23,8 @@ const styles = StyleSheet.create({
     flex: 1,
     alignItems: 'center',
     padding: 16,
-    backgroundColor: '#FFFFFF'
-  }
+    backgroundColor: '#FFFFFF',
+  },
 });
 
 export { ItScreenContainer };

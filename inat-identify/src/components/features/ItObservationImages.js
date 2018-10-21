@@ -6,8 +6,8 @@ class ItObservationImages extends Component {
     currentIndex: 0,
     uri: this.props.observation.observation_photos[0].photo.url.replace(
       'square',
-      'large'
-    )
+      'large',
+    ),
   };
 
   constructor(props) {
@@ -44,11 +44,11 @@ const styles = StyleSheet.create({
   containerStyle: {
     flex: 1,
     paddingLeft: 1,
-    paddingRight: 1
+    paddingRight: 1,
   },
   image: {
-    flex: 1
-  }
+    flex: 1,
+  },
 });
 
 export default ItObservationImages;

@@ -8,31 +8,31 @@ import {
   SWIPER_RIGHT_SUBSCRIBED,
   SWIPER_RIGHT_UNSUBSCRIBED,
   SWIPER_TOP_SUBSCRIBED,
-  SWIPER_TOP_UNSUBSCRIBED
+  SWIPER_TOP_UNSUBSCRIBED,
 }
-from "../actions/types";
+  from '../actions/types';
 
 const INITIAL_STATE = {
   swipeLeft: {
     id: 1,
     label: 'Animalia',
-    subscribe: true
+    subscribe: true,
   },
   swipeRight: {
     id: 47126,
     label: 'Plantae',
-    subscribe: true
+    subscribe: true,
   },
   swipeTop: {
     id: 47170,
     label: 'Fungi',
-    subscribe: true
+    subscribe: true,
   },
   place: {
     id: 97391,
     label: 'Europe',
-    subscribe: true
-  }
+    subscribe: true,
+  },
 };
 
 export default (state = INITIAL_STATE, action) => {
@@ -44,45 +44,45 @@ export default (state = INITIAL_STATE, action) => {
         ...state,
         swipeLeft: {
           ...state.swipeLeft,
-          subscribe: true
-        }
+          subscribe: true,
+        },
       };
     case SWIPER_LEFT_UNSUBSCRIBED:
       return { ...state, swipeLeft: { ...state.swipeLeft, subscribe: false } };
     case SWIPER_RIGHT_CHANGED:
       return {
         ...state,
-        swipeRight: action.payload
+        swipeRight: action.payload,
       };
     case SWIPER_RIGHT_SUBSCRIBED:
       return {
         ...state,
         swipeRight: {
           ...state.swipeRight,
-          subscribe: true
-        }
+          subscribe: true,
+        },
       };
     case SWIPER_RIGHT_UNSUBSCRIBED:
       return { ...state, swipeRight: { ...state.swipeRight, subscribe: false } };
     case SWIPER_TOP_CHANGED:
       return {
         ...state,
-        swipeTop: action.payload
+        swipeTop: action.payload,
       };
     case SWIPER_TOP_SUBSCRIBED:
       return {
         ...state,
         swipeTop: {
           ...state.swipeTop,
-          subscribe: true
-        }
+          subscribe: true,
+        },
       };
     case SWIPER_TOP_UNSUBSCRIBED:
       return { ...state, swipeTop: { ...state.swipeTop, subscribe: false } };
     case SWIPER_PLACE_CHANGED:
       return {
         ...state,
-        place: action.payload
+        place: action.payload,
       };
     default:
       return state;

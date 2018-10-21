@@ -14,60 +14,58 @@ import {
   SWIPER_RIGHT_UNSUBSCRIBED,
   SWIPER_RIGHT_SUBSCRIBED,
   SWIPER_TOP_UNSUBSCRIBED,
-  SWIPER_TOP_SUBSCRIBED
+  SWIPER_TOP_SUBSCRIBED,
 } from '../actions/types';
 
 const places = [
   {
     id: 97389,
-    label: 'South America'
+    label: 'South America',
   },
   {
     id: 97391,
-    label: 'Europe'
+    label: 'Europe',
   },
   {
     id: 97392,
-    label: 'Africa'
+    label: 'Africa',
   },
   {
     id: 97393,
-    label: 'Oceania'
+    label: 'Oceania',
   },
   {
     id: 97394,
-    label: 'North America'
+    label: 'North America',
   },
   {
     id: 97395,
-    label: 'Asia'
-  }
+    label: 'Asia',
+  },
 ];
 
 const taxa = [
   {
     id: 1,
     label: 'Animalia',
-    subscribe: true
+    subscribe: true,
   },
   {
     id: 47126,
     label: 'Plantae',
-    subscribe: true
+    subscribe: true,
   },
   {
     id: 47170,
     label: 'Fungi',
-    subscribe: true
-  }
+    subscribe: true,
+  },
 ];
 
 class ItSettingsScreen extends Component {
-  static navigationOptions = () => {
-    return {
-      title: 'Swiper settings'
-    };
-  };
+  static navigationOptions = () => ({
+    title: 'Swiper settings',
+  });
 
   render() {
     const {
@@ -80,9 +78,11 @@ class ItSettingsScreen extends Component {
       changeSwipeTop,
       subscribeSwipeTop,
       unsubscribeSwipeTop,
-      changeSwipePlace
+      changeSwipePlace,
     } = this.props;
-    const { swipeLeft, swipeRight, swipeTop, place } = this.props.swiper;
+    const {
+      swipeLeft, swipeRight, swipeTop, place,
+    } = this.props.swiper;
     const { container, subscriptionContainer } = styles;
     return (
       <ItScreenContainer>
@@ -111,10 +111,9 @@ class ItSettingsScreen extends Component {
             <Text>Subscribe to {swipeLeft.label} identifications</Text>
             <Switch
               value={swipeLeft.subscribe}
-              onValueChange={() =>
-                swipeLeft.subscribe
-                  ? unsubscribeSwipeLeft()
-                  : subscribeSwipeLeft()
+              onValueChange={() => (swipeLeft.subscribe
+                ? unsubscribeSwipeLeft()
+                : subscribeSwipeLeft())
               }
             />
           </View>
@@ -129,13 +128,17 @@ class ItSettingsScreen extends Component {
             ))}
           </List.Accordion>
           <View style={subscriptionContainer}>
-            <Text>Subscribe to {swipeRight.label} identifications</Text>
+            <Text>
+Subscribe to
+              {swipeRight.label}
+              {' '}
+identifications
+            </Text>
             <Switch
               value={swipeRight.subscribe}
-              onValueChange={() =>
-                swipeRight.subscribe
-                  ? unsubscribeSwipeRight()
-                  : subscribeSwipeRight()
+              onValueChange={() => (swipeRight.subscribe
+                ? unsubscribeSwipeRight()
+                : subscribeSwipeRight())
               }
             />
           </View>
@@ -150,11 +153,15 @@ class ItSettingsScreen extends Component {
             ))}
           </List.Accordion>
           <View style={subscriptionContainer}>
-            <Text>Subscribe to {swipeTop.label} identifications</Text>
+            <Text>
+Subscribe to
+              {swipeTop.label}
+              {' '}
+identifications
+            </Text>
             <Switch
               value={swipeTop.subscribe}
-              onValueChange={() =>
-                swipeTop.subscribe ? unsubscribeSwipeTop() : subscribeSwipeTop()
+              onValueChange={() => (swipeTop.subscribe ? unsubscribeSwipeTop() : subscribeSwipeTop())
               }
             />
           </View>
@@ -171,15 +178,15 @@ const styles = StyleSheet.create({
   subscriptionContainer: {
     flexDirection: 'row',
     justifyContent: 'space-between',
-    alignItems: 'center'
-  }
+    alignItems: 'center',
+  },
 });
 
-const mapStateToProps = (state) => ({
-  swiper: state.swiper
+const mapStateToProps = state => ({
+  swiper: state.swiper,
 });
 
-const mapDispatchToProps = (dispatch) => ({
+const mapDispatchToProps = dispatch => ({
   changeSwipeLeft: (payload) => {
     dispatch({ type: SWIPER_LEFT_CHANGED, payload });
   },

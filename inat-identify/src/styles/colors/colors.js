@@ -3,7 +3,7 @@ import { DefaultTheme } from 'react-native-paper';
 const primaryColor = '#85A833';
 
 const colors = {
-  primaryColor
+  primaryColor,
 };
 
 const theme = {
@@ -11,9 +11,8 @@ const theme = {
   colors: {
     ...DefaultTheme.colors,
     primary: primaryColor,
-    accent: primaryColor
-  }
+    accent: primaryColor,
+  },
 };
 
 export { colors, theme };
-

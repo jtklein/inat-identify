@@ -12,24 +12,24 @@ import { colors } from './styles';
 const { primaryColor } = colors;
 
 const headerStyle = {
-  backgroundColor: primaryColor
+  backgroundColor: primaryColor,
 };
 const headerTintColor = '#FFFFFF';
 const headerTitleStyle = {
-  fontWeight: 'bold'
+  fontWeight: 'bold',
 };
 
 const AuthStack = createStackNavigator(
   {
-    Auth: IiAuthScreen
+    Auth: IiAuthScreen,
   },
   {
     initialRouteName: 'Auth',
     navigationOptions: {
       header: null,
-      gesturesEnabled: false
-    }
-  }
+      gesturesEnabled: false,
+    },
+  },
 );
 
 const AppStack = createStackNavigator(
@@ -44,8 +44,8 @@ const AppStack = createStackNavigator(
       headerStyle,
       headerTintColor,
       headerTitleStyle,
-    }
-  }
+    },
+  },
 );
 
 /**
@@ -57,7 +57,7 @@ const RootNavigator = createSwitchNavigator(
   // RouteConfigs
   {
     Auth: AuthStack,
-    App: AppStack
+    App: AppStack,
   },
   // createSwitchNavigatorConfig
   {
@@ -78,4 +78,3 @@ export default class IiAppNavigator extends React.Component {
     return <RootNavigator />;
   }
 }
-

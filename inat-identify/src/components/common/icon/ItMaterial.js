@@ -6,7 +6,7 @@ import { colors } from '../../../styles';
 /**
  * The primary styled component to use a MaterialIcon from Expo.
  */
-const ItMaterial = props => {
+const ItMaterial = (props) => {
   const { primaryColor } = colors;
   const { size, color } = props;
   return (
