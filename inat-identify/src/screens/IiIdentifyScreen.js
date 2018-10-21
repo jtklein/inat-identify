@@ -22,7 +22,6 @@ class IiIdentifyScreen extends Component {
     apiToken: this.props.navigation.state.params.apiToken,
     swipedAllCards: false,
     swipeDirection: '',
-    isSwipingBack: false,
     cardIndex: 0,
     observations: [],
     page: 0,
