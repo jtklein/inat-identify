@@ -73,7 +73,7 @@ class IiIdentifyScreen extends Component {
       .search(params)
       .then(rsp => {
         const filteredResults = rsp.results.filter(d => !d.species_guess);
-        this.setState({ observations: filteredResults, page: rsp.page });
+        this.setState({ observations: filteredResults, page: rsp.page, cardIndex: 0 });
       })
       .catch(e => {
         console.log('Error in fetching list of observations', e);
