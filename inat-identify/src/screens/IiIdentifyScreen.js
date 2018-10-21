@@ -22,7 +22,7 @@ class IiIdentifyScreen extends Component {
     swipeDirection: '',
     cardIndex: 0,
     observations: [],
-    page: 0,
+    page: 0
   };
 
   constructor(props) {
@@ -50,6 +50,63 @@ class IiIdentifyScreen extends Component {
     return true;
   }
 
+  onSwipedLeft(index) {
+    const { observations } = this.state;
+    const { swiper } = this.props;
+    const { swipeLeft } = swiper;
+    this.setState({ cardIndex: index + 1 });
+    // Use set id for this identification
+    this.identifyInAnimationFrame(observations[index], swipeLeft);
+  }
+
+  onSwipedRight(index) {
+    const { observations } = this.state;
+    const { swiper } = this.props;
+    const { swipeRight } = swiper;
+    this.setState({ cardIndex: index + 1 });
+    // Use set id for this identification
+    this.identifyInAnimationFrame(observations[index], swipeRight);
+  }
+
+  onSwipedTop(index) {
+    const { observations } = this.state;
+    const { swiper } = this.props;
+    const { swipeTop } = swiper;
+    this.setState({ cardIndex: index + 1 });
+    // Use set id for this identification
+    this.identifyInAnimationFrame(observations[index], swipeTop);
+  }
+
+  onSwipedBottom(index) {
+    this.setState({ cardIndex: index + 1 });
+    // Nothing to do here, as this is the skip option
+  }
+
+  onSwipedAllCards = () => {
+    this.setState({
+      observations: [],
+      swipedAllCards: true
+    });
+    // Get new batch of unidentified observation
+    this.searchObservations();
+  };
+
+  getCurrentUser = async () => {
+    const { apiToken } = this.state;
+    const options = { api_token: apiToken };
+    return await inatjs.users
+      .me(options)
+      .then(r => {
+        this.setState({ user: r.results[0] });
+        return r;
+      })
+      // TODO: UI response
+      .catch(e => {
+        console.log('Error in fetching current user', e);
+        console.log(e.response);
+      });
+  };
+
   searchObservations() {
     const { user } = this.state;
     const { place } = this.props.swiper;
@@ -70,38 +127,17 @@ class IiIdentifyScreen extends Component {
       .search(params)
       .then(rsp => {
         const filteredResults = rsp.results.filter(d => !d.species_guess);
-        this.setState({ observations: filteredResults, page: rsp.page, cardIndex: 0 });
+        this.setState({
+          observations: filteredResults,
+          page: rsp.page,
+          cardIndex: 0
+        });
       })
       .catch(e => {
         console.log('Error in fetching list of observations', e);
         console.log(e.response);
       });
   }
-
-  getCurrentUser = async () => {
-    const { apiToken } = this.state;
-    const options = { api_token: apiToken };
-    return await inatjs.users
-      .me(options)
-      .then(r => {
-        this.setState({ user: r.results[0] });
-        return r;
-      })
-      // TODO: UI response
-      .catch(e => {
-        console.log('Error in fetching current user', e);
-        console.log(e.response);
-      });
-  };
-
-  onSwipedAllCards = () => {
-    this.setState({
-      observations: [],
-      swipedAllCards: true
-    });
-    // Get new batch of unidentified observation
-    this.searchObservations();
-  };
 
   identifyInAnimationFrame(observation, swipeOption) {
     requestAnimationFrame(() => {
@@ -149,38 +185,6 @@ class IiIdentifyScreen extends Component {
       });
   }
 
-  onSwipedLeft(index) {
-    const { observations } = this.state;
-    const { swiper } = this.props;
-    const { swipeLeft } = swiper;
-    this.setState({ cardIndex: index + 1 });
-    // Use set id for this identification
-    this.identifyInAnimationFrame(observations[index], swipeLeft);
-  }
-
-  onSwipedRight(index) {
-    const { observations } = this.state;
-    const { swiper } = this.props;
-    const { swipeRight } = swiper;
-    this.setState({ cardIndex: index + 1 });
-    // Use set id for this identification
-    this.identifyInAnimationFrame(observations[index], swipeRight);
-  }
-
-  onSwipedTop(index) {
-    const { observations } = this.state;
-    const { swiper } = this.props;
-    const { swipeTop } = swiper;
-    this.setState({ cardIndex: index + 1 });
-    // Use set id for this identification
-    this.identifyInAnimationFrame(observations[index], swipeTop);
-  }
-
-  onSwipedBottom(index) {
-    this.setState({ cardIndex: index + 1 });
-    // Nothing to do here, as this is the skip option
-  }
-
   renderAdditionalInfo = () => {
     const { cardIndex, observations } = this.state;
     const observation = observations[cardIndex];
@@ -189,7 +193,8 @@ class IiIdentifyScreen extends Component {
       return null;
     }
 
-    return <View style={{ alignItems: 'center' }}>
+    return (
+      <View style={{ alignItems: 'center' }}>
         <Text style={text}>{cardIndex}</Text>
         <Text style={text}>{observation.observation_photos.length}</Text>
         <Text style={text}>{observation.species_guess}</Text>
@@ -199,8 +204,9 @@ class IiIdentifyScreen extends Component {
             : null}
         </Text>
         <Text style={text}>{observation.description}</Text>
-      </View>;
-  }
+      </View>
+    );
+  };
 
   renderCard = (observation, index) => {
     const { card } = styles;
@@ -290,8 +296,7 @@ class IiIdentifyScreen extends Component {
             }
           }}
           animateOverlayLabelsOpacity
-          animateCardOpacity
-        >
+          animateCardOpacity>
           {this.renderAdditionalInfo()}
         </Swiper>
       </ItScreenContainer>
