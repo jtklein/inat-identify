@@ -196,8 +196,7 @@ class ItSettingsScreen extends Component {
           />
         </View>
       </View>
-
-    )
+    );
   }
 
   renderSettings = () => {
@@ -211,10 +210,10 @@ class ItSettingsScreen extends Component {
     return (
       <ItScreenContainer>
         <View style={{ flexDirection: 'row', justifyContent: 'space-evenly' }}>
-          <Button icon="add-a-photo" mode={showFilter ? 'contained' : 'outlined'} onPress={() => this.onFilterPressed()}>
+          <Button icon="filter-list" mode={showFilter ? 'contained' : 'outlined'} onPress={() => this.onFilterPressed()}>
             Filter
           </Button>
-          <Button icon="add-a-photo" mode={!showFilter ? 'contained' : 'outlined'} onPress={() => this.onActionsPressed()}>
+          <Button icon="open-with" mode={!showFilter ? 'contained' : 'outlined'} onPress={() => this.onActionsPressed()}>
             Actions
           </Button>
         </View>
