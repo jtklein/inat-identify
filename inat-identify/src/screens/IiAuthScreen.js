@@ -57,7 +57,6 @@ export default class IiAuthScreen extends React.Component {
       // Response OK
       // TODO: UI for failure
       if (response.status === 200) {
-
         // Get the API token required to make API calls for the user
         const apiTokenUrl = 'https://www.inaturalist.org/users/api_token.json';
         const config = {

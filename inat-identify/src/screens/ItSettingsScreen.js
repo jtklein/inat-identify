@@ -79,7 +79,7 @@ class ItSettingsScreen extends Component {
       subscribeSwipeTop,
       unsubscribeSwipeTop,
       changeSwipePlace,
-      swiper
+      swiper,
     } = this.props;
     const {
       swipeLeft, swipeRight, swipeTop, place,
