@@ -119,7 +119,7 @@ export default class IiAuthScreen extends React.Component {
             of your credentials for future use.
             </Paragraph>
           </View>
-          {true ? (
+          {__DEV__ ? (
             <Button onPress={() => navigation.navigate(
               'Entry',
               {
