@@ -1,27 +1,41 @@
 {
   "expo": {
-    "name": "inat-toolkit",
+    "name": "iNat-Toolcat",
     "description": "This project is really great.",
     "slug": "inat-toolkit",
-    "privacy": "public",
+    "privacy": "unlisted",
+    "githubUrl": "https://github.com/jtklein/inat-identify",
     "sdkVersion": "30.0.0",
-    "platforms": ["ios", "android"],
-    "version": "1.0.0",
+    "platforms": [
+      "ios",
+      "android"
+    ],
+    "version": "0.0.1",
     "orientation": "portrait",
-    "icon": "./assets/icon.png",
+    "primaryColor": "#85A833",
+    "icon": "./assets/icons/ios.png",
+    "scheme": "inat-toolkit",
     "splash": {
       "image": "./assets/splash.png",
       "resizeMode": "contain",
       "backgroundColor": "#ffffff"
     },
-    "updates": {
-      "fallbackToCacheTimeout": 0
-    },
     "assetBundlePatterns": [
       "**/*"
     ],
+    "updates": {
+      "enabled": true,
+      "checkAutomatically": "ON_LOAD",
+      "fallbackToCacheTimeout": 30000
+    },
     "ios": {
-      "supportsTablet": true
+      "icon": "./assets/icons/ios.png",
+      "supportsTablet": true,
+      "isTabletOnly": false
+    },
+    "android": {
+      "icon": "./assets/icons/android_1024.png",
+      "permissions": []
     }
   }
 }
