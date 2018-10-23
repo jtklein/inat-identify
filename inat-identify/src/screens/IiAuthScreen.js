@@ -1,5 +1,5 @@
 import React from 'react';
-import { StyleSheet, View } from 'react-native';
+import { Alert, StyleSheet, View } from 'react-native';
 import { Button, Paragraph } from 'react-native-paper';
 import { AuthSession } from 'expo';
 import axios from 'axios';
@@ -33,7 +33,6 @@ export default class IiAuthScreen extends React.Component {
     });
     console.log('result', result);
     // The code was successfully retrieved
-    // TODO: UI for result.type === 'cancel | dismissed | error'
     if (result.type && result.type === 'success') {
       const tokenUrl = `${INATURALIST_OAUTH_API}/token`;
       const params = {
@@ -55,7 +54,6 @@ export default class IiAuthScreen extends React.Component {
         });
       console.log('response', response);
       // Response OK
-      // TODO: UI for failure
       if (response.status === 200) {
         // Get the API token required to make API calls for the user
         const apiTokenUrl = 'https://www.inaturalist.org/users/api_token.json';
@@ -74,8 +72,39 @@ export default class IiAuthScreen extends React.Component {
         if (apiTokenResponse.data && apiTokenResponse.data.api_token) {
           // Navigate to next screen with api_token
           navigation.navigate('Entry', { apiToken: apiTokenResponse.data.api_token });
+        } else {
+          // Show alert for failure of getting api token
+          Alert.alert(
+            'The login was giving an error',
+            'Unfortunately, you can not proceed',
+          );
         }
-        // TODO: UI response if no token received
+      } else {
+        // Show alert for failure of getting oauth token
+        Alert.alert(
+          'The login was giving an error',
+          'Unfortunately, you can not proceed',
+        );
+      }
+    } else {
+      // The auth session was unsuccessful
+      if (result.type === 'cancel') {
+        Alert.alert(
+          'The login was canceled',
+          'You need to login to iNaturalist to proceed',
+        );
+      }
+      if (result.type === 'dismissed') {
+        Alert.alert(
+          'The login was dismissed',
+          'Unfortunately, you can not proceed',
+        );
+      }
+      if (result.type === 'error') {
+        Alert.alert(
+          'The login was giving an error',
+          'Unfortunately, you can not proceed',
+        );
       }
     }
     this.setState({ isAuthenticating: false });

@@ -40,7 +40,8 @@ class ItEntryScreen extends Component {
               The app will show you a stack of cards. These are true iNaturalist
               observations, so don't mess around. In the basic example you can swipe right if you
               want to identify the observation as a plant, left for animal and up to the top for fungi.
-              These represent the main branches of life and should suffice for now.
+              These represent the main branches of life and should suffice for now. You can always swipe
+              to the bottom to skip an observation.
             </Paragraph>
             <Paragraph>
               Press on the image in the card to page through the images.

@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import { Alert, StyleSheet, Text, View } from 'react-native';
 import { connect } from 'react-redux';
 import Swiper from 'react-native-deck-swiper';
 import inatjs from 'inaturalistjs';
@@ -99,6 +99,11 @@ class IiIdentifyScreen extends Component {
       .catch((e) => {
         console.log('Error in fetching current user', e);
         console.log(e.response);
+        // Show alert for failure of getting user object from iNat
+        Alert.alert(
+          'Sorry',
+          'Unfortunately, something went wrong. You can not proceed.',
+        );
       });
   };
 
@@ -132,6 +137,10 @@ class IiIdentifyScreen extends Component {
       .catch((e) => {
         console.log('Error in fetching list of observations', e);
         console.log(e.response);
+        Alert.alert(
+          'Sorry',
+          'Unfortunately, something went wrong. You can not proceed.',
+        );
       });
   }
 
@@ -178,6 +187,10 @@ class IiIdentifyScreen extends Component {
       .catch((e) => {
         console.log('Error in creating identification', e);
         console.log(e.response);
+        Alert.alert(
+          'Sorry',
+          'Unfortunately, something went wrong. Your identification was not processed.',
+        );
       });
   }
 
