@@ -29,11 +29,13 @@
       "fallbackToCacheTimeout": 30000
     },
     "ios": {
+      "buildNumber": "0.0.4",
       "icon": "./assets/icons/ios.png",
       "supportsTablet": true,
       "isTabletOnly": false
     },
     "android": {
+      "versionCode": 4,
       "icon": "./assets/icons/android_1024.png",
       "permissions": []
     }
