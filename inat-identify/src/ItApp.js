@@ -1,5 +1,5 @@
 import React from 'react';
-import Expo from 'expo';
+import * as Expo from 'expo';
 import { Provider } from 'react-redux';
 import { Provider as PaperProvider } from 'react-native-paper';
 
