@@ -1,7 +1,7 @@
 {
   "expo": {
     "name": "iNat-Toolcat",
-    "description": "This project is really great.",
+    "description": "The handy tool cat for iNat.",
     "slug": "inat-toolkit",
     "privacy": "unlisted",
     "githubUrl": "https://github.com/jtklein/inat-identify",
