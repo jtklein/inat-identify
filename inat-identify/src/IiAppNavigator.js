@@ -1,5 +1,4 @@
-import React from 'react';
-import { createStackNavigator, createSwitchNavigator } from 'react-navigation';
+import { createStackNavigator, createSwitchNavigator, createAppContainer } from 'react-navigation';
 
 import IiAuthScreen from './screens/IiAuthScreen';
 
@@ -21,31 +20,31 @@ const headerTitleStyle = {
 
 const AuthStack = createStackNavigator(
   {
-    Auth: IiAuthScreen,
+    Auth: IiAuthScreen
   },
   {
     initialRouteName: 'Auth',
-    navigationOptions: {
+    defaultNavigationOptions: {
       header: null,
-      gesturesEnabled: false,
-    },
-  },
+      gesturesEnabled: false
+    }
+  }
 );
 
 const AppStack = createStackNavigator(
   {
     Entry: ItEntryScreen,
     Settings: ItSettingsScreen,
-    Identify: IiIdentifyScreen,
+    Identify: IiIdentifyScreen
   },
   {
     initialRouteName: 'Entry',
-    navigationOptions: {
+    defaultNavigationOptions: {
       headerStyle,
       headerTintColor,
-      headerTitleStyle,
-    },
-  },
+      headerTitleStyle
+    }
+  }
 );
 
 /**
@@ -57,24 +56,18 @@ const RootNavigator = createSwitchNavigator(
   // RouteConfigs
   {
     Auth: AuthStack,
-    App: AppStack,
+    App: AppStack
   },
   // createSwitchNavigatorConfig
   {
-
     initialRoutName: 'Auth',
     resetOnBlur: true,
     backBehavior: 'none',
-    navigationOptions: {
+    defaultNavigationOptions: {
       header: null,
-      gesturesEnabled: false,
-    },
-  },
+      gesturesEnabled: false
+    }
+  }
 );
 
-
-export default class IiAppNavigator extends React.Component {
-  render() {
-    return <RootNavigator />;
-  }
-}
+export default IiAppNavigator = createAppContainer(RootNavigator);
