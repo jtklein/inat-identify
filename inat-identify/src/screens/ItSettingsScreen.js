@@ -15,6 +15,7 @@ import {
   SWIPER_RIGHT_SUBSCRIBED,
   SWIPER_TOP_UNSUBSCRIBED,
   SWIPER_TOP_SUBSCRIBED,
+  SWIPER_PHOTOS_CHANGED,
 } from '../actions/types';
 
 const places = [
@@ -62,6 +63,17 @@ const taxa = [
   },
 ];
 
+const photosOptions = [
+  {
+    value: 1,
+    label: '1',
+  },
+  {
+    value: Infinity,
+    label: 'More than one',
+  },
+];
+
 class ItSettingsScreen extends Component {
   static navigationOptions = () => ({
     title: 'Swiper settings',
@@ -87,9 +99,10 @@ class ItSettingsScreen extends Component {
   renderFilterSettings = () => {
     const {
       changeSwipePlace,
+      changeSwipePhotos,
       swiper,
     } = this.props;
-    const { place } = swiper;
+    const { place, maxPhotos } = swiper;
     const { container } = styles;
     return (
       <View style={container}>
@@ -102,6 +115,18 @@ class ItSettingsScreen extends Component {
               key={p.id}
               title={p.label}
               onPress={() => changeSwipePlace(p)}
+            />
+          ))}
+        </List.Accordion>
+        <List.Accordion
+          title={`Filter by number photos = ${maxPhotos}`}
+          left={props => <List.Icon {...props} icon="photo" />}
+        >
+          {photosOptions.map(p => (
+            <List.Item
+              key={p.label}
+              title={p.label}
+              onPress={() => changeSwipePhotos(p)}
             />
           ))}
         </List.Accordion>
@@ -271,6 +296,9 @@ const mapDispatchToProps = dispatch => ({
   },
   changeSwipePlace: (payload) => {
     dispatch({ type: SWIPER_PLACE_CHANGED, payload });
+  },
+  changeSwipePhotos: (payload) => {
+    dispatch({ type: SWIPER_PHOTOS_CHANGED, payload });
   },
 });
 

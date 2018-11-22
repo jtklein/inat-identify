@@ -110,7 +110,7 @@ class IiIdentifyScreen extends Component {
   searchObservations() {
     const { user, page } = this.state;
     const { swiper } = this.props;
-    const { place } = swiper;
+    const { place, maxPhotos } = swiper;
     const params = {
       iconic_taxa: 'unknown',
       quality_grade: 'needs_id',
@@ -127,7 +127,7 @@ class IiIdentifyScreen extends Component {
     inatjs.observations
       .search(params)
       .then((rsp) => {
-        const filteredResults = rsp.results.filter(d => !d.species_guess);
+        const filteredResults = rsp.results.filter(d => !d.species_guess).filter(d => d.photos.length <= maxPhotos);
         this.setState({
           observations: filteredResults,
           page: rsp.page,
@@ -195,10 +195,12 @@ class IiIdentifyScreen extends Component {
   }
 
   renderAdditionalInfo = () => {
+    const { swiper } = this.props;
+    const { maxPhotos } = swiper;
     const { cardIndex, observations } = this.state;
     const observation = observations[cardIndex];
     const { additionalInfoContainer, text } = styles;
-    if (!observation) {
+    if (!observation || maxPhotos === 1) {
       return null;
     }
 

@@ -9,8 +9,8 @@ import {
   SWIPER_RIGHT_UNSUBSCRIBED,
   SWIPER_TOP_SUBSCRIBED,
   SWIPER_TOP_UNSUBSCRIBED,
-}
-  from '../actions/types';
+  SWIPER_PHOTOS_CHANGED,
+} from '../actions/types';
 
 const INITIAL_STATE = {
   swipeLeft: {
@@ -33,6 +33,7 @@ const INITIAL_STATE = {
     label: 'Europe',
     subscribe: true,
   },
+  maxPhotos: Infinity,
 };
 
 export default (state = INITIAL_STATE, action) => {
@@ -83,6 +84,11 @@ export default (state = INITIAL_STATE, action) => {
       return {
         ...state,
         place: action.payload,
+      };
+    case SWIPER_PHOTOS_CHANGED:
+      return {
+        ...state,
+        maxPhotos: action.payload.value,
       };
     default:
       return state;
