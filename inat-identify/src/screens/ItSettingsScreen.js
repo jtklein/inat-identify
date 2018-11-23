@@ -107,7 +107,7 @@ class ItSettingsScreen extends Component {
     return (
       <View style={container}>
         <List.Accordion
-          title={`Filter by place = ${place.label}`}
+          title={`by place = ${place.label}`}
           left={props => <List.Icon {...props} icon="place" />}
         >
           {places.map(p => (
@@ -119,7 +119,7 @@ class ItSettingsScreen extends Component {
           ))}
         </List.Accordion>
         <List.Accordion
-          title={`Filter by number photos = ${maxPhotos}`}
+          title={`by number photos = ${maxPhotos}`}
           left={props => <List.Icon {...props} icon="photo" />}
         >
           {photosOptions.map(p => (
