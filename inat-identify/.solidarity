@@ -32,6 +32,13 @@
         "line": 2
       }
     ],
+    "Expo": [
+      {
+        "rule": "cli",
+        "binary": "expo",
+        "semver": "2.4.3"
+      }
+    ],
     "Package JSON": [
       {
         "rule": "file",
