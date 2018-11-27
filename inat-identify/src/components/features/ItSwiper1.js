@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
-import { Alert, StyleSheet, Text, View } from 'react-native';
+import { StyleSheet, Text, View } from 'react-native';
 import Swiper from 'react-native-deck-swiper';
 
-import ItObservationImages from './ItObservationImages';
+import ItObservationImages from './swiper/ItObservationImages';
 
 class ItSwiper extends Component {
   renderAdditionalInfo = () => {

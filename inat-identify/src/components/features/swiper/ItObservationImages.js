@@ -44,11 +44,14 @@ const styles = StyleSheet.create({
   containerStyle: {
     flex: 1,
     paddingLeft: 1,
-    paddingRight: 1,
+    paddingRight: 1
   },
   image: {
-    flex: 1,
-  },
+    ...StyleSheet.absoluteFillObject,
+    width: null,
+    height: null,
+    borderRadius: 8
+  }
 });
 
 export default ItObservationImages;
