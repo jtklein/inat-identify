@@ -40,6 +40,9 @@ export default class ItSwiperCard extends React.PureComponent<CardProps> {
     const {
       labelContainer,
       label,
+      topLabels,
+      pager,
+      pagerIndicator,
     } = styles;
     const { swipeLeft, swipeRight, swipeTop } = swiper;
     return (
@@ -47,12 +50,17 @@ export default class ItSwiperCard extends React.PureComponent<CardProps> {
         <Image style={styles.image} source={{ uri: observation.observation_photos[0].photo.url.replace('square', 'large') }} />
         <View style={styles.overlay}>
           <View style={styles.header}>
-            <Animated.View style={[labelContainer, { opacity: rightOpacity }]}>
-              <Text style={label}>{swipeRight.label}</Text>
-            </Animated.View>
-            <Animated.View style={[labelContainer, { opacity: leftOpacity }]}>
-              <Text style={label}>{swipeLeft.label}</Text>
-            </Animated.View>
+            <View style={pager}>
+              {observation.observation_photos.length > 1 ? observation.observation_photos.map((p, index) => <View key={p.id} style={index === 0 ? pagerIndicator : [pagerIndicator, { backgroundColor: '#BBBBBB' }]} />) : null}
+            </View>
+            <View style={topLabels}>
+              <Animated.View style={[labelContainer, { opacity: rightOpacity }]}>
+                <Text style={label}>{swipeRight.label}</Text>
+              </Animated.View>
+              <Animated.View style={[labelContainer, { opacity: leftOpacity }]}>
+                <Text style={label}>{swipeLeft.label}</Text>
+              </Animated.View>
+            </View>
           </View>
           <View style={styles.centre}>
             <Animated.View style={[labelContainer, { opacity: bottomOpacity }]}>
@@ -86,8 +94,23 @@ const styles = StyleSheet.create({
     padding: 16
   },
   header: {
+    flexDirection: 'column',
+    justifyContent: 'flex-start'
+  },
+  topLabels: {
     flexDirection: 'row',
     justifyContent: 'space-between'
+  },
+  pager: {
+    flexDirection: 'row',
+    justifyContent: 'space-around'
+  },
+  pagerIndicator: {
+    flex: 1,
+    height: 8,
+    backgroundColor: '#FFFFFF',
+    marginHorizontal: 2,
+    borderRadius: 8
   },
   centre: {
     flexDirection: 'column',
@@ -106,11 +129,11 @@ const styles = StyleSheet.create({
     borderRadius: 5,
     padding: 8,
     borderColor: '#000000',
-    backgroundColor: '#000000',
+    backgroundColor: '#000000'
   },
   label: {
     fontSize: 32,
     color: '#FFFFFF',
-    fontWeight: 'bold',
-  },
+    fontWeight: 'bold'
+  }
 });
