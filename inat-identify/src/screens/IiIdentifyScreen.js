@@ -84,12 +84,12 @@ class IiIdentifyScreen extends Component {
     const options = { api_token: apiToken };
     return await inatjs.users
       .me(options)
-      .then(r => {
+      .then((r) => {
         this.setState({ user: r.results[0] });
         return r;
       })
       // TODO: UI response
-      .catch(e => {
+      .catch((e) => {
         console.log('Error in fetching current user', e);
         console.log(e.response);
         // Show alert for failure of getting user object from iNat
@@ -114,22 +114,21 @@ class IiIdentifyScreen extends Component {
       // Observations have been reviewed by the user with ID equal to the value of the viewer_id parameter
       viewer_id: user.id,
       reviewed: 'false',
-      photos: 'true'
+      photos: 'true',
     };
 
     inatjs.observations
       .search(params)
-      .then(rsp => {
+      .then((rsp) => {
         const filteredResults = rsp.results
           .filter(d => !d.species_guess)
           .filter(d => d.photos.length <= maxPhotos);
         this.setState({
           observations: filteredResults,
           page: rsp.page,
-          cardIndex: 0
         });
       })
-      .catch(e => {
+      .catch((e) => {
         console.log('Error in fetching list of observations', e);
         console.log(e.response);
         Alert.alert(
@@ -146,7 +145,6 @@ class IiIdentifyScreen extends Component {
   }
 
   identify(observation, swipeOption) {
-    console.log('Identified as, this', swipeOption.label, observation);
     const { apiToken } = this.state;
     /*
     {
@@ -167,19 +165,19 @@ class IiIdentifyScreen extends Component {
     const options = { api_token: apiToken };
     inatjs.identifications
       .create(identification, options)
-      .then(c => {
+      .then((c) => {
         console.log('identification', c);
         if (!swipeOption.subscribe) {
           inatjs.observations
             .subscribe(observation, options)
             .then(rsp => console.log('Unsubscriped to: ', rsp))
-            .catch(e => {
+            .catch((e) => {
               console.log('Error in unsubscribing to observation', e);
               console.log(e.response);
             });
         }
       })
-      .catch(e => {
+      .catch((e) => {
         console.log('Error in creating identification', e);
         console.log(e.response);
         Alert.alert(
