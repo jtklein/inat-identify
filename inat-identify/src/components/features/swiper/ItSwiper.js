@@ -263,7 +263,6 @@ class ItSwiper extends Component {
                 <ItSwiperCard
                   swiper={swiper}
                   observation={topObservation}
-                  imageIndex={imageIndex}
                   {...{
                     rightOpacity,
                     leftOpacity,
