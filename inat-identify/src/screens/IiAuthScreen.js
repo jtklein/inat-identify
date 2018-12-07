@@ -5,6 +5,7 @@ import { AuthSession } from 'expo';
 import axios from 'axios';
 
 import oauth from '../../secrets/oauth';
+import api from '../../secrets/api_token';
 import { ItScreenContainer } from '../components/common';
 
 const INATURALIST_OAUTH_API = 'https://www.inaturalist.org/oauth';
@@ -152,7 +153,7 @@ export default class IiAuthScreen extends React.Component {
             <Button onPress={() => navigation.navigate(
               'Entry',
               {
-                apiToken: oauth.MY_CURRENT_API_TOKEN,
+                apiToken: api.api_token,
               },
             )}
             >
