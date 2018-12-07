@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { StyleSheet, View, Dimensions } from 'react-native';
-import { PanGestureHandler, State } from 'react-native-gesture-handler';
+import { PanGestureHandler, State, TapGestureHandler } from 'react-native-gesture-handler';
 import Animated from 'react-native-reanimated';
 
 import ItSwiperCard from './ItSwiperCard';
@@ -165,7 +165,6 @@ class ItSwiper extends Component {
       onSwipedAll,
     } = this.props;
     const goesDown = translationX > 0;
-    // Card was swiped right
     if (goesDown) {
       onSwipedRight(topObservation);
     } else {
@@ -185,7 +184,6 @@ class ItSwiper extends Component {
       onSwipedAll,
     } = this.props;
     const goesBottom = translationY > 0;
-    // Card was swiped right
     if (goesBottom) {
       onSwipedBottom(topObservation);
     } else {
@@ -196,6 +194,9 @@ class ItSwiper extends Component {
     }
     this.setState({ observations }, this.init);
   }
+
+  onTap = (event) => {
+  };
 
   render() {
     const { onGestureEvent, translateX, translateY } = this;
@@ -255,16 +256,23 @@ class ItSwiper extends Component {
           {...{ onGestureEvent }}
         >
           <Animated.View {...{ style }}>
-            <ItSwiperCard
-              swiper={swiper}
-              observation={topObservation}
-              {...{
-                rightOpacity,
-                leftOpacity,
-                topOpacity,
-                bottomOpacity,
-              }}
-            />
+            <TapGestureHandler
+              onHandlerStateChange={this.onTap}
+            >
+              <Animated.View {...{ style }}>
+                <ItSwiperCard
+                  swiper={swiper}
+                  observation={topObservation}
+                  imageIndex={imageIndex}
+                  {...{
+                    rightOpacity,
+                    leftOpacity,
+                    topOpacity,
+                    bottomOpacity,
+                  }}
+                />
+              </Animated.View>
+            </TapGestureHandler>
           </Animated.View>
         </PanGestureHandler>
       </View>
@@ -275,7 +283,6 @@ class ItSwiper extends Component {
 const styles = StyleSheet.create({
   cards: {
     flex: 1,
-    margin: 8,
     zIndex: 100,
   },
 });
