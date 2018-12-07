@@ -197,7 +197,7 @@ class IiIdentifyScreen extends Component {
     const { observations, cardIndex } = this.state;
     const { swiper } = this.props;
     if (!observations || !observations.length > 0) {
-      return <ItSpinner />;
+      return <ItSpinner size="large" />;
     }
     return (
       <ItScreenContainer>
