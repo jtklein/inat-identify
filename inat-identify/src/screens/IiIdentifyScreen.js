@@ -3,7 +3,7 @@ import { Alert } from 'react-native';
 import { connect } from 'react-redux';
 import inatjs from 'inaturalistjs';
 
-import ItSwiper from '../components/features/ItSwiper';
+import ItObservationSwiper from '../components/features/ItObservationSwiper';
 import {
   ItScreenContainer,
   ItSpinner,
@@ -201,7 +201,7 @@ class IiIdentifyScreen extends Component {
     }
     return (
       <ItScreenContainer>
-        <ItSwiper
+        <ItObservationSwiper
           observations={observations}
           cardIndex={cardIndex}
           swiper={swiper}

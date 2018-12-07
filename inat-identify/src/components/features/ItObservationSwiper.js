@@ -1,10 +1,11 @@
 import React, { Component } from 'react';
 import { Alert, StyleSheet, Text, View } from 'react-native';
-import Swiper from 'react-native-deck-swiper';
+
+import Swiper from './swiper/ItSwiper';
 
 import ItObservationImages from './ItObservationImages';
 
-class ItSwiper extends Component {
+class ItObservationSwiper extends Component {
   renderAdditionalInfo = () => {
     const { swiper, observations, cardIndex } = this.props;
     const { maxPhotos } = swiper;
@@ -145,4 +146,4 @@ const styles = StyleSheet.create({
   }
 });
 
-export default ItSwiper;
+export default ItObservationSwiper;
