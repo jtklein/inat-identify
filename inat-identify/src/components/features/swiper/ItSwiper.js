@@ -162,7 +162,7 @@ class ItSwiper extends Component {
     const {
       onSwipedLeft,
       onSwipedRight,
-      onSwipedAllCards
+      onSwipedAll,
     } = this.props;
     const goesDown = translationX > 0;
     // Card was swiped right
@@ -170,6 +170,9 @@ class ItSwiper extends Component {
       onSwipedRight(topObservation);
     } else {
       onSwipedLeft(topObservation);
+    }
+    if (observations.length === 0) {
+      onSwipedAll();
     }
     this.setState({ observations }, this.init);
   }
@@ -179,7 +182,7 @@ class ItSwiper extends Component {
     const {
       onSwipedTop,
       onSwipedBottom,
-      onSwipedAllCards
+      onSwipedAll,
     } = this.props;
     const goesBottom = translationY > 0;
     // Card was swiped right
@@ -187,6 +190,9 @@ class ItSwiper extends Component {
       onSwipedBottom(topObservation);
     } else {
       onSwipedTop(topObservation);
+    }
+    if (observations.length === 0) {
+      onSwipedAll();
     }
     this.setState({ observations }, this.init);
   }
