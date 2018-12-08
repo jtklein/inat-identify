@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { StyleSheet, Image, TouchableWithoutFeedback } from 'react-native';
+import { StyleSheet, View, Image, TouchableWithoutFeedback } from 'react-native';
 
 class ItObservationImages extends Component {
   INITIAL_STATE = {
@@ -31,10 +31,16 @@ class ItObservationImages extends Component {
 
   render() {
     const { uri } = this.state;
-    const { containerStyle, image } = styles;
+    const { observation } = this.props;
+    const {
+      containerStyle,
+      image,
+    } = styles;
     return (
       <TouchableWithoutFeedback style={containerStyle} onPress={() => this.onImagePressed()}>
-        <Image style={image} source={{ uri }} resizeMode="contain" />
+        <View style={StyleSheet.absoluteFill}>
+          <Image style={image} source={{ uri }} />
+        </View>
       </TouchableWithoutFeedback>
     );
   }
@@ -44,10 +50,12 @@ const styles = StyleSheet.create({
   containerStyle: {
     flex: 1,
     paddingLeft: 1,
-    paddingRight: 1,
+    paddingRight: 1
   },
   image: {
-    flex: 1,
+    ...StyleSheet.absoluteFillObject,
+    width: null,
+    height: null,
   },
 });
 
