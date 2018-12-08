@@ -30,16 +30,24 @@ class ItObservationImages extends Component {
   }
 
   render() {
-    const { uri } = this.state;
+    const { currentIndex, uri } = this.state;
     const { observation } = this.props;
     const {
       containerStyle,
+      overlay,
       image,
+      pager,
+      pagerIndicator,
     } = styles;
     return (
       <TouchableWithoutFeedback style={containerStyle} onPress={() => this.onImagePressed()}>
         <View style={StyleSheet.absoluteFill}>
           <Image style={image} source={{ uri }} />
+          <View style={overlay}>
+            <View style={pager}>
+              {observation.observation_photos.length > 1 ? observation.observation_photos.map((p, index) => <View key={p.id} style={index === currentIndex ? pagerIndicator : [pagerIndicator, { backgroundColor: '#BBBBBB' }]} />) : null}
+            </View>
+          </View>
         </View>
       </TouchableWithoutFeedback>
     );
@@ -50,13 +58,29 @@ const styles = StyleSheet.create({
   containerStyle: {
     flex: 1,
     paddingLeft: 1,
-    paddingRight: 1
+    paddingRight: 1,
   },
   image: {
     ...StyleSheet.absoluteFillObject,
     width: null,
     height: null,
   },
+  overlay: {
+    flex: 1,
+    justifyContent: 'space-between',
+    padding: 16,
+  },
+  pager: {
+    flexDirection: 'row',
+    justifyContent: 'space-around'
+  },
+  pagerIndicator: {
+    flex: 1,
+    height: 8,
+    backgroundColor: '#FFFFFF',
+    marginHorizontal: 2,
+    borderRadius: 8
+  }
 });
 
 export default ItObservationImages;

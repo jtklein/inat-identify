@@ -6,22 +6,6 @@ import Swiper from './swiper/ItSwiper';
 import ItObservationImages from './ItObservationImages';
 
 class ItObservationSwiper extends Component {
-  renderAdditionalInfo = () => {
-    const { swiper, observations, cardIndex } = this.props;
-    const { maxPhotos } = swiper;
-    const observation = observations[cardIndex];
-    const { additionalInfoContainer, text } = styles;
-    if (!observation || maxPhotos === 1) {
-      return null;
-    }
-
-    return (
-      <View style={additionalInfoContainer}>
-        <Text style={text}>{`Number of photos: ${observation.observation_photos.length}`}</Text>
-      </View>
-    );
-  };
-
   renderCard = (observation, index) => {
     const { card, text } = styles;
     return (
@@ -116,9 +100,7 @@ class ItObservationSwiper extends Component {
         }}
         animateOverlayLabelsOpacity
         animateCardOpacity
-      >
-        {this.renderAdditionalInfo()}
-      </Swiper>
+      />
     );
   }
 }
@@ -140,9 +122,6 @@ const styles = StyleSheet.create({
   },
   text: {
     color: 'red'
-  },
-  additionalInfoContainer: {
-    alignItems: 'center'
   }
 });
 
