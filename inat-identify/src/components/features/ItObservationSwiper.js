@@ -3,19 +3,17 @@ import { Alert, StyleSheet, Text, View } from 'react-native';
 
 import ItSwiper from './swiper/ItSwiper';
 
-import ItObservationImages from './ItObservationImages';
+import ItObservationCard from './ItObservationCard';
 
 class ItObservationSwiper extends Component {
   renderCard = (observation, index) => {
-    const { card, text } = styles;
+    const { card } = styles;
     if (!observation) {
       return null;
     }
     return (
       <View style={card}>
-        {observation.description ? <Text style={text}>{`Description: ${observation.description}`}</Text> : null}
-        {observation.identifications_count > 0 ? <Text style={text}>This observation already has some identifications</Text> : null}
-        <ItObservationImages observation={observation} />
+        <ItObservationCard observation={observation} />
       </View>
     );
   };
@@ -43,7 +41,7 @@ class ItObservationSwiper extends Component {
         backgroundColor="#FFFFFF"
         renderCard={this.renderCard}
         cardVerticalMargin={20}
-        stackSize={3}
+        stackSize={4}
         stackSeparation={8}
         stackScale={10}
         onSwipedLeft={index => onSwipedLeft(index)}
@@ -111,7 +109,7 @@ class ItObservationSwiper extends Component {
 const styles = StyleSheet.create({
   card: {
     flex: 1,
-    borderRadius: 4,
+    borderRadius: 8,
     borderWidth: 2,
     borderColor: '#E8E8E8',
     justifyContent: 'center',
@@ -123,9 +121,6 @@ const styles = StyleSheet.create({
     color: 'white',
     borderWidth: 1
   },
-  text: {
-    color: 'red'
-  }
 });
 
 export default ItObservationSwiper;

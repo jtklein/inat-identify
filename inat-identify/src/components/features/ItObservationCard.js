@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
-import { StyleSheet, View, Image, TouchableWithoutFeedback } from 'react-native';
+import { StyleSheet, View, Image, Text, TouchableWithoutFeedback } from 'react-native';
 
-class ItObservationImages extends Component {
+class ItObservationCard extends Component {
   INITIAL_STATE = {
     currentIndex: 0,
     uri: this.props.observation.observation_photos[0].photo.url.replace(
@@ -38,6 +38,7 @@ class ItObservationImages extends Component {
       image,
       pager,
       pagerIndicator,
+      text,
     } = styles;
     return (
       <TouchableWithoutFeedback style={containerStyle} onPress={() => this.onImagePressed()}>
@@ -47,6 +48,8 @@ class ItObservationImages extends Component {
             <View style={pager}>
               {observation.observation_photos.length > 1 ? observation.observation_photos.map((p, index) => <View key={p.id} style={index === currentIndex ? pagerIndicator : [pagerIndicator, { backgroundColor: '#BBBBBB' }]} />) : null}
             </View>
+            {observation.description ? <Text style={text}>{`Description: ${observation.description}`}</Text> : null}
+            {observation.identifications_count > 0 ? <Text style={text}>This observation already has some identifications</Text> : null}
           </View>
         </View>
       </TouchableWithoutFeedback>
@@ -58,17 +61,18 @@ const styles = StyleSheet.create({
   containerStyle: {
     flex: 1,
     paddingLeft: 1,
-    paddingRight: 1,
+    paddingRight: 1
   },
   image: {
     ...StyleSheet.absoluteFillObject,
+    borderRadius: 8,
     width: null,
-    height: null,
+    height: null
   },
   overlay: {
     flex: 1,
     justifyContent: 'space-between',
-    padding: 16,
+    padding: 16
   },
   pager: {
     flexDirection: 'row',
@@ -80,7 +84,11 @@ const styles = StyleSheet.create({
     backgroundColor: '#FFFFFF',
     marginHorizontal: 2,
     borderRadius: 8
+  },
+  text: {
+    color: 'white',
+    fontSize: 32
   }
 });
 
-export default ItObservationImages;
+export default ItObservationCard;
