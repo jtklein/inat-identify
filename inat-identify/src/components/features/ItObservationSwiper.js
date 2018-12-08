@@ -1,13 +1,16 @@
 import React, { Component } from 'react';
 import { Alert, StyleSheet, Text, View } from 'react-native';
 
-import Swiper from './swiper/ItSwiper';
+import ItSwiper from './swiper/ItSwiper';
 
 import ItObservationImages from './ItObservationImages';
 
 class ItObservationSwiper extends Component {
   renderCard = (observation, index) => {
     const { card, text } = styles;
+    if (!observation) {
+      return null;
+    }
     return (
       <View style={card}>
         {observation.description ? <Text style={text}>{`Description: ${observation.description}`}</Text> : null}
@@ -25,12 +28,12 @@ class ItObservationSwiper extends Component {
       onSwipedRight,
       onSwipedTop,
       onSwipedBottom,
-      onSwipedAllCards
+      onSwipedAll
     } = this.props;
     const { swipeLeft, swipeRight, swipeTop } = this.props.swiper;
     const { label } = styles;
     return (
-      <Swiper
+      <ItSwiper
         cards={observations}
         cardIndex={cardIndex}
         ref={(swiper) => {
@@ -47,7 +50,7 @@ class ItObservationSwiper extends Component {
         onSwipedRight={index => onSwipedRight(index)}
         onSwipedTop={index => onSwipedTop(index)}
         onSwipedBottom={index => onSwipedBottom(index)}
-        onSwipedAll={onSwipedAllCards}
+        onSwipedAll={onSwipedAll}
         overlayLabels={{
           bottom: {
             title: 'Skip',

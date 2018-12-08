@@ -38,7 +38,7 @@ const rebuildStackAnimatedValues = (props) => {
   return stackPositionsAndScales
 }
 
-class Swiper extends Component {
+class ItSwiper extends Component {
   static getDerivedStateFromProps(props, state) {
     return {
       ...state,
@@ -843,7 +843,7 @@ class Swiper extends Component {
   }
 }
 
-Swiper.defaultProps = {
+ItSwiper.defaultProps = {
   animateCardOpacity: false,
   animateOverlayLabelsOpacity: false,
   backgroundColor: '#4FD0E9',
@@ -999,4 +999,4 @@ const styles = StyleSheet.create({
   }
 });
 
-export default Swiper;
+export default ItSwiper;
