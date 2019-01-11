@@ -117,7 +117,10 @@ export default class IiAuthScreen extends React.Component {
     const { container, paragraph } = styles;
     return (
       <ItScreenContainer barStyle="dark-content">
-        <View style={container}>
+        <View
+          testID="auth_screen"
+          style={container}
+        >
           <View style={paragraph}>
             <Paragraph>What can I do with this app?</Paragraph>
             <Paragraph>
@@ -135,8 +138,12 @@ export default class IiAuthScreen extends React.Component {
             Once this was successfull you will be guided back here.
             </Paragraph>
           </View>
-          <Button onPress={() => this.loginAsync()} loading={isAuthenticating}>
-          Login with iNaturalist
+          <Button
+            testID="login_button"
+            onPress={() => this.loginAsync()}
+            loading={isAuthenticating}
+          >
+            Login with iNaturalist
           </Button>
           <View style={paragraph}>
             <Paragraph>Why do I see this screen every time?</Paragraph>
@@ -150,14 +157,16 @@ export default class IiAuthScreen extends React.Component {
             </Paragraph>
           </View>
           {__DEV__ ? (
-            <Button onPress={() => navigation.navigate(
-              'Entry',
-              {
-                apiToken: api.api_token,
-              },
-            )}
+            <Button
+              testID="dev_skip_login"
+              onPress={() => navigation.navigate(
+                'Entry',
+                {
+                  apiToken: api.api_token,
+                },
+              )}
             >
-            !!DEV Skip
+              !!DEV Skip
             </Button>
           ) : null}
         </View>

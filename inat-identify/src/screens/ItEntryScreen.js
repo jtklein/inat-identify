@@ -13,7 +13,7 @@ class ItEntryScreen extends Component {
     title: 'Swiper',
     headerRight: (
       <ItHeaderButtons>
-        <HeaderItem title="settings" iconName="settings" onPress={() => navigation.navigate('Settings')} />
+        <HeaderItem testID="header_settings_button" title="settings" iconName="settings" onPress={() => navigation.navigate('Settings')} />
       </ItHeaderButtons>
     ),
   });
@@ -33,7 +33,7 @@ class ItEntryScreen extends Component {
     const { container, paragraph } = styles;
     return (
       <ItScreenContainer>
-        <View style={container}>
+        <View testID="entry_screen" style={container}>
           <View style={paragraph}>
             <Paragraph>How does it work?</Paragraph>
             <Paragraph>
