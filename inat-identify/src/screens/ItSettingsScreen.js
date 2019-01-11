@@ -169,6 +169,7 @@ class ItSettingsScreen extends Component {
         <View style={subscriptionContainer}>
           <Text>{`Subscribe to ${swipeLeft.label} identifications`}</Text>
           <Switch
+            testID="subscribe_left"
             value={swipeLeft.subscribe}
             onValueChange={() => (swipeLeft.subscribe
               ? unsubscribeSwipeLeft()
@@ -192,6 +193,7 @@ class ItSettingsScreen extends Component {
         <View style={subscriptionContainer}>
           <Text>{`Subscribe to ${swipeRight.label} identifications`}</Text>
           <Switch
+            testID="subscribe_right"
             value={swipeRight.subscribe}
             onValueChange={() => (swipeRight.subscribe
               ? unsubscribeSwipeRight()
@@ -215,6 +217,7 @@ class ItSettingsScreen extends Component {
         <View style={subscriptionContainer}>
           <Text>{`Subscribe to ${swipeTop.label} identifications`}</Text>
           <Switch
+            testID="subscribe_top"
             value={swipeTop.subscribe}
             onValueChange={() => (swipeTop.subscribe ? unsubscribeSwipeTop() : subscribeSwipeTop())
             }
@@ -234,11 +237,11 @@ class ItSettingsScreen extends Component {
     const { container } = styles;
     return (
       <ItScreenContainer>
-        <View style={{ flexDirection: 'row', justifyContent: 'space-evenly' }}>
-          <Button icon="filter-list" mode={showFilter ? 'contained' : 'outlined'} onPress={() => this.onFilterPressed()}>
+        <View testID="settings_screen" style={{ flexDirection: 'row', justifyContent: 'space-evenly' }}>
+          <Button testID="filter_tab" icon="filter-list" mode={showFilter ? 'contained' : 'outlined'} onPress={() => this.onFilterPressed()}>
             Filter
           </Button>
-          <Button icon="open-with" mode={!showFilter ? 'contained' : 'outlined'} onPress={() => this.onActionsPressed()}>
+          <Button testID="actions_tab" icon="open-with" mode={!showFilter ? 'contained' : 'outlined'} onPress={() => this.onActionsPressed()}>
             Actions
           </Button>
         </View>

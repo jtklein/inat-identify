@@ -42,5 +42,16 @@ describe('Login flow', () => {
     await element(by.id('subscribe_top')).tap();
     // Press the filter tab
     await element(by.id('filter_tab')).tap();
+    // TODO: Should be a check for List.Accordion dropdown by ID?
+    // Check for place dropdown by label
+    await expect(element(by.label('by place = Europe'))).toBeVisible();
+    // Press the place dropdown by label to open it
+    await element(by.label('by place = Europe')).tap();
+    // Check for Asia selection
+    await expect(element(by.label('Asia'))).toBeVisible();
+    // Press the Asia selection
+    await element(by.label('Asia')).tap();
+    // Press the place dropdown by label to close it
+    await element(by.label('by place = Europe')).tap();
   });
 })
