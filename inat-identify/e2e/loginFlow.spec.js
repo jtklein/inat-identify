@@ -42,16 +42,40 @@ describe('Login flow', () => {
     await element(by.id('subscribe_top')).tap();
     // Press the filter tab
     await element(by.id('filter_tab')).tap();
+
     // TODO: Should be a check for List.Accordion dropdown by ID?
     // Check for place dropdown by label
     await expect(element(by.label('by place = Europe'))).toBeVisible();
     // Press the place dropdown by label to open it
     await element(by.label('by place = Europe')).tap();
     // Check for Asia selection
-    await expect(element(by.label('Asia'))).toBeVisible();
+    await expect(element(by.label('Asia').withAncestor(by.label('Asia')))).toBeVisible();
     // Press the Asia selection
-    await element(by.label('Asia')).tap();
+    await element(by.label('Asia').withAncestor(by.label('Asia'))).tap();
+    // Check that place dropdown label has changed
+    await expect(element(by.label('by place = Asia'))).toBeVisible();
     // Press the place dropdown by label to close it
-    await element(by.label('by place = Europe')).tap();
+    await element(by.label('by place = Asia')).tap();
+
+    // TODO: Should be a check for List.Accordion dropdown by ID?
+    // Check for number photos dropdown by label
+    await expect(element(by.label('by number photos = Infinity'))).toBeVisible();
+    // Press the number photos dropdown by label to open it
+    await element(by.label('by number photos = Infinity')).tap();
+    // Check for 1 selection
+    await expect(element(by.label('1').withAncestor(by.label('1')))).toBeVisible();
+    // Press the 1 selection
+    await element(by.label('1').withAncestor(by.label('1'))).tap();
+    // Check that number photos dropdown label has changed
+    await expect(element(by.label('by number photos = 1'))).toBeVisible();
+    // Press the number photos dropdown by label to close it
+    await element(by.label('by number photos = 1')).tap();
+
+    // Navigate by back button
+    await element(by.traits(['button'])).atIndex(0).tap();
+    await expect(element(by.id('entry_screen'))).toBeVisible();
+    // Go to swiper
+    await expect(element(by.id('start_swiper'))).toBeVisible();
+    await element(by.id('start_swiper')).tap();
   });
 })

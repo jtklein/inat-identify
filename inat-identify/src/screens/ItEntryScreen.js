@@ -56,7 +56,7 @@ class ItEntryScreen extends Component {
               If you like the app let me know, then I can make it so that you can customize the swipe directions even further.
             </Paragraph>
           </View>
-          <Button onPress={() => navigation.navigate('Identify', { apiToken })}>
+          <Button testID="start_swiper" onPress={() => navigation.navigate('Identify', { apiToken })}>
             OK, got it
           </Button>
         </View>
