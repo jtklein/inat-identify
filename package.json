@@ -3,7 +3,8 @@
   "main": "main.js",
   "scripts": {
     "checks": "node ./scripts/CheckSecretsExist.js",
-    "start": "yarn checks && expo start -c"
+    "start": "yarn checks && expo start -c",
+    "postcheckout": "yarn solidarity"
   },
   "dependencies": {
     "axios": "^0.18.0",
