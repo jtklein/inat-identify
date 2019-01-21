@@ -4015,10 +4015,10 @@ expo-localization@~2.0.0:
     moment-timezone "^0.5.23"
     rtl-detect "^1.0.2"
 
-expo-location@~2.0.0:
-  version "2.0.0"
-  resolved "https://registry.yarnpkg.com/expo-location/-/expo-location-2.0.0.tgz#8ce2502960abffaffa87e07939668f2bb03874d3"
-  integrity sha512-kVo07OWLSoSZPRxaocOyMtEuGPjRJ2hBFBd8/sHNaLTmdnFQMrG6lanwemORZSgYAUgSwGX1yrsn0I5trWofyQ==
+expo-location@~2.0.1:
+  version "2.0.1"
+  resolved "https://registry.yarnpkg.com/expo-location/-/expo-location-2.0.1.tgz#44d5865640ce28a1683dec8ff9269e786b86aa2e"
+  integrity sha512-hd1lZ1yPh+q50AihNqdeAumr3R64fp7qKlJ/5Ry1ap519Gy3uA1y+XOw5HHNXDw+/fbO9O1xBLpAuJUbZxVk8w==
   dependencies:
     invariant "^2.2.4"
 
@@ -4112,10 +4112,10 @@ expo-task-manager@~1.0.0:
     expo-errors "~1.0.0"
     expo-task-manager-interface "~1.0.0"
 
-expo@^32.0.0:
-  version "32.0.0"
-  resolved "https://registry.yarnpkg.com/expo/-/expo-32.0.0.tgz#c5b0120fdbd76ab9b14476482d525fde23effdbf"
-  integrity sha512-y8qB9LF3rKvwMJjS4WdKW+skBcalPua0GqrjsKQVRjjntNuCMdmtXzCnI7ukcXMnV9Awa0txKtH/2pfsE08e5Q==
+expo@^32.0.1:
+  version "32.0.1"
+  resolved "https://registry.yarnpkg.com/expo/-/expo-32.0.1.tgz#6b6eab63afd0fb4a7b8ca06de3f0f408f8c4ae6b"
+  integrity sha512-1oJPx3xjcjIcMZmQ8cuxnuaBe62miC+QrCqjtQgmErBJQG4jY3r2LP5l1pPoY42nR3zV8czhlvW9kx39sdunNw==
   dependencies:
     "@babel/runtime" "^7.1.2"
     "@expo/vector-icons" "github:expo/vector-icons#expo-font-fix"
@@ -4155,7 +4155,7 @@ expo@^32.0.0:
     expo-image-loader-interface "~2.0.0"
     expo-local-authentication "~2.0.0"
     expo-localization "~2.0.0"
-    expo-location "~2.0.0"
+    expo-location "~2.0.1"
     expo-media-library "~2.0.0"
     expo-payments-stripe "~2.0.0"
     expo-permissions "~2.0.0"
@@ -4182,7 +4182,7 @@ expo@^32.0.0:
     react-native-gesture-handler "1.0.12"
     react-native-maps expo/react-native-maps#v0.22.1-exp.0
     react-native-reanimated "1.0.0-alpha.11"
-    react-native-screens "1.0.0-alpha.19"
+    react-native-screens "1.0.0-alpha.22"
     react-native-svg "8.0.10"
     react-native-view-shot "2.5.0"
     serialize-error "^2.1.0"
@@ -8551,12 +8551,12 @@ punycode@^1.4.1:
   resolved "https://registry.yarnpkg.com/punycode/-/punycode-1.4.1.tgz#c0d5a63b2718800ad8e1eb0fa5269c84dd41845e"
   integrity sha1-wNWmOycYgArY4esPpSachN1BhF4=
 
-qs@6.5.2, qs@^6.5.0, qs@~6.5.2:
+qs@6.5.2, qs@~6.5.2:
   version "6.5.2"
   resolved "https://registry.yarnpkg.com/qs/-/qs-6.5.2.tgz#cb3ae806e8740444584ef154ce8ee98d403f3e36"
   integrity sha512-N5ZAX4/LxJmF+7wN74pUD6qAh9/wnvdQcjq9TZjevvXzSUo7bfmw91saqMjzGS2xq91/odN2dW/WOl7qQHNDGA==
 
-qs@^6.5.1:
+qs@^6.5.0, qs@^6.5.1:
   version "6.6.0"
   resolved "https://registry.yarnpkg.com/qs/-/qs-6.6.0.tgz#a99c0f69a8d26bf7ef012f871cdabb0aee4424c2"
   integrity sha512-KIJqT9jQJDQx5h5uAVPimw6yVg2SekOKu959OCtktD3FjzbpvaPr8i4zzg07DOMz+igA4W/aNM7OV8H37pFYfA==
@@ -8701,19 +8701,10 @@ react-native-branch@2.2.5:
   resolved "https://registry.yarnpkg.com/react-native-branch/-/react-native-branch-2.2.5.tgz#4074dd63b4973e6397d9ce50e97b57c77a518e9d"
   integrity sha1-QHTdY7SXPmOX2c5Q6XtXx3pRjp0=
 
-react-native-gesture-handler@1.0.12:
+react-native-gesture-handler@1.0.12, react-native-gesture-handler@^1.0.0:
   version "1.0.12"
   resolved "https://registry.yarnpkg.com/react-native-gesture-handler/-/react-native-gesture-handler-1.0.12.tgz#99a22f90212df299245357dbd3a9a01c788f310b"
   integrity sha512-Qp5FjRmqUFeCevSu2IYQG1Xw+YXZ9YOzqze/ZxaIvWzYAoKsRchlgHhNoxvCqElp/befrnVFIjAEQyUxcmBKJw==
-  dependencies:
-    hoist-non-react-statics "^2.3.1"
-    invariant "^2.2.2"
-    prop-types "^15.5.10"
-
-react-native-gesture-handler@^1.0.0:
-  version "1.0.9"
-  resolved "https://registry.yarnpkg.com/react-native-gesture-handler/-/react-native-gesture-handler-1.0.9.tgz#ddec4d19d51cb6fb54df6eca792ebd76aaef083f"
-  integrity sha512-TPaiS8cAGqQA9p1GwjDbgMyNVCO/7cWC05h1rWIX2ZLoB1oSxGEBi5Es211HpBUmsTAzrUGH7M+ASGkAQeYH/A==
   dependencies:
     hoist-non-react-statics "^2.3.1"
     invariant "^2.2.2"
@@ -8758,15 +8749,10 @@ react-native-safe-module@^1.1.0:
   dependencies:
     dedent "^0.6.0"
 
-react-native-screens@1.0.0-alpha.19:
-  version "1.0.0-alpha.19"
-  resolved "https://registry.yarnpkg.com/react-native-screens/-/react-native-screens-1.0.0-alpha.19.tgz#ecf3c9023e169b7013266d40b9c5599f37667f6d"
-  integrity sha512-+a7GdwzLWYWYVUJMg+XuyBoRFGD8GdGyBfebuTNBY+xwUZpTXCaK/GlLGL6EE3h0iBHZu83do7zViEailWRNyA==
-
-"react-native-screens@^1.0.0 || ^1.0.0-alpha":
-  version "1.0.0-alpha.16"
-  resolved "https://registry.yarnpkg.com/react-native-screens/-/react-native-screens-1.0.0-alpha.16.tgz#e3651b7077ea8fa04e8dd3265ad9b87f1f77a758"
-  integrity sha512-t+/aq5jQa+Is6afiQHa1P+2UPnwPGY9NT0pSqNr2zQ5llCn8TcPq6GN8xDMuEc08g+y/9R5zWo32hlVStwWn1A==
+react-native-screens@1.0.0-alpha.22, "react-native-screens@^1.0.0 || ^1.0.0-alpha":
+  version "1.0.0-alpha.22"
+  resolved "https://registry.yarnpkg.com/react-native-screens/-/react-native-screens-1.0.0-alpha.22.tgz#7a120377b52aa9bbb94d0b8541a014026be9289b"
+  integrity sha512-kSyAt0AeVU6N7ZonfV6dP6iZF8B7Bce+tk3eujXhzBGsLg0VSLnU7uE9VqJF0xdQrHR91ZjGgVMieo/8df9KTA==
 
 react-native-svg@8.0.10:
   version "8.0.10"
