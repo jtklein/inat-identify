@@ -4112,10 +4112,10 @@ expo-task-manager@~1.0.0:
     expo-errors "~1.0.0"
     expo-task-manager-interface "~1.0.0"
 
-expo@^32.0.1:
-  version "32.0.1"
-  resolved "https://registry.yarnpkg.com/expo/-/expo-32.0.1.tgz#6b6eab63afd0fb4a7b8ca06de3f0f408f8c4ae6b"
-  integrity sha512-1oJPx3xjcjIcMZmQ8cuxnuaBe62miC+QrCqjtQgmErBJQG4jY3r2LP5l1pPoY42nR3zV8czhlvW9kx39sdunNw==
+expo@^32.0.2:
+  version "32.0.2"
+  resolved "https://registry.yarnpkg.com/expo/-/expo-32.0.2.tgz#266abf5b5ff955151609666c23946f4e45f3ed23"
+  integrity sha512-56uBjw1Tph1BKMqRP0yhI136OiID+WBn9YRLjpJ6GTJ1Qwh9bt82rJBK2GiEVF/bNyWb7QkhcrgujIASStg11Q==
   dependencies:
     "@babel/runtime" "^7.1.2"
     "@expo/vector-icons" "github:expo/vector-icons#expo-font-fix"
@@ -4179,8 +4179,8 @@ expo@^32.0.1:
     prop-types "^15.6.0"
     qs "^6.5.0"
     react-native-branch "2.2.5"
-    react-native-gesture-handler "1.0.12"
-    react-native-maps expo/react-native-maps#v0.22.1-exp.0
+    react-native-gesture-handler "1.0.14"
+    react-native-maps "github:expo/react-native-maps#v0.22.1-exp.0"
     react-native-reanimated "1.0.0-alpha.11"
     react-native-screens "1.0.0-alpha.22"
     react-native-svg "8.0.10"
@@ -8694,17 +8694,18 @@ react-native-branch@2.2.5:
   resolved "https://registry.yarnpkg.com/react-native-branch/-/react-native-branch-2.2.5.tgz#4074dd63b4973e6397d9ce50e97b57c77a518e9d"
   integrity sha1-QHTdY7SXPmOX2c5Q6XtXx3pRjp0=
 
-react-native-gesture-handler@1.0.12, react-native-gesture-handler@^1.0.0:
-  version "1.0.12"
-  resolved "https://registry.yarnpkg.com/react-native-gesture-handler/-/react-native-gesture-handler-1.0.12.tgz#99a22f90212df299245357dbd3a9a01c788f310b"
-  integrity sha512-Qp5FjRmqUFeCevSu2IYQG1Xw+YXZ9YOzqze/ZxaIvWzYAoKsRchlgHhNoxvCqElp/befrnVFIjAEQyUxcmBKJw==
+react-native-gesture-handler@1.0.14, react-native-gesture-handler@^1.0.0:
+  version "1.0.14"
+  resolved "https://registry.yarnpkg.com/react-native-gesture-handler/-/react-native-gesture-handler-1.0.14.tgz#0e79fcc7175c9bb2e550917a35488100eec8738b"
+  integrity sha512-mp+VD7ukS/gI6HhIJMp9GTIUzbNB+1MS9CvvtWEYoVp0eWFHuDA4W+t1cFNZv08kgDI9mBNbV9jj05hlzefSTw==
   dependencies:
     hoist-non-react-statics "^2.3.1"
     invariant "^2.2.2"
     prop-types "^15.5.10"
 
-react-native-maps@expo/react-native-maps#v0.22.1-exp.0:
+"react-native-maps@github:expo/react-native-maps#v0.22.1-exp.0":
   version "0.22.1"
+  uid e6f98ff7272e5d0a7fe974a41f28593af2d77bb2
   resolved "https://codeload.github.com/expo/react-native-maps/tar.gz/e6f98ff7272e5d0a7fe974a41f28593af2d77bb2"
 
 react-native-paper@^2.5.0:
