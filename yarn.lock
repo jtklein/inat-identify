@@ -8707,10 +8707,10 @@ react-native-maps@expo/react-native-maps#v0.22.1-exp.0:
   version "0.22.1"
   resolved "https://codeload.github.com/expo/react-native-maps/tar.gz/e6f98ff7272e5d0a7fe974a41f28593af2d77bb2"
 
-react-native-paper@^2.5.0:
-  version "2.5.0"
-  resolved "https://registry.yarnpkg.com/react-native-paper/-/react-native-paper-2.5.0.tgz#008636eebe2f29499bd237df02bfc8498086e222"
-  integrity sha512-Dh/072/YKWvbkqOw1kyHMXIZwPo5JR7OPqxROwEYAnJlGPO4Mv5w6IEpL87uUsrPGQMZGzbSyEKS/x3K8AW/cA==
+react-native-paper@^2.6.3:
+  version "2.6.3"
+  resolved "https://registry.yarnpkg.com/react-native-paper/-/react-native-paper-2.6.3.tgz#9ed37d127a4a5d30b940a9123ea9224c4d64034a"
+  integrity sha512-TsGrvvRtG0tfEk+82EpWXkxe/jJ3e2pivePqRqLJH37rBCDauNnGGi3hl7CL8XFqOBru55n86Eb92F4e4qjlDg==
   dependencies:
     "@callstack/react-theme-provider" "^1.0.7"
     color "^2.0.1"
