@@ -1,10 +1,10 @@
 import ReduxThunk from 'redux-thunk';
-import promiseMiddleware from 'redux-promise-middleware';
+import promise from 'redux-promise-middleware';
 import logger from 'redux-logger';
 
 const middlewares = [
   ReduxThunk, // Thunk middleware for Redux
-  promiseMiddleware(), // ReduxPromise middleware
+  promise, // ReduxPromise middleware
 ];
 
 // In development mode add these middlewares
