@@ -8702,16 +8702,17 @@ react-native-gesture-handler@1.0.14, react-native-gesture-handler@^1.0.0:
   uid e6f98ff7272e5d0a7fe974a41f28593af2d77bb2
   resolved "https://codeload.github.com/expo/react-native-maps/tar.gz/e6f98ff7272e5d0a7fe974a41f28593af2d77bb2"
 
-react-native-paper@^2.7.0:
-  version "2.7.0"
-  resolved "https://registry.yarnpkg.com/react-native-paper/-/react-native-paper-2.7.0.tgz#36f7228548884d4c1cde8bd7b1d44b6621a9107d"
-  integrity sha512-jhu/rxWMIkyFLiG4uMtArW5p4kJFYqUqD5l/gvKTXjBJ+LiW8z28hRL+xGaXGAGi5czGQDuw0XzqoWzPJdZw+g==
+react-native-paper@^2.10.1:
+  version "2.10.1"
+  resolved "https://registry.yarnpkg.com/react-native-paper/-/react-native-paper-2.10.1.tgz#31316fd7b97d4537f6dde28e96fb35681798d1d2"
+  integrity sha512-I0zWlRnCHvISBwOcq4Xq5DE5zstLQIRM99ID9CzfjILGu2teY1PV/dgVzf1S0w+wpJx4GG7U8WJsIZ2s+LFV3w==
   dependencies:
     "@callstack/react-theme-provider" "^1.0.7"
     color "^2.0.1"
     create-react-context "^0.2.3"
     hoist-non-react-statics "^3.1.0"
     react-lifecycles-compat "^3.0.4"
+    react-native-safe-area-view "^0.12.0"
 
 react-native-platform-touchable@^1.1.1:
   version "1.1.1"
@@ -8727,6 +8728,13 @@ react-native-safe-area-view@^0.11.0:
   version "0.11.0"
   resolved "https://registry.yarnpkg.com/react-native-safe-area-view/-/react-native-safe-area-view-0.11.0.tgz#4f3dda43c2bace37965e7c6aef5fc83d4f19d174"
   integrity sha512-N3nElaahu1Me2ltnfc9acpgt1znm6pi8DSadKy79kvdzKwvVIzw0IXueA/Hjr51eCW1BsfNw7D1SgBT9U6qEkA==
+  dependencies:
+    hoist-non-react-statics "^2.3.1"
+
+react-native-safe-area-view@^0.12.0:
+  version "0.12.0"
+  resolved "https://registry.yarnpkg.com/react-native-safe-area-view/-/react-native-safe-area-view-0.12.0.tgz#5c312f087300ecf82e8541c3eac25d560e147f22"
+  integrity sha512-UrAXmBC4KNR5K2eczIDZgqceWyKsgG9gmWFerHCvoyApfei8ceBB9u/c//PWCpS5Gt8MRLTmX5jPtzdXo2yNqg==
   dependencies:
     hoist-non-react-statics "^2.3.1"
 
