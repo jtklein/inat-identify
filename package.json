@@ -2,7 +2,7 @@
   "private": true,
   "main": "main.js",
   "scripts": {
-    "checks": "node ./scripts/CheckSecretsExist.js",
+    "checks": "node ./scripts/CheckSecretsExist.js && solidarity",
     "start": "yarn checks && expo start -c"
   },
   "dependencies": {
