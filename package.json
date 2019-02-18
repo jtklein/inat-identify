@@ -8,7 +8,7 @@
   "dependencies": {
     "axios": "^0.18.0",
     "babel-preset-expo": "^5.0.0",
-    "expo": "^32.0.4",
+    "expo": "^32.0.6",
     "inaturalistjs": "github:inaturalist/inaturalistjs",
     "react": "16.5.0",
     "react-native": "https://github.com/expo/react-native/archive/sdk-32.0.0.tar.gz",
