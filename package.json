@@ -15,7 +15,7 @@
     "react-native-paper": "^2.11.1",
     "react-navigation": "^3.3.0",
     "react-navigation-header-buttons": "^2.1.2",
-    "react-redux": "^6.0.0",
+    "react-redux": "^6.0.1",
     "redux": "^4.0.1",
     "redux-promise-middleware": "^6.1.0",
     "redux-thunk": "^2.3.0"
