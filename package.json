@@ -10,7 +10,7 @@
     "babel-preset-expo": "^5.0.0",
     "expo": "^32.0.6",
     "inaturalistjs": "github:inaturalist/inaturalistjs",
-    "react": "16.5.0",
+    "react": "16.8.3",
     "react-native": "https://github.com/expo/react-native/archive/sdk-32.0.0.tar.gz",
     "react-native-paper": "^2.11.1",
     "react-navigation": "^3.3.2",
