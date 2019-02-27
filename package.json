@@ -45,6 +45,9 @@
     "solidarity": "^2.3.1",
     "solidarity-react-native": "^2.1.2"
   },
+  "resolutions": {
+    "lodash": "^4.17.11"
+  },
   "detox": {
     "test-runner": "jest",
     "configurations": {

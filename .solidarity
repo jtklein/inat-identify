@@ -36,7 +36,7 @@
       {
         "rule": "cli",
         "binary": "expo",
-        "semver": "2.9.0"
+        "semver": "2.11.3"
       }
     ],
     "Package JSON": [
