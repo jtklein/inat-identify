@@ -8748,10 +8748,10 @@ react-native-tab-view@^1.2.0:
   dependencies:
     prop-types "^15.6.1"
 
-react-native-testing-library@^1.6.0:
-  version "1.6.0"
-  resolved "https://registry.yarnpkg.com/react-native-testing-library/-/react-native-testing-library-1.6.0.tgz#857f5cddea26f43ee8d942779d98209fe355f66e"
-  integrity sha512-fUdwLp+PqTOAIWtOwa3D5+KnUiPEj6qAnXrtZKQji+w5hnn7YHNnf1YYQad3H/GP8mJq5Y8GG/KBKnBXpq7WxA==
+react-native-testing-library@^1.6.1:
+  version "1.6.1"
+  resolved "https://registry.yarnpkg.com/react-native-testing-library/-/react-native-testing-library-1.6.1.tgz#655c6ddbca6447339a7cd8729fb574ba3cf00d69"
+  integrity sha512-plGZ3zCP5zT4nxL+4x7sdmv/OFOIGRyWceIAe6CxO2ZC9BXauhAUKP/AUNI/5fviW2EkVnNqni61RVNoqsSYEQ==
   dependencies:
     pretty-format "^24.0.0"
 
