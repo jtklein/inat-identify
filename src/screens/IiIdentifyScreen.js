@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
-import { Alert } from 'react-native';
+import { Alert, View } from 'react-native';
+import { Button, List, Dialog, Portal } from 'react-native-paper';
 import { connect } from 'react-redux';
 import inatjs from 'inaturalistjs';
 
@@ -7,10 +8,24 @@ import ItObservationSwiper from '../components/features/ItObservationSwiper';
 import {
   ItScreenContainer,
   ItSpinner,
+  ItHeaderButtons,
+  HeaderItem,
 } from '../components/common';
 
 class IiIdentifyScreen extends Component {
-  static navigationOptions = ({ navigation }) => ({ title: navigation.getParam('title') });
+  static navigationOptions = ({ navigation }) => ({
+    title: navigation.getParam('title'),
+    headerRight: (
+      <ItHeaderButtons>
+        <HeaderItem
+          testID="header_info_button"
+          title="info"
+          iconName="info"
+          onPress={() => navigation.getParam('showDialog')()}
+        />
+      </ItHeaderButtons>
+    ),
+  });
 
   INITIAL_STATE = {
     user: {},
@@ -19,6 +34,7 @@ class IiIdentifyScreen extends Component {
     cardIndex: 0,
     observations: [],
     page: 0,
+    visible: false,
   };
 
   constructor(props) {
@@ -29,7 +45,7 @@ class IiIdentifyScreen extends Component {
   componentDidMount = async () => {
     const { navigation, swiper } = this.props;
     const { place } = swiper;
-    navigation.setParams({ title: place.label });
+    navigation.setParams({ title: place.label, showDialog: this.showDialog });
     // TODO: refactor to app start up, if we ever have different screens
     const user = await this.getCurrentUser();
     console.log('user', user);
@@ -90,18 +106,18 @@ class IiIdentifyScreen extends Component {
     const options = { api_token: apiToken };
     return await inatjs.users
       .me(options)
-      .then((r) => {
+      .then(r => {
         this.setState({ user: r.results[0] });
         return r;
       })
       // TODO: UI response
-      .catch((e) => {
+      .catch(e => {
         console.log('Error in fetching current user', e);
         console.log(e.response);
         // Show alert for failure of getting user object from iNat
         Alert.alert(
           'Sorry',
-          'Unfortunately, something went wrong. You can not proceed.',
+          'Unfortunately, something went wrong. You can not proceed.'
         );
       });
   };
@@ -122,25 +138,27 @@ class IiIdentifyScreen extends Component {
       reviewed: 'false',
       photos: 'true',
       order: sortOrder,
-      order_by: 'created_at',
+      order_by: 'created_at'
     };
 
     inatjs.observations
       .search(params)
-      .then((rsp) => {
-        const filteredResults = rsp.results.filter(d => !d.species_guess).filter(d => d.photos.length <= maxPhotos);
+      .then(rsp => {
+        const filteredResults = rsp.results
+          .filter(d => !d.species_guess)
+          .filter(d => d.photos.length <= maxPhotos);
         this.setState({
           observations: filteredResults,
           page: rsp.page,
-          cardIndex: 0,
+          cardIndex: 0
         });
       })
-      .catch((e) => {
+      .catch(e => {
         console.log('Error in fetching list of observations', e);
         console.log(e.response);
         Alert.alert(
           'Sorry',
-          'Unfortunately, something went wrong. You can not proceed.',
+          'Unfortunately, something went wrong. You can not proceed.'
         );
       });
   }
@@ -167,32 +185,70 @@ class IiIdentifyScreen extends Component {
     const identification = {
       identification: {
         observation_id: observation.id,
-        taxon_id: swipeOption.id,
-      },
+        taxon_id: swipeOption.id
+      }
     };
     const options = { api_token: apiToken };
     inatjs.identifications
       .create(identification, options)
-      .then((c) => {
+      .then(c => {
         console.log('identification', c);
         if (!swipeOption.subscribe) {
           inatjs.observations
             .subscribe(observation, options)
             .then(rsp => console.log('Unsubscriped to: ', rsp))
-            .catch((e) => {
+            .catch(e => {
               console.log('Error in unsubscribing to observation', e);
               console.log(e.response);
             });
         }
       })
-      .catch((e) => {
+      .catch(e => {
         console.log('Error in creating identification', e);
         console.log(e.response);
         Alert.alert(
           'Sorry',
-          'Unfortunately, something went wrong. Your identification was not processed.',
+          'Unfortunately, something went wrong. Your identification was not processed.'
         );
       });
+  }
+
+  showDialog = () => {
+    this.setState({ visible: true });
+  };
+
+  hideDialog = () => {
+    this.setState({ visible: false });
+  };
+
+  renderInfoModal() {
+    const { visible } = this.state;
+    const { swiper } = this.props;
+    const { swipeTop, swipeLeft, swipeRight } = swiper;
+    return (
+      <Portal>
+        <Dialog visible={visible} onDismiss={this.hideDialog}>
+          <Dialog.Title>Your current settings</Dialog.Title>
+          <Dialog.Content>
+            <List.Item
+              title={swipeTop.label}
+              left={() => <List.Icon icon="keyboard-arrow-up" />}
+            />
+            <List.Item
+              title={swipeLeft.label}
+              left={() => <List.Icon icon="keyboard-arrow-left" />}
+            />
+            <List.Item
+              title={swipeRight.label}
+              left={() => <List.Icon icon="keyboard-arrow-right" />}
+            />
+          </Dialog.Content>
+          <Dialog.Actions>
+            <Button onPress={this.hideDialog}>Thanks</Button>
+          </Dialog.Actions>
+        </Dialog>
+      </Portal>
+    );
   }
 
   render() {
@@ -213,6 +269,7 @@ class IiIdentifyScreen extends Component {
           onSwipedBottom={index => this.onSwipedBottom(index)}
           onSwipedAll={this.onSwipedAllCards}
         />
+        {this.renderInfoModal()}
       </ItScreenContainer>
     );
   }
