@@ -109,7 +109,7 @@ class IiIdentifyScreen extends Component {
   searchObservations() {
     const { user, page } = this.state;
     const { swiper } = this.props;
-    const { place, maxPhotos } = swiper;
+    const { place, maxPhotos, sortOrder } = swiper;
     const params = {
       iconic_taxa: 'unknown',
       quality_grade: 'needs_id',
@@ -121,6 +121,8 @@ class IiIdentifyScreen extends Component {
       viewer_id: user.id,
       reviewed: 'false',
       photos: 'true',
+      order: sortOrder,
+      order_by: 'created_at',
     };
 
     inatjs.observations
