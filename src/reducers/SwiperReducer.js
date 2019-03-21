@@ -10,6 +10,7 @@ import {
   SWIPER_TOP_SUBSCRIBED,
   SWIPER_TOP_UNSUBSCRIBED,
   SWIPER_PHOTOS_CHANGED,
+  SWIPER_SORT_CHANGED,
 } from '../actions/types';
 
 const INITIAL_STATE = {
@@ -34,6 +35,7 @@ const INITIAL_STATE = {
     subscribe: true,
   },
   maxPhotos: Infinity,
+  sortOrder: 'asc',
 };
 
 export default (state = INITIAL_STATE, action) => {
@@ -89,6 +91,11 @@ export default (state = INITIAL_STATE, action) => {
       return {
         ...state,
         maxPhotos: action.payload.value,
+      };
+    case SWIPER_SORT_CHANGED:
+      return {
+        ...state,
+        sortOrder: action.payload.value,
       };
     default:
       return state;

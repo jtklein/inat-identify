@@ -16,6 +16,7 @@ import {
   SWIPER_TOP_UNSUBSCRIBED,
   SWIPER_TOP_SUBSCRIBED,
   SWIPER_PHOTOS_CHANGED,
+  SWIPER_SORT_CHANGED,
 } from '../actions/types';
 
 const places = [
@@ -74,6 +75,17 @@ const photosOptions = [
   },
 ];
 
+const sortOptions = [
+  {
+    value: 'asc',
+    label: 'ascending',
+  },
+  {
+    value: 'desc',
+    label: 'descending',
+  },
+];
+
 class ItSettingsScreen extends Component {
   static navigationOptions = () => ({
     title: 'Swiper settings',
@@ -100,9 +112,10 @@ class ItSettingsScreen extends Component {
     const {
       changeSwipePlace,
       changeSwipePhotos,
+      changeSwipeSort,
       swiper,
     } = this.props;
-    const { place, maxPhotos } = swiper;
+    const { place, maxPhotos, sortOrder } = swiper;
     const { container } = styles;
     return (
       <View style={container}>
@@ -127,6 +140,18 @@ class ItSettingsScreen extends Component {
               key={p.label}
               title={p.label}
               onPress={() => changeSwipePhotos(p)}
+            />
+          ))}
+        </List.Accordion>
+        <List.Accordion
+          title={`sorted by creation date = ${sortOrder}`}
+          left={props => <List.Icon {...props} icon="sort" />}
+        >
+          {sortOptions.map(p => (
+            <List.Item
+              key={p.label}
+              title={p.label}
+              onPress={() => changeSwipeSort(p)}
             />
           ))}
         </List.Accordion>
@@ -302,6 +327,9 @@ const mapDispatchToProps = dispatch => ({
   },
   changeSwipePhotos: (payload) => {
     dispatch({ type: SWIPER_PHOTOS_CHANGED, payload });
+  },
+  changeSwipeSort: (payload) => {
+    dispatch({ type: SWIPER_SORT_CHANGED, payload });
   },
 });
 
