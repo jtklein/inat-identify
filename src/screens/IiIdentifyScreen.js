@@ -1,6 +1,11 @@
 import React, { Component } from 'react';
-import { Alert, View } from 'react-native';
-import { Button, List, Dialog, Portal } from 'react-native-paper';
+import { Alert } from 'react-native';
+import {
+  Button,
+  List,
+  Dialog,
+  Portal,
+} from 'react-native-paper';
 import { connect } from 'react-redux';
 import inatjs from 'inaturalistjs';
 
