@@ -9375,10 +9375,10 @@ react-navigation-drawer@1.3.0:
   dependencies:
     react-native-tab-view "^1.2.0"
 
-react-navigation-header-buttons@^2.1.2:
-  version "2.1.2"
-  resolved "https://registry.yarnpkg.com/react-navigation-header-buttons/-/react-navigation-header-buttons-2.1.2.tgz#1d8b3eb19aa0dd5367f0a39b7b3da5b334b92855"
-  integrity sha512-I2LyJnwQMlGZ6qYO3xWNt8hqS31RpJjas6PmISuP6xSUpuKcAUIrn4h2ouo3fivB+VfcpLwzuAZf/xSIIkeY2Q==
+react-navigation-header-buttons@^2.2.0:
+  version "2.2.0"
+  resolved "https://registry.yarnpkg.com/react-navigation-header-buttons/-/react-navigation-header-buttons-2.2.0.tgz#41e2c94051a33907b3a3c31172c832aa17d21afc"
+  integrity sha512-Dv1GBcs6gxBVm6rVR81EdHlBYCmbmOJKiE5OoRRLLwKzalAMDbv68zQv7+TkgpqBDHXfhUB++KMuM7/8nXfM8w==
   dependencies:
     react-native-platform-touchable "^1.1.1"
 
