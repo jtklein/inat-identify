@@ -263,10 +263,10 @@ class ItSettingsScreen extends Component {
     return (
       <ItScreenContainer>
         <View testID="settings_screen" style={{ flexDirection: 'row', justifyContent: 'space-evenly' }}>
-          <Button testID="filter_tab" icon="filter-list" mode={showFilter ? 'contained' : 'outlined'} onPress={() => this.onFilterPressed()}>
+          <Button testID="filter_tab" dark icon="filter-list" mode={showFilter ? 'contained' : 'outlined'} onPress={() => this.onFilterPressed()}>
             Filter
           </Button>
-          <Button testID="actions_tab" icon="open-with" mode={!showFilter ? 'contained' : 'outlined'} onPress={() => this.onActionsPressed()}>
+          <Button testID="actions_tab" dark icon="open-with" mode={!showFilter ? 'contained' : 'outlined'} onPress={() => this.onActionsPressed()}>
             Actions
           </Button>
         </View>
