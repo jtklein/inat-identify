@@ -1,10 +1,11 @@
 import React, { Component } from 'react';
-import { Alert } from 'react-native';
+import { StyleSheet, Alert } from 'react-native';
 import {
   Button,
   List,
   Dialog,
   Portal,
+  FAB,
 } from 'react-native-paper';
 import { connect } from 'react-redux';
 import inatjs from 'inaturalistjs';
