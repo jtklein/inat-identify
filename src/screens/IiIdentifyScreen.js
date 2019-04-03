@@ -227,6 +227,26 @@ class IiIdentifyScreen extends Component {
     this.setState({ visible: false });
   };
 
+  onFABPressed = () => {
+    const { observations, cardIndex, apiToken } = this.state;
+    const review = {
+      id: observations[cardIndex].id,  
+    };
+    const options = { api_token: apiToken };
+    inatjs.observations
+      .review(review, options)
+      .then(rsp => console.log('Reviewed: ', rsp))
+      .catch(e => {
+        console.log('Error in reviewing observation', e);
+        console.log(e.response);
+        Alert.alert(
+          'Sorry',
+          'Unfortunately, something went wrong. The observation was skipped but not marked as reviewed.'
+        );
+      });
+    this.swiper.swipeBottom();
+  }
+
   renderFAB() {
     const { fab } = styles;
     return (
@@ -235,6 +255,7 @@ class IiIdentifyScreen extends Component {
         label="+ review"
         icon="keyboard-arrow-down"
         color="#FFFFFF"
+        onPress={() => this.onFABPressed()}
       />
     );
   }
