@@ -265,6 +265,9 @@ class IiIdentifyScreen extends Component {
     return (
       <ItScreenContainer>
         <ItObservationSwiper
+          swiperRef={(swiperRef) => {
+            this.swiper = swiperRef;
+          }}
           observations={observations}
           cardIndex={cardIndex}
           swiper={swiper}
