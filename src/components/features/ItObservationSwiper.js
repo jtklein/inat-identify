@@ -35,7 +35,7 @@ class ItObservationSwiper extends Component {
         cards={observations}
         cardIndex={cardIndex}
         ref={(swiper) => {
-          this.swiper = swiper;
+          this.props.swiperRef(swiper);
         }}
         marginBottom={60}
         backgroundColor="#FFFFFF"

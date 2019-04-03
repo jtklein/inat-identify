@@ -1,10 +1,11 @@
 import React, { Component } from 'react';
-import { Alert } from 'react-native';
+import { StyleSheet, Alert } from 'react-native';
 import {
   Button,
   List,
   Dialog,
   Portal,
+  FAB,
 } from 'react-native-paper';
 import { connect } from 'react-redux';
 import inatjs from 'inaturalistjs';
@@ -226,6 +227,39 @@ class IiIdentifyScreen extends Component {
     this.setState({ visible: false });
   };
 
+  onFABPressed = () => {
+    const { observations, cardIndex, apiToken } = this.state;
+    const review = {
+      id: observations[cardIndex].id,  
+    };
+    const options = { api_token: apiToken };
+    inatjs.observations
+      .review(review, options)
+      .then(rsp => console.log('Reviewed: ', rsp))
+      .catch(e => {
+        console.log('Error in reviewing observation', e);
+        console.log(e.response);
+        Alert.alert(
+          'Sorry',
+          'Unfortunately, something went wrong. The observation was skipped but not marked as reviewed.'
+        );
+      });
+    this.swiper.swipeBottom();
+  }
+
+  renderFAB() {
+    const { fab } = styles;
+    return (
+      <FAB
+        style={fab}
+        label="+ review"
+        icon="keyboard-arrow-down"
+        color="#FFFFFF"
+        onPress={() => this.onFABPressed()}
+      />
+    );
+  }
+
   renderInfoModal() {
     const { visible } = this.state;
     const { swiper } = this.props;
@@ -265,6 +299,9 @@ class IiIdentifyScreen extends Component {
     return (
       <ItScreenContainer>
         <ItObservationSwiper
+          swiperRef={(swiperRef) => {
+            this.swiper = swiperRef;
+          }}
           observations={observations}
           cardIndex={cardIndex}
           swiper={swiper}
@@ -275,10 +312,20 @@ class IiIdentifyScreen extends Component {
           onSwipedAll={this.onSwipedAllCards}
         />
         {this.renderInfoModal()}
+        {this.renderFAB()}
       </ItScreenContainer>
     );
   }
 }
+
+const styles = StyleSheet.create({
+  fab: {
+    position: 'absolute',
+    margin: 16,
+    right: 0,
+    bottom: 0,
+  },
+});
 
 const mapStateToProps = state => ({
   swiper: state.swiper,
