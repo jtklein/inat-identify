@@ -226,6 +226,18 @@ class IiIdentifyScreen extends Component {
     this.setState({ visible: false });
   };
 
+  renderFAB() {
+    const { fab } = styles;
+    return (
+      <FAB
+        style={fab}
+        label="+ review"
+        icon="keyboard-arrow-down"
+        color="#FFFFFF"
+      />
+    );
+  }
+
   renderInfoModal() {
     const { visible } = this.state;
     const { swiper } = this.props;
@@ -278,10 +290,20 @@ class IiIdentifyScreen extends Component {
           onSwipedAll={this.onSwipedAllCards}
         />
         {this.renderInfoModal()}
+        {this.renderFAB()}
       </ItScreenContainer>
     );
   }
 }
+
+const styles = StyleSheet.create({
+  fab: {
+    position: 'absolute',
+    margin: 16,
+    right: 0,
+    bottom: 0,
+  },
+});
 
 const mapStateToProps = state => ({
   swiper: state.swiper,
