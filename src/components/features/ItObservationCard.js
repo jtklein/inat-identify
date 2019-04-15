@@ -1,13 +1,17 @@
 import React, { Component } from 'react';
 import { StyleSheet, View, Image, Text, TouchableWithoutFeedback } from 'react-native';
+import { Button, Dialog, Portal } from 'react-native-paper';
+
+import { ItMaterial } from '../common';
 
 class ItObservationCard extends Component {
   INITIAL_STATE = {
     currentIndex: 0,
     uri: this.props.observation.observation_photos[0].photo.url.replace(
       'square',
-      'large',
+      'large'
     ),
+    commentsVisible: false
   };
 
   constructor(props) {
@@ -24,9 +28,38 @@ class ItObservationCard extends Component {
     }
 
     // The Observation has only thumbnails of images
-    const uri = observation.observation_photos[newIndex].photo.url.replace('square', 'large');
+    const uri = observation.observation_photos[newIndex].photo.url.replace(
+      'square',
+      'large'
+    );
     console.log(uri);
     this.setState({ currentIndex: newIndex, uri });
+  }
+
+  showDialog = () => {
+    this.setState({ commentsVisible: true });
+  };
+
+  hideDialog = () => {
+    this.setState({ commentsVisible: false });
+  };
+
+  renderCommentsModal() {
+    const { commentsVisible } = this.state;
+    const { observation } = this.props;
+    return (
+      <Portal>
+        <Dialog visible={commentsVisible} onDismiss={this.hideDialog}>
+          <Dialog.Title>Comments</Dialog.Title>
+          <Dialog.Content>
+            {observation.comments.map((c) => <Text key={c.id}>{`@${c.user.login}: ${c.body}`}</Text>)}
+          </Dialog.Content>
+          <Dialog.Actions>
+            <Button onPress={this.hideDialog}>OK</Button>
+          </Dialog.Actions>
+        </Dialog>
+      </Portal>
+    );
   }
 
   render() {
@@ -41,15 +74,48 @@ class ItObservationCard extends Component {
       text,
     } = styles;
     return (
-      <TouchableWithoutFeedback style={containerStyle} onPress={() => this.onImagePressed()}>
+      <TouchableWithoutFeedback
+        style={containerStyle}
+        onPress={() => this.onImagePressed()}
+      >
         <View style={StyleSheet.absoluteFill}>
           <Image style={image} source={{ uri }} />
           <View style={overlay}>
             <View style={pager}>
-              {observation.observation_photos.length > 1 ? observation.observation_photos.map((p, index) => <View key={p.id} style={index === currentIndex ? pagerIndicator : [pagerIndicator, { backgroundColor: '#BBBBBB' }]} />) : null}
+              {observation.observation_photos.length > 1
+                ? observation.observation_photos.map((p, index) => (
+                  <View
+                    key={p.id}
+                    style={
+                      index === currentIndex
+                        ? pagerIndicator
+                        : [pagerIndicator, { backgroundColor: '#BBBBBB' }]
+                    }
+                  />
+                ))
+                : null}
             </View>
-            {observation.description ? <Text style={text}>{`Description: ${observation.description}`}</Text> : null}
-            {observation.identifications_count > 0 ? <Text style={text}>This observation already has some identifications</Text> : null}
+            {observation.description ? (
+              <Text style={text}>
+                {`Description: ${observation.description}`}
+              </Text>
+            ) : null}
+            {observation.identifications_count > 0 ? (
+              <Text style={text}>
+                This observation already has some identifications
+              </Text>
+            ) : null}
+            {observation.comments_count > 0 ? (
+              <View>
+                <ItMaterial
+                  name="comment"
+                  size={48}
+                  color="#FFFFFF"
+                  onPress={() => this.showDialog()}
+                />
+                {this.renderCommentsModal()}
+              </View>
+            ) : null}
           </View>
         </View>
       </TouchableWithoutFeedback>
