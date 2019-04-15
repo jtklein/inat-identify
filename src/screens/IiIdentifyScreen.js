@@ -255,14 +255,20 @@ class IiIdentifyScreen extends Component {
   }
 
   renderFAB() {
-    const { fab } = styles;
+    const { fabOpen } = this.state;
     return (
-      <FAB
-        style={fab}
-        label="+ review"
-        icon="keyboard-arrow-down"
+      <FAB.Group
         color="#FFFFFF"
-        onPress={() => this.onFABPressed()}
+        open={fabOpen}
+        icon={fabOpen ? 'close' : 'build'}
+        actions={[
+          {
+            icon: 'keyboard-arrow-down',
+            label: 'Skip and review',
+            onPress: () => this.skipAndReview(),
+          },
+        ]}
+        onStateChange={({ open }) => this.setState({ fabOpen: open })}
       />
     );
   }
@@ -324,15 +330,6 @@ class IiIdentifyScreen extends Component {
     );
   }
 }
-
-const styles = StyleSheet.create({
-  fab: {
-    position: 'absolute',
-    margin: 16,
-    right: 0,
-    bottom: 0,
-  },
-});
 
 const mapStateToProps = state => ({
   swiper: state.swiper,
