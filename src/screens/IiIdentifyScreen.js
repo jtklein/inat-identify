@@ -1,11 +1,13 @@
 import React, { Component } from 'react';
-import { StyleSheet, Alert } from 'react-native';
+import { View, Alert } from 'react-native';
 import {
   Button,
   List,
   Dialog,
   Portal,
   FAB,
+  Checkbox,
+  Text,
 } from 'react-native-paper';
 import { connect } from 'react-redux';
 import inatjs from 'inaturalistjs';
@@ -156,7 +158,7 @@ class IiIdentifyScreen extends Component {
 
     inatjs.observations
       .search(params)
-      .then(rsp => {
+      .then((rsp) => {
         const filteredResults = rsp.results
           .filter(d => !d.species_guess)
           .filter(d => d.photos.length <= maxPhotos);
@@ -164,6 +166,10 @@ class IiIdentifyScreen extends Component {
           observations: filteredResults,
           page: rsp.page,
           cardIndex: 0
+        }, () => {
+          if (filteredResults.length === 0) {
+            this.searchObservations();
+          }
         });
       })
       .catch(e => {
@@ -204,19 +210,19 @@ class IiIdentifyScreen extends Component {
     const options = { api_token: apiToken };
     inatjs.identifications
       .create(identification, options)
-      .then(c => {
+      .then((c) => {
         console.log('identification', c);
         if (!swipeOption.subscribe) {
           inatjs.observations
             .subscribe(observation, options)
             .then(rsp => console.log('Unsubscriped to: ', rsp))
-            .catch(e => {
+            .catch((e) => {
               console.log('Error in unsubscribing to observation', e);
               console.log(e.response);
             });
         }
       })
-      .catch(e => {
+      .catch((e) => {
         console.log('Error in creating identification', e);
         console.log(e.response);
         Alert.alert(
@@ -234,24 +240,62 @@ class IiIdentifyScreen extends Component {
     this.setState({ visible: false });
   };
 
-  onFABPressed = () => {
+  showCommentDialog = () => {
+    this.setState({ commentVisible: true });
+  };
+
+  hideCommentDialog = () => {
+    this.setState({ commentVisible: false });
+  };
+
+  skipAndReview = () => {
     const { observations, cardIndex, apiToken } = this.state;
-    const review = {
-      id: observations[cardIndex].id,  
-    };
     const options = { api_token: apiToken };
     inatjs.observations
-      .review(review, options)
+      .review(observations[cardIndex], options)
       .then(rsp => console.log('Reviewed: ', rsp))
-      .catch(e => {
+      .catch((e) => {
         console.log('Error in reviewing observation', e);
         console.log(e.response);
         Alert.alert(
           'Sorry',
-          'Unfortunately, something went wrong. The observation was skipped but not marked as reviewed.'
+          'Unfortunately, something went wrong. The observation was skipped but not marked as reviewed.',
         );
       });
     this.swiper.swipeBottom();
+  }
+
+  addComment = (commentText) => {
+    const { observations, cardIndex, apiToken } = this.state;
+    this.setState({ commentLoading: true });
+    const params = {
+      comment: {
+        body: commentText,
+        parent_type: 'Observation',
+        parent_id: observations[cardIndex].id,
+      },
+    };
+    const options = { api_token: apiToken };
+    inatjs.comments.create(params, options)
+      .then((c) => {
+        console.log('New comment', c);
+        Alert.alert(
+          'Success',
+          'The comment was added. However, it will not show here only in the website.',
+        );
+        this.setState({ commentLoading: false });
+        this.hideCommentDialog();
+      })
+      .catch((e) => {
+        console.log('Error in adding comment', e);
+        console.log(e.response);
+        Alert.alert(
+          'Sorry',
+          'Unfortunately, something went wrong. The comment could not be added.',
+        );
+        this.setState({ commentLoading: false });
+        this.hideCommentDialog();
+      });
   }
 
   renderFAB() {
@@ -262,6 +306,11 @@ class IiIdentifyScreen extends Component {
         open={fabOpen}
         icon={fabOpen ? 'close' : 'build'}
         actions={[
+          {
+            icon: 'comment',
+            label: 'Add comment',
+            onPress: () => this.showCommentDialog(),
+          },
           {
             icon: 'keyboard-arrow-down',
             label: 'Skip and review',
@@ -303,6 +352,62 @@ class IiIdentifyScreen extends Component {
     );
   }
 
+  renderCommentDialog() {
+    const { commentVisible, checkedIndex, commentLoading } = this.state;
+    const { predefinedComments } = this.props;
+    return (
+      <Portal>
+        <Dialog visible={commentVisible} onDismiss={this.hideCommentDialog}>
+          <Dialog.Title>Predefined comments</Dialog.Title>
+          <Dialog.Content>
+            {
+              predefinedComments.map((predefinedComment, commentIndex) => {
+                if (!predefinedComment) {
+                  return null;
+                }
+                return (
+                  <View
+                    key={commentIndex}
+                    style={{ flexDirection: 'row', padding: 4 }}
+                  >
+                    <Checkbox
+                      uncheckedColor="#888888"
+                      status={checkedIndex === commentIndex ? 'checked' : 'unchecked'}
+                      onPress={() => {
+                        this.setState({
+                          checkedIndex: commentIndex,
+                        });
+                      }}
+                    />
+                    <Text
+                      onPress={() => {
+                        this.setState({
+                          checkedIndex: commentIndex,
+                        });
+                      }}
+                    >
+                      {predefinedComment}
+                    </Text>
+                  </View>
+                );
+              })
+            }
+          </Dialog.Content>
+          <Dialog.Actions>
+            <Button onPress={this.hideCommentDialog}>Cancel</Button>
+            <Button
+              onPress={() => this.addComment(predefinedComments[checkedIndex])}
+              disabled={!checkedIndex || commentLoading}
+              loading={commentLoading}
+            >
+              Add Comment
+            </Button>
+          </Dialog.Actions>
+        </Dialog>
+      </Portal>
+    );
+  }
+
   render() {
     const { observations, cardIndex } = this.state;
     const { swiper } = this.props;
@@ -325,6 +430,7 @@ class IiIdentifyScreen extends Component {
           onSwipedAll={this.onSwipedAllCards}
         />
         {this.renderInfoModal()}
+        {this.renderCommentDialog()}
         {this.renderFAB()}
       </ItScreenContainer>
     );
