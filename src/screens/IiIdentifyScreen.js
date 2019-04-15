@@ -18,6 +18,10 @@ import {
   HeaderItem,
 } from '../components/common';
 
+import {
+  OBSERVATION_SKIPPED,
+} from '../actions/types';
+
 class IiIdentifyScreen extends Component {
   static navigationOptions = ({ navigation }) => ({
     title: navigation.getParam('title'),
@@ -97,8 +101,11 @@ class IiIdentifyScreen extends Component {
   }
 
   onSwipedBottom(index) {
+    const { observations } = this.state;
+    const { observationSkipped } = this.props;
     this.setState({ cardIndex: index + 1 });
-    // Nothing to do here, as this is the skip option
+    // Add the skipped observation's id to the observation reducer
+    observationSkipped(observations[index].id);
   }
 
   onSwipedAllCards = () => {
@@ -329,6 +336,13 @@ const styles = StyleSheet.create({
 
 const mapStateToProps = state => ({
   swiper: state.swiper,
+  predefinedComments: state.comment.predefinedComments,
 });
 
-export default connect(mapStateToProps, undefined)(IiIdentifyScreen);
+const mapDispatchToProps = dispatch => ({
+  observationSkipped: (payload) => {
+    dispatch({ type: OBSERVATION_SKIPPED, payload });
+  },
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(IiIdentifyScreen);
