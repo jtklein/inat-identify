@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
-import { StyleSheet, View, Share, Linking } from 'react-native';
+import {
+  StyleSheet, View, Share, Linking,
+} from 'react-native';
 import { Button, Paragraph } from 'react-native-paper';
 import { connect } from 'react-redux';
 
@@ -29,8 +31,7 @@ class ItEntryScreen extends Component {
   }
 
   shareLink = (ids) => {
-    const baseURL =
-      'https://www.inaturalist.org/observations/identify?reviewed=any&quality_grade=needs_id%2Cresearch%2Ccasual&id=';
+    const baseURL = 'https://www.inaturalist.org/observations/identify?reviewed=any&quality_grade=needs_id%2Cresearch%2Ccasual&id=';
     const url = `${baseURL}${ids}`;
     Share.share({ url })
       .then((result) => {
@@ -48,8 +49,7 @@ class ItEntryScreen extends Component {
   }
 
   openLink = (ids) => {
-    const baseURL =
-      'https://www.inaturalist.org/observations/identify?reviewed=any&quality_grade=needs_id%2Cresearch%2Ccasual&id=';
+    const baseURL = 'https://www.inaturalist.org/observations/identify?reviewed=any&quality_grade=needs_id%2Cresearch%2Ccasual&id=';
     const url = `${baseURL}${ids}`;
     Linking.canOpenURL(url).then((supported) => {
       if (supported) {
@@ -97,7 +97,8 @@ class ItEntryScreen extends Component {
           </View>
           <Button
             testID="start_swiper"
-            onPress={() => navigation.navigate('Identify', { apiToken })}>
+            onPress={() => navigation.navigate('Identify', { apiToken })}
+          >
             OK, got it
           </Button>
           <View style={paragraph}>

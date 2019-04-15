@@ -121,18 +121,18 @@ class IiIdentifyScreen extends Component {
     const options = { api_token: apiToken };
     return await inatjs.users
       .me(options)
-      .then(r => {
+      .then((r) => {
         this.setState({ user: r.results[0] });
         return r;
       })
       // TODO: UI response
-      .catch(e => {
+      .catch((e) => {
         console.log('Error in fetching current user', e);
         console.log(e.response);
         // Show alert for failure of getting user object from iNat
         Alert.alert(
           'Sorry',
-          'Unfortunately, something went wrong. You can not proceed.'
+          'Unfortunately, something went wrong. You can not proceed.',
         );
       });
   };
@@ -153,7 +153,7 @@ class IiIdentifyScreen extends Component {
       reviewed: 'false',
       photos: 'true',
       order: sortOrder,
-      order_by: 'created_at'
+      order_by: 'created_at',
     };
 
     inatjs.observations
@@ -165,19 +165,19 @@ class IiIdentifyScreen extends Component {
         this.setState({
           observations: filteredResults,
           page: rsp.page,
-          cardIndex: 0
+          cardIndex: 0,
         }, () => {
           if (filteredResults.length === 0) {
             this.searchObservations();
           }
         });
       })
-      .catch(e => {
+      .catch((e) => {
         console.log('Error in fetching list of observations', e);
         console.log(e.response);
         Alert.alert(
           'Sorry',
-          'Unfortunately, something went wrong. You can not proceed.'
+          'Unfortunately, something went wrong. You can not proceed.',
         );
       });
   }
@@ -204,8 +204,8 @@ class IiIdentifyScreen extends Component {
     const identification = {
       identification: {
         observation_id: observation.id,
-        taxon_id: swipeOption.id
-      }
+        taxon_id: swipeOption.id,
+      },
     };
     const options = { api_token: apiToken };
     inatjs.identifications
@@ -227,7 +227,7 @@ class IiIdentifyScreen extends Component {
         console.log(e.response);
         Alert.alert(
           'Sorry',
-          'Unfortunately, something went wrong. Your identification was not processed.'
+          'Unfortunately, something went wrong. Your identification was not processed.',
         );
       });
   }

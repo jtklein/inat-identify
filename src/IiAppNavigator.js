@@ -20,31 +20,31 @@ const headerTitleStyle = {
 
 const AuthStack = createStackNavigator(
   {
-    Auth: IiAuthScreen
+    Auth: IiAuthScreen,
   },
   {
     initialRouteName: 'Auth',
     defaultNavigationOptions: {
       header: null,
-      gesturesEnabled: false
-    }
-  }
+      gesturesEnabled: false,
+    },
+  },
 );
 
 const AppStack = createStackNavigator(
   {
     Entry: ItEntryScreen,
     Settings: ItSettingsScreen,
-    Identify: IiIdentifyScreen
+    Identify: IiIdentifyScreen,
   },
   {
     initialRouteName: 'Entry',
     defaultNavigationOptions: {
       headerStyle,
       headerTintColor,
-      headerTitleStyle
-    }
-  }
+      headerTitleStyle,
+    },
+  },
 );
 
 /**
@@ -56,7 +56,7 @@ const RootNavigator = createSwitchNavigator(
   // RouteConfigs
   {
     Auth: AuthStack,
-    App: AppStack
+    App: AppStack,
   },
   // createSwitchNavigatorConfig
   {
@@ -65,9 +65,9 @@ const RootNavigator = createSwitchNavigator(
     backBehavior: 'none',
     defaultNavigationOptions: {
       header: null,
-      gesturesEnabled: false
-    }
-  }
+      gesturesEnabled: false,
+    },
+  },
 );
 
 export default IiAppNavigator = createAppContainer(RootNavigator);

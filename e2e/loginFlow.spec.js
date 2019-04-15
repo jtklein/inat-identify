@@ -78,4 +78,4 @@ describe('Login flow', () => {
     await expect(element(by.id('start_swiper'))).toBeVisible();
     await element(by.id('start_swiper')).tap();
   });
-})
+});

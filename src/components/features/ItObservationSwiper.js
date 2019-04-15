@@ -26,7 +26,7 @@ class ItObservationSwiper extends Component {
       onSwipedRight,
       onSwipedTop,
       onSwipedBottom,
-      onSwipedAll
+      onSwipedAll,
     } = this.props;
     const { swipeLeft, swipeRight, swipeTop } = this.props.swiper;
     const { label } = styles;
@@ -113,13 +113,13 @@ const styles = StyleSheet.create({
     borderWidth: 2,
     borderColor: '#E8E8E8',
     justifyContent: 'center',
-    backgroundColor: 'white'
+    backgroundColor: 'white',
   },
   label: {
     backgroundColor: 'black',
     borderColor: 'black',
     color: 'white',
-    borderWidth: 1
+    borderWidth: 1,
   },
 });
 

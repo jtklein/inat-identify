@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
-import { StyleSheet, View, Image, Text, TouchableWithoutFeedback } from 'react-native';
+import {
+  StyleSheet, View, Image, Text, TouchableWithoutFeedback,
+} from 'react-native';
 import { Button, Dialog, Portal } from 'react-native-paper';
 
 import { ItMaterial } from '../common';
@@ -9,9 +11,9 @@ class ItObservationCard extends Component {
     currentIndex: 0,
     uri: this.props.observation.observation_photos[0].photo.url.replace(
       'square',
-      'large'
+      'large',
     ),
-    commentsVisible: false
+    commentsVisible: false,
   };
 
   constructor(props) {
@@ -30,7 +32,7 @@ class ItObservationCard extends Component {
     // The Observation has only thumbnails of images
     const uri = observation.observation_photos[newIndex].photo.url.replace(
       'square',
-      'large'
+      'large',
     );
     console.log(uri);
     this.setState({ currentIndex: newIndex, uri });
@@ -52,7 +54,7 @@ class ItObservationCard extends Component {
         <Dialog visible={commentsVisible} onDismiss={this.hideDialog}>
           <Dialog.Title>Comments</Dialog.Title>
           <Dialog.Content>
-            {observation.comments.map((c) => <Text key={c.id}>{`@${c.user.login}: ${c.body}`}</Text>)}
+            {observation.comments.map(c => <Text key={c.id}>{`@${c.user.login}: ${c.body}`}</Text>)}
           </Dialog.Content>
           <Dialog.Actions>
             <Button onPress={this.hideDialog}>OK</Button>
@@ -127,34 +129,34 @@ const styles = StyleSheet.create({
   containerStyle: {
     flex: 1,
     paddingLeft: 1,
-    paddingRight: 1
+    paddingRight: 1,
   },
   image: {
     ...StyleSheet.absoluteFillObject,
     borderRadius: 8,
     width: null,
-    height: null
+    height: null,
   },
   overlay: {
     flex: 1,
     justifyContent: 'space-between',
-    padding: 16
+    padding: 16,
   },
   pager: {
     flexDirection: 'row',
-    justifyContent: 'space-around'
+    justifyContent: 'space-around',
   },
   pagerIndicator: {
     flex: 1,
     height: 8,
     backgroundColor: '#FFFFFF',
     marginHorizontal: 2,
-    borderRadius: 8
+    borderRadius: 8,
   },
   text: {
     color: 'white',
-    fontSize: 32
-  }
+    fontSize: 32,
+  },
 });
 
 export default ItObservationCard;
