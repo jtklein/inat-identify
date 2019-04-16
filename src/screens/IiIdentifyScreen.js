@@ -47,6 +47,7 @@ class IiIdentifyScreen extends Component {
     observations: [],
     page: 0,
     visible: false,
+    currentObservationCaptive: false,
   };
 
   constructor(props) {
@@ -75,6 +76,10 @@ class IiIdentifyScreen extends Component {
     return true;
   }
 
+  onAnySwiped = () => {
+    this.setState({ currentObservationCaptive: false });
+  }
+
   onSwipedLeft(index) {
     const { observations } = this.state;
     const { swiper } = this.props;
@@ -82,6 +87,7 @@ class IiIdentifyScreen extends Component {
     this.setState({ cardIndex: index + 1 });
     // Use set id for this identification
     this.identifyInAnimationFrame(observations[index], swipeLeft);
+    this.onAnySwiped();
   }
 
   onSwipedRight(index) {
@@ -91,6 +97,7 @@ class IiIdentifyScreen extends Component {
     this.setState({ cardIndex: index + 1 });
     // Use set id for this identification
     this.identifyInAnimationFrame(observations[index], swipeRight);
+    this.onAnySwiped();
   }
 
   onSwipedTop(index) {
@@ -100,6 +107,7 @@ class IiIdentifyScreen extends Component {
     this.setState({ cardIndex: index + 1 });
     // Use set id for this identification
     this.identifyInAnimationFrame(observations[index], swipeTop);
+    this.onAnySwiped();
   }
 
   onSwipedBottom(index) {
@@ -108,6 +116,7 @@ class IiIdentifyScreen extends Component {
     this.setState({ cardIndex: index + 1 });
     // Add the skipped observation's id to the observation reducer
     observationSkipped(observations[index].id);
+    this.onAnySwiped();
   }
 
   onSwipedAllCards = () => {
@@ -126,7 +135,7 @@ class IiIdentifyScreen extends Component {
         return r;
       })
       // TODO: UI response
-      .catch((e) => {
+      .catch(e => {
         console.log('Error in fetching current user', e);
         console.log(e.response);
         // Show alert for failure of getting user object from iNat
@@ -158,21 +167,24 @@ class IiIdentifyScreen extends Component {
 
     inatjs.observations
       .search(params)
-      .then((rsp) => {
+      .then(rsp => {
         const filteredResults = rsp.results
           .filter(d => !d.species_guess)
           .filter(d => d.photos.length <= maxPhotos);
-        this.setState({
-          observations: filteredResults,
-          page: rsp.page,
-          cardIndex: 0,
-        }, () => {
-          if (filteredResults.length === 0) {
-            this.searchObservations();
-          }
-        });
+        this.setState(
+          {
+            observations: filteredResults,
+            page: rsp.page,
+            cardIndex: 0,
+          },
+          () => {
+            if (filteredResults.length === 0) {
+              this.searchObservations();
+            }
+          },
+        );
       })
-      .catch((e) => {
+      .catch(e => {
         console.log('Error in fetching list of observations', e);
         console.log(e.response);
         Alert.alert(
@@ -263,7 +275,38 @@ class IiIdentifyScreen extends Component {
         );
       });
     this.swiper.swipeBottom();
-  }
+  };
+
+  cultivate = () => {
+    const {
+      observations,
+      cardIndex,
+      apiToken,
+      currentObservationCaptive,
+    } = this.state;
+    const options = { api_token: apiToken };
+    inatjs.observations
+      .setQualityMetric(
+        {
+          ...observations[cardIndex],
+          metric: 'wild',
+          agree: currentObservationCaptive.toString(),
+        },
+        options,
+      )
+      .then((rsp) => {
+        this.setState({ currentObservationCaptive: !currentObservationCaptive });
+        console.log('Marked as captive: ', rsp);
+      })
+      .catch((e) => {
+        console.log('Error in marked as captive', e);
+        console.log(e.response);
+        Alert.alert(
+          'Sorry',
+          'Unfortunately, something went wrong. The observation was not marked as captive.',
+        );
+      });
+  };
 
   addComment = (commentText) => {
     const { observations, cardIndex, apiToken } = this.state;
@@ -276,7 +319,8 @@ class IiIdentifyScreen extends Component {
       },
     };
     const options = { api_token: apiToken };
-    inatjs.comments.create(params, options)
+    inatjs.comments
+      .create(params, options)
       .then((c) => {
         console.log('New comment', c);
         Alert.alert(
@@ -296,10 +340,10 @@ class IiIdentifyScreen extends Component {
         this.setState({ commentLoading: false });
         this.hideCommentDialog();
       });
-  }
+  };
 
   renderFAB() {
-    const { fabOpen } = this.state;
+    const { fabOpen, currentObservationCaptive } = this.state;
     return (
       <FAB.Group
         color="#FFFFFF"
@@ -310,6 +354,13 @@ class IiIdentifyScreen extends Component {
             icon: 'comment',
             label: 'Add comment',
             onPress: () => this.showCommentDialog(),
+          },
+          {
+            icon: currentObservationCaptive
+              ? 'check-box'
+              : 'check-box-outline-blank',
+            label: 'Mark as captive/cultivated',
+            onPress: () => this.cultivate(),
           },
           {
             icon: 'keyboard-arrow-down',
@@ -360,46 +411,43 @@ class IiIdentifyScreen extends Component {
         <Dialog visible={commentVisible} onDismiss={this.hideCommentDialog}>
           <Dialog.Title>Predefined comments</Dialog.Title>
           <Dialog.Content>
-            {
-              predefinedComments.map((predefinedComment, commentIndex) => {
-                if (!predefinedComment) {
-                  return null;
-                }
-                return (
-                  <View
-                    key={commentIndex}
-                    style={{ flexDirection: 'row', padding: 4 }}
-                  >
-                    <Checkbox
-                      uncheckedColor="#888888"
-                      status={checkedIndex === commentIndex ? 'checked' : 'unchecked'}
-                      onPress={() => {
-                        this.setState({
-                          checkedIndex: commentIndex,
-                        });
-                      }}
-                    />
-                    <Text
-                      onPress={() => {
-                        this.setState({
-                          checkedIndex: commentIndex,
-                        });
-                      }}
-                    >
-                      {predefinedComment}
-                    </Text>
-                  </View>
-                );
-              })
-            }
+            {predefinedComments.map((predefinedComment, commentIndex) => {
+              if (!predefinedComment) {
+                return null;
+              }
+              return (
+                <View
+                  key={commentIndex}
+                  style={{ flexDirection: 'row', padding: 4 }}>
+                  <Checkbox
+                    uncheckedColor="#888888"
+                    status={
+                      checkedIndex === commentIndex ? 'checked' : 'unchecked'
+                    }
+                    onPress={() => {
+                      this.setState({
+                        checkedIndex: commentIndex,
+                      });
+                    }}
+                  />
+                  <Text
+                    onPress={() => {
+                      this.setState({
+                        checkedIndex: commentIndex,
+                      });
+                    }}>
+                    {predefinedComment}
+                  </Text>
+                </View>
+              );
+            })}
           </Dialog.Content>
           <Dialog.Actions>
             <Button onPress={this.hideCommentDialog}>Cancel</Button>
             <Button
               onPress={() => this.addComment(predefinedComments[checkedIndex])}
               disabled={!checkedIndex || commentLoading}
-              loading={commentLoading}
-            >
+              loading={commentLoading}>
               Add Comment
             </Button>
           </Dialog.Actions>
@@ -417,7 +465,7 @@ class IiIdentifyScreen extends Component {
     return (
       <ItScreenContainer>
         <ItObservationSwiper
-          swiperRef={(swiperRef) => {
+          swiperRef={swiperRef => {
             this.swiper = swiperRef;
           }}
           observations={observations}
