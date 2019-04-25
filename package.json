@@ -33,7 +33,7 @@
     "eslint-plugin-import": "^2.17.2",
     "eslint-plugin-jsx-a11y": "^6.2.1",
     "eslint-plugin-react": "^7.12.4",
-    "eslint-plugin-react-native": "^3.6.0",
+    "eslint-plugin-react-native": "^3.7.0",
     "expo-detox-hook": "^1.0.10",
     "flow-bin": "^0.97.0",
     "flow-result-checker": "^1.1.0",
