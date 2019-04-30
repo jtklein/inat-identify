@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { StyleSheet, Text, View } from 'react-native';
+import { WebBrowser } from 'expo';
 import { connect } from 'react-redux';
 import { Switch, List, Button } from 'react-native-paper';
 
@@ -262,6 +263,10 @@ class ItSettingsScreen extends Component {
     const { container } = styles;
     return (
       <ItScreenContainer>
+        <List.Item
+          title="Privacy policy"
+          onPress={() => WebBrowser.openBrowserAsync('https://www.inaturalist.org/journal/jtklein/24285-privacy-policy-for-inat-toolcat')}
+        />
         <View testID="settings_screen" style={{ flexDirection: 'row', justifyContent: 'space-evenly' }}>
           <Button testID="filter_tab" dark icon="filter-list" mode={showFilter ? 'contained' : 'outlined'} onPress={() => this.onFilterPressed()}>
             Filter
