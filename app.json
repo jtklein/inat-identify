@@ -35,7 +35,7 @@
       "isTabletOnly": false
     },
     "android": {
-      "versionCode": 6,
+      "versionCode": 7,
       "icon": "./assets/icons/android_1024.png",
       "permissions": []
     }
