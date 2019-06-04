@@ -5710,8 +5710,9 @@ imurmurhash@^0.1.4:
   integrity sha1-khi5srkoojixPcT7a21XbyMUU+o=
 
 "inaturalistjs@github:inaturalist/inaturalistjs":
-  version "1.5.0"
-  resolved "https://codeload.github.com/inaturalist/inaturalistjs/tar.gz/477ad39768540f9467c873ce87964b0aa315ce9a"
+  version "1.6.0"
+  uid cd34a63ebf619e22fedd69df4be5d39f28305a64
+  resolved "https://codeload.github.com/inaturalist/inaturalistjs/tar.gz/cd34a63ebf619e22fedd69df4be5d39f28305a64"
   dependencies:
     cross-fetch "^2.2.3"
 
