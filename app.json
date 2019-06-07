@@ -10,7 +10,7 @@
       "ios",
       "android"
     ],
-    "version": "0.0.3",
+    "version": "0.0.4",
     "orientation": "portrait",
     "primaryColor": "#85A833",
     "icon": "./assets/icons/ios.png",
@@ -29,13 +29,16 @@
       "fallbackToCacheTimeout": 30000
     },
     "ios": {
-      "buildNumber": "0.0.2",
+      "buildNumber": "0.0.1",
       "icon": "./assets/icons/ios.png",
       "supportsTablet": true,
-      "isTabletOnly": false
+      "isTabletOnly": false,
+      "infoPlist": {
+        "ITSAppUsesNonExemptEncryption": false
+      }
     },
     "android": {
-      "versionCode": 7,
+      "versionCode": 8,
       "icon": "./assets/icons/android_1024.png",
       "permissions": []
     }
