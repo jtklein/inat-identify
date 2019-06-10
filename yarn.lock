@@ -992,19 +992,12 @@
     pirates "^4.0.0"
     source-map-support "^0.5.9"
 
-"@babel/runtime@^7.0.0":
+"@babel/runtime@^7.0.0", "@babel/runtime@^7.1.2", "@babel/runtime@^7.3.1":
   version "7.4.5"
   resolved "https://registry.yarnpkg.com/@babel/runtime/-/runtime-7.4.5.tgz#582bb531f5f9dc67d2fcb682979894f75e253f12"
   integrity sha512-TuI4qpWZP6lGOGIuGWtp9sPluqYICmbk8T/1vpSysqJxRPkudh/ofFWyqdcMsDf2s7KvDL4/YHgKyvcS3g9CJQ==
   dependencies:
     regenerator-runtime "^0.13.2"
-
-"@babel/runtime@^7.1.2", "@babel/runtime@^7.3.1":
-  version "7.3.1"
-  resolved "https://registry.yarnpkg.com/@babel/runtime/-/runtime-7.3.1.tgz#574b03e8e8a9898eaf4a872a92ea20b7846f6f2a"
-  integrity sha512-7jGW8ppV0ant637pIqAcFfQDDH1orEPGJb8aXfUozuCU3QqX7rX4DA8iwrbPrR1hcH0FTTHz47yQnk+bl5xHQA==
-  dependencies:
-    regenerator-runtime "^0.12.0"
 
 "@babel/template@^7.0.0", "@babel/template@^7.1.0":
   version "7.1.2"
@@ -4424,15 +4417,15 @@ expo-task-manager@~5.0.1:
   resolved "https://registry.yarnpkg.com/expo-task-manager/-/expo-task-manager-5.0.1.tgz#18e0a2a7539617d7731c3e4e9bedcf0a3574577b"
   integrity sha512-ManMdoYH++K2ZaRCYc2hfi1N33XTzjn1o1O8Qkj8JH49VssOzW9TF1URw2j+qRt3iN5Iba4+ECONoi++GoCiqw==
 
-expo-web-browser@~5.0.2:
-  version "5.0.2"
-  resolved "https://registry.yarnpkg.com/expo-web-browser/-/expo-web-browser-5.0.2.tgz#79d0dc3d0b12f917d69267e6e9d85f2d38e77e1b"
-  integrity sha512-yz8U3Qo4LPvFZYwl2E0t18JAsctwEkY5KuT/1UNH+lAy6krtXF2vmOtZ2xIMIiqiZkZLTr75zlA+iJAlmn0eOw==
+expo-web-browser@~5.0.3:
+  version "5.0.3"
+  resolved "https://registry.yarnpkg.com/expo-web-browser/-/expo-web-browser-5.0.3.tgz#c382358ece64a4fad5a5996795faea3446072298"
+  integrity sha512-Etue3QfBki4shFChsVd3Of3xvY7KsXoNINKvckiRCmcCjOC5bGiZ+Grhf70YEHVUB2bEcAUeZhC9Tg0Ip2tdEQ==
 
-expo@^33.0.3:
-  version "33.0.3"
-  resolved "https://registry.yarnpkg.com/expo/-/expo-33.0.3.tgz#49ed7ebac0479aaafa0421562fe0460b523f489c"
-  integrity sha512-0ejoSDZ6PYCQ6il5BNRWp7X62oTDvwhaM0+wYCik9lqzsKcJ+BjlIAPZTXQVB0a8ti9dQnFQoZ4ZBfyzkzUuvg==
+expo@^33.0.4:
+  version "33.0.4"
+  resolved "https://registry.yarnpkg.com/expo/-/expo-33.0.4.tgz#cb0ce00bf9d904a87fc319178b9099449a0b400c"
+  integrity sha512-8bp7ig7qR0mhkOP9iVTA+8G36YMyjcBqrQG1/TMheOqdgFGS2suQ1zcIruhtIx2rlZQNFAtjPVP1EWet8whiXw==
   dependencies:
     "@babel/runtime" "^7.1.2"
     "@expo/vector-icons" "^10.0.1"
@@ -4493,7 +4486,7 @@ expo@^33.0.3:
     expo-speech "~5.0.2"
     expo-sqlite "~5.0.1"
     expo-task-manager "~5.0.1"
-    expo-web-browser "~5.0.2"
+    expo-web-browser "~5.0.3"
     fbemitter "^2.1.1"
     invariant "^2.2.2"
     lodash "^4.6.0"
@@ -8653,15 +8646,7 @@ pretty-format@^23.6.0:
     ansi-regex "^3.0.0"
     ansi-styles "^3.2.0"
 
-pretty-format@^24.0.0:
-  version "24.0.0"
-  resolved "https://registry.yarnpkg.com/pretty-format/-/pretty-format-24.0.0.tgz#cb6599fd73ac088e37ed682f61291e4678f48591"
-  integrity sha512-LszZaKG665djUcqg5ZQq+XzezHLKrxsA86ZABTozp+oNhkdqa+tG2dX4qa6ERl5c/sRDrAa3lHmwnvKoP+OG/g==
-  dependencies:
-    ansi-regex "^4.0.0"
-    ansi-styles "^3.2.0"
-
-pretty-format@^24.8.0:
+pretty-format@^24.0.0, pretty-format@^24.8.0:
   version "24.8.0"
   resolved "https://registry.yarnpkg.com/pretty-format/-/pretty-format-24.8.0.tgz#8dae7044f58db7cb8be245383b565a963e3c27f2"
   integrity sha512-P952T7dkrDEplsR+TuY7q3VXDae5Sr7zmQb12JU/NDQa/3CH7/QW0yvqLcGN6jL+zQFKaoJcPc+yJxMTGmosqw==
@@ -9730,11 +9715,6 @@ regenerator-runtime@^0.11.0:
   version "0.11.1"
   resolved "https://registry.yarnpkg.com/regenerator-runtime/-/regenerator-runtime-0.11.1.tgz#be05ad7f9bf7d22e056f9726cee5017fbf19e2e9"
   integrity sha512-MguG95oij0fC3QV3URf4V2SDYGJhJnJGqvIIgdECeODCT98wSWDAJ94SSuVpYQUoTcGUIL6L4yNB7j1DFFHSBg==
-
-regenerator-runtime@^0.12.0:
-  version "0.12.1"
-  resolved "https://registry.yarnpkg.com/regenerator-runtime/-/regenerator-runtime-0.12.1.tgz#fa1a71544764c036f8c49b13a08b2594c9f8a0de"
-  integrity sha512-odxIc1/vDlo4iZcfXqRYFj0vpXFNoGdKMAUieAlFYO6m/nl5e9KR/beGf41z4a1FI+aQgtjhuaSlDxQ0hmkrHg==
 
 regenerator-runtime@^0.13.2:
   version "0.13.2"
