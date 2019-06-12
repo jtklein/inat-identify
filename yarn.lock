@@ -8609,15 +8609,7 @@ pretty-format@^23.6.0:
     ansi-regex "^3.0.0"
     ansi-styles "^3.2.0"
 
-pretty-format@^24.0.0:
-  version "24.0.0"
-  resolved "https://registry.yarnpkg.com/pretty-format/-/pretty-format-24.0.0.tgz#cb6599fd73ac088e37ed682f61291e4678f48591"
-  integrity sha512-LszZaKG665djUcqg5ZQq+XzezHLKrxsA86ZABTozp+oNhkdqa+tG2dX4qa6ERl5c/sRDrAa3lHmwnvKoP+OG/g==
-  dependencies:
-    ansi-regex "^4.0.0"
-    ansi-styles "^3.2.0"
-
-pretty-format@^24.8.0:
+pretty-format@^24.0.0, pretty-format@^24.8.0:
   version "24.8.0"
   resolved "https://registry.yarnpkg.com/pretty-format/-/pretty-format-24.8.0.tgz#8dae7044f58db7cb8be245383b565a963e3c27f2"
   integrity sha512-P952T7dkrDEplsR+TuY7q3VXDae5Sr7zmQb12JU/NDQa/3CH7/QW0yvqLcGN6jL+zQFKaoJcPc+yJxMTGmosqw==
@@ -9275,10 +9267,10 @@ react-native-tab-view@^1.4.1:
   dependencies:
     prop-types "^15.6.1"
 
-react-native-testing-library@^1.8.0:
-  version "1.8.0"
-  resolved "https://registry.yarnpkg.com/react-native-testing-library/-/react-native-testing-library-1.8.0.tgz#2c79ff20551be11b4e645745397cdaceff6d2e69"
-  integrity sha512-8N0gPJeeyGEZj4z8/feshUjC9rpTHUkwiTXSZJX3AXxs7cBybOZyxhloCvd+X3UrGd3LYEUWp/RxzlUonbBmWg==
+react-native-testing-library@^1.9.1:
+  version "1.9.1"
+  resolved "https://registry.yarnpkg.com/react-native-testing-library/-/react-native-testing-library-1.9.1.tgz#458f32ffa86b4f767f05d90475edd04c119f4595"
+  integrity sha512-8yOKu47096p/nl6riIXToidWzmvvoYxVFOG84vb7huT4/HBpfq8FqQJlg7Ck+7Uyq//xBK9c26uAKRsNgTQZWQ==
   dependencies:
     pretty-format "^24.0.0"
 
