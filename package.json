@@ -35,7 +35,7 @@
     "eslint-plugin-react": "^7.13.0",
     "eslint-plugin-react-native": "^3.7.0",
     "expo-detox-hook": "^1.0.10",
-    "flow-bin": "^0.101.0",
+    "flow-bin": "^0.101.1",
     "flow-result-checker": "^1.1.0",
     "jest-expo": "^33.0.0",
     "jest-junit-reporter": "^1.1.0",
