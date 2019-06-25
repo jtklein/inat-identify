@@ -11,6 +11,7 @@ import {
 } from 'react-native-paper';
 import { connect } from 'react-redux';
 import inatjs from 'inaturalistjs';
+import * as WebBrowser from 'expo-web-browser';
 
 import ItObservationSwiper from '../components/features/ItObservationSwiper';
 import {
@@ -260,6 +261,15 @@ class IiIdentifyScreen extends Component {
     this.setState({ commentVisible: false });
   };
 
+  showWeb = () => {
+    const { observations, cardIndex } = this.state;
+    const observation = observations[cardIndex];
+    const baseURL = 'https://www.inaturalist.org/observations/';
+    const url = `${baseURL}${observation.id}`;
+    WebBrowser.openBrowserAsync(url);
+    this.swiper.swipeBottom();
+  };
+
   skipAndReview = () => {
     const { observations, cardIndex, apiToken } = this.state;
     const options = { api_token: apiToken };
@@ -350,6 +360,11 @@ class IiIdentifyScreen extends Component {
         open={fabOpen}
         icon={fabOpen ? 'close' : 'build'}
         actions={[
+          {
+            icon: 'link',
+            label: 'Show on website',
+            onPress: () => this.showWeb(),
+          },
           {
             icon: 'comment',
             label: 'Add comment',
