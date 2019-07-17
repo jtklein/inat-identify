@@ -36,7 +36,7 @@
       {
         "rule": "cli",
         "binary": "expo",
-        "semver": "2.20.2"
+        "semver": "2.21.2"
       }
     ],
     "Package JSON": [
@@ -57,7 +57,7 @@
         "rule": "cli",
         "binary": "yarn",
         "version": "--version",
-        "semver": "1.16.0"
+        "semver": "1.17.3"
       }
     ],
     "Detox": [
