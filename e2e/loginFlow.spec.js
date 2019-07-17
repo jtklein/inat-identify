@@ -1,8 +1,6 @@
-const { reloadApp } = require('detox-expo-helpers');
-
 describe('Login flow', () => {
   beforeEach(async () => {
-    await reloadApp();
+    await device.reloadReactNative();
   });
 
   it('login to iNaturalist', async () => {
