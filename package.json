@@ -10,7 +10,7 @@
     "axios": "^0.19.0",
     "babel-preset-expo": "^5.2.0",
     "expo": "^33.0.7",
-    "expo-web-browser": "~5.0.2",
+    "expo-web-browser": "~6.0.0",
     "inaturalistjs": "github:inaturalist/inaturalistjs",
     "lodash": "^4.17.15",
     "react": "16.8.3",
