@@ -5,12 +5,12 @@
     "slug": "inat-toolkit",
     "privacy": "unlisted",
     "githubUrl": "https://github.com/jtklein/inat-identify",
-    "sdkVersion": "33.0.0",
+    "sdkVersion": "34.0.0",
     "platforms": [
       "ios",
       "android"
     ],
-    "version": "0.0.4",
+    "version": "0.0.5",
     "orientation": "portrait",
     "primaryColor": "#85A833",
     "icon": "./assets/icons/ios.png",
@@ -38,7 +38,7 @@
       }
     },
     "android": {
-      "versionCode": 8,
+      "versionCode": 9,
       "icon": "./assets/icons/android_1024.png",
       "permissions": []
     }
