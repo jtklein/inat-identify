@@ -1,5 +1,10 @@
 import React from 'react';
-import { Alert, StyleSheet, View } from 'react-native';
+import {
+  Alert,
+  StyleSheet,
+  View,
+  ScrollView,
+} from 'react-native';
 import { Button, Paragraph } from 'react-native-paper';
 import { AuthSession } from 'expo';
 import axios from 'axios';
@@ -114,13 +119,10 @@ export default class IiAuthScreen extends React.Component {
   render() {
     const { navigation } = this.props;
     const { isAuthenticating } = this.state;
-    const { container, paragraph } = styles;
+    const { paragraph } = styles;
     return (
       <ItScreenContainer barStyle="dark-content">
-        <View
-          testID="auth_screen"
-          style={container}
-        >
+        <ScrollView testID="auth_screen">
           <View style={paragraph}>
             <Paragraph>What can I do with this app?</Paragraph>
             <Paragraph>
@@ -169,17 +171,13 @@ export default class IiAuthScreen extends React.Component {
               !!DEV Skip
             </Button>
           ) : null}
-        </View>
+        </ScrollView>
       </ItScreenContainer>
     );
   }
 }
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    justifyContent: 'space-around',
-  },
   paragraph: {
     alignItems: 'center',
     justifyContent: 'center',
