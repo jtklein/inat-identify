@@ -1,6 +1,10 @@
 import React, { Component } from 'react';
 import {
-  StyleSheet, View, Share, Linking,
+  StyleSheet,
+  View,
+  Share,
+  Linking,
+  ScrollView,
 } from 'react-native';
 import { Button, Paragraph } from 'react-native-paper';
 import { connect } from 'react-redux';
@@ -63,10 +67,10 @@ class ItEntryScreen extends Component {
   render() {
     const { navigation, skippedObservations } = this.props;
     const { apiToken } = this.state;
-    const { container, paragraph } = styles;
+    const { paragraph } = styles;
     return (
       <ItScreenContainer>
-        <View testID="entry_screen" style={container}>
+        <ScrollView testID="entry_screen">
           <View style={paragraph}>
             <Paragraph>How does it work?</Paragraph>
             <Paragraph>
@@ -124,17 +128,13 @@ class ItEntryScreen extends Component {
               Share the link
             </Button>
           </View>
-        </View>
+        </ScrollView>
       </ItScreenContainer>
     );
   }
 }
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    justifyContent: 'space-around',
-  },
   paragraph: {
     alignItems: 'center',
     justifyContent: 'center',
