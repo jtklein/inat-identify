@@ -3,7 +3,7 @@
   "main": "main.js",
   "scripts": {
     "checks": "node ./scripts/CheckSecretsExist.js && solidarity",
-    "start": "yarn checks && expo start -c",
+    "start": "yarn checks && open https://www.inaturalist.org/users/api_token && expo start -c",
     "test": "node_modules/.bin/jest test/**/*.spec.js"
   },
   "dependencies": {
