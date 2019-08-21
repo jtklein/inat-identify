@@ -5880,16 +5880,16 @@ jest-environment-node@^24.8.0:
     jest-mock "^24.8.0"
     jest-util "^24.8.0"
 
-jest-expo@^34.0.0:
-  version "34.0.0"
-  resolved "https://registry.yarnpkg.com/jest-expo/-/jest-expo-34.0.0.tgz#982e1d8a5cd913efaf2735bf2b8bae38e1d12d5b"
-  integrity sha512-XWgBVHuGZWX3o6uUpXuupCW9D5yN36DSnVsH51bM8sFuFkXVR2Z6Zo8a2QVci8TX2HBaUW7tniyXVf11v4S8TA==
+jest-expo@^34.0.1:
+  version "34.0.1"
+  resolved "https://registry.yarnpkg.com/jest-expo/-/jest-expo-34.0.1.tgz#0711b35adb0fa3d543d13de66b0bcdd9b7c7bbc8"
+  integrity sha512-Ai1AJMx+cUlNFEx1w6Nu6veve9TKRq0+wr24UHCVbsjgZ+I5V2tg4//nHUKWEiOWYskw3ziCakpi4puDWUB9YQ==
   dependencies:
     babel-jest "^24.7.1"
     jest "^24.7.1"
     json5 "^2.1.0"
     lodash "^4.5.0"
-    react-test-renderer "^16.8.6"
+    react-test-renderer "~16.8.3"
 
 jest-get-type@^24.8.0:
   version "24.8.0"
@@ -9002,7 +9002,7 @@ react-redux@^6.0.1:
     prop-types "^15.7.2"
     react-is "^16.8.2"
 
-react-test-renderer@^16.8.6:
+react-test-renderer@^16.8.6, react-test-renderer@~16.8.3:
   version "16.8.6"
   resolved "https://registry.yarnpkg.com/react-test-renderer/-/react-test-renderer-16.8.6.tgz#188d8029b8c39c786f998aa3efd3ffe7642d5ba1"
   integrity sha512-H2srzU5IWYT6cZXof6AhUcx/wEyJddQ8l7cLM/F7gDXYyPr4oq+vCIxJYXVGhId1J706sqziAjuOEjyNkfgoEw==
