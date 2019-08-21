@@ -5283,7 +5283,8 @@ imurmurhash@^0.1.4:
 
 "inaturalistjs@github:inaturalist/inaturalistjs":
   version "1.6.0"
-  resolved "https://codeload.github.com/inaturalist/inaturalistjs/tar.gz/fa1fbdbe973d3a537ae92b8ef1c336d16b6546f6"
+  uid "5def57c1f5f94c146a9af9d8ed82de8c62696fb2"
+  resolved "https://codeload.github.com/inaturalist/inaturalistjs/tar.gz/5def57c1f5f94c146a9af9d8ed82de8c62696fb2"
   dependencies:
     cross-fetch "^2.2.3"
 
