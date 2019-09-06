@@ -5275,7 +5275,6 @@ imurmurhash@^0.1.4:
 
 "inaturalistjs@github:inaturalist/inaturalistjs":
   version "1.6.0"
-  uid "15ba3b5a8aff3f03543423d7311336e6724fc2e6"
   resolved "https://codeload.github.com/inaturalist/inaturalistjs/tar.gz/15ba3b5a8aff3f03543423d7311336e6724fc2e6"
   dependencies:
     cross-fetch "^2.2.3"
@@ -8934,6 +8933,13 @@ react-navigation-header-buttons@^3.0.2:
   integrity sha512-dzcJnr5uH76Ym8NhIM39zBxrXPgyJ7MLRRt/D5cuubE5w6uYZ5Hsep/QD7AiFlIV1cJrY3iCU0PXyjx33ZhoGA==
   dependencies:
     react-native-platform-touchable "^1.1.1"
+
+react-navigation-stack@^1.5.1:
+  version "1.5.1"
+  resolved "https://registry.yarnpkg.com/react-navigation-stack/-/react-navigation-stack-1.5.1.tgz#8a8c0cd0b8498225f4e8e564f06043849961bede"
+  integrity sha512-VEMSsKvicaLlFu6+U4u5YkwFe4hnMTLu83bR15GumuqrpCVPPgl7Qt4fSZCRG/YtC5ZcUiy5EgCRu9MVIINV5w==
+  dependencies:
+    prop-types "^15.7.2"
 
 react-navigation-stack@~1.4.0:
   version "1.4.0"
