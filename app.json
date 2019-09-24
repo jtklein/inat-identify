@@ -10,7 +10,7 @@
       "ios",
       "android"
     ],
-    "version": "0.0.5",
+    "version": "0.0.6",
     "orientation": "portrait",
     "primaryColor": "#85A833",
     "icon": "./assets/icons/ios.png",
@@ -38,7 +38,7 @@
       }
     },
     "android": {
-      "versionCode": 9,
+      "versionCode": 10,
       "icon": "./assets/icons/android_1024.png",
       "permissions": []
     }
