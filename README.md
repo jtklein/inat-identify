@@ -12,3 +12,8 @@ Then, in another terminal, run Detox:
 ```bash
 $ detox test
 ```
+
+
+
+expo build:ios
+expo build:android
