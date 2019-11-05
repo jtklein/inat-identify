@@ -3522,10 +3522,10 @@ detox-expo-helpers@^0.6.0:
     semver "^5.6.0"
     xdl "^51.5.0"
 
-detox@^14.3.4:
-  version "14.3.4"
-  resolved "https://registry.yarnpkg.com/detox/-/detox-14.3.4.tgz#ec8e040fe2a1e6c5c6cbce70486ac5973bfb37dc"
-  integrity sha512-P+rLrGrnJLlxcwDrk2LEt6tt36G5RKOs9DYtwlWef4KiYtVfjjijgGRsUoojXl2g2BkGK0baIm1uOZtmYllW8g==
+detox@^14.6.0:
+  version "14.6.0"
+  resolved "https://registry.yarnpkg.com/detox/-/detox-14.6.0.tgz#1cdd1e790992b664946f67ca4b408b0cb7bdee07"
+  integrity sha512-Pk36LMb7xv5QyovC42BDW8+v8YCNb2ky+qPdtY6VrJ5pGGmJHSjU8mp9XvDmi1UKoTUXD2UHmComcqYj/Pw1iA==
   dependencies:
     "@babel/core" "^7.4.5"
     bunyan "^1.8.12"
