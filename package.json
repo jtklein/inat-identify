@@ -9,7 +9,7 @@
   "dependencies": {
     "axios": "^0.19.0",
     "babel-preset-expo": "^8.0.0",
-    "expo": "^35.0.0",
+    "expo": "^37.0.9",
     "expo-web-browser": "~7.0.0",
     "inaturalistjs": "github:inaturalist/inaturalistjs",
     "lodash": "^4.17.15",
