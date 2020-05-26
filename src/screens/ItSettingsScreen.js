@@ -122,9 +122,8 @@ class ItSettingsScreen extends Component {
       <View style={container}>
         <List.Accordion
           title={`by place = ${place.label}`}
-          left={props => <List.Icon {...props} icon="place" />}
-        >
-          {places.map(p => (
+          left={(props) => <List.Icon {...props} icon="map-marker" />}>
+          {places.map((p) => (
             <List.Item
               key={p.id}
               title={p.label}
@@ -134,9 +133,8 @@ class ItSettingsScreen extends Component {
         </List.Accordion>
         <List.Accordion
           title={`by number photos = ${maxPhotos}`}
-          left={props => <List.Icon {...props} icon="photo" />}
-        >
-          {photosOptions.map(p => (
+          left={(props) => <List.Icon {...props} icon="image" />}>
+          {photosOptions.map((p) => (
             <List.Item
               key={p.label}
               title={p.label}
@@ -146,9 +144,8 @@ class ItSettingsScreen extends Component {
         </List.Accordion>
         <List.Accordion
           title={`sorted by creation date = ${sortOrder}`}
-          left={props => <List.Icon {...props} icon="sort" />}
-        >
-          {sortOptions.map(p => (
+          left={(props) => <List.Icon {...props} icon="sort" />}>
+          {sortOptions.map((p) => (
             <List.Item
               key={p.label}
               title={p.label}
@@ -182,7 +179,7 @@ class ItSettingsScreen extends Component {
       <View style={container}>
         <List.Accordion
           title={`Swipe left = ${swipeLeft.label}`}
-          left={props => <List.Icon {...props} icon="keyboard-arrow-left" />}
+          left={props => <List.Icon {...props} icon="arrow-left-bold" />}
         >
           {taxa.map(taxon => (
             <List.Item
@@ -206,7 +203,7 @@ class ItSettingsScreen extends Component {
 
         <List.Accordion
           title={`Swipe right = ${swipeRight.label}`}
-          left={props => <List.Icon {...props} icon="keyboard-arrow-right" />}
+          left={props => <List.Icon {...props} icon="arrow-right-bold" />}
         >
           {taxa.map(taxon => (
             <List.Item
@@ -230,7 +227,7 @@ class ItSettingsScreen extends Component {
 
         <List.Accordion
           title={`Swipe top = ${swipeTop.label}`}
-          left={props => <List.Icon {...props} icon="keyboard-arrow-up" />}
+          left={props => <List.Icon {...props} icon="arrow-up-bold" />}
         >
           {taxa.map(taxon => (
             <List.Item
@@ -265,19 +262,33 @@ class ItSettingsScreen extends Component {
       <ItScreenContainer>
         <List.Item
           title="Privacy policy"
-          onPress={() => WebBrowser.openBrowserAsync('https://www.inaturalist.org/journal/jtklein/24285-privacy-policy-for-inat-toolcat')}
+          onPress={() =>
+            WebBrowser.openBrowserAsync(
+              'https://www.inaturalist.org/journal/jtklein/24285-privacy-policy-for-inat-toolcat',
+            )
+          }
         />
-        <View testID="settings_screen" style={{ flexDirection: 'row', justifyContent: 'space-evenly' }}>
-          <Button testID="filter_tab" dark icon="filter-list" mode={showFilter ? 'contained' : 'outlined'} onPress={() => this.onFilterPressed()}>
+        <View
+          testID="settings_screen"
+          style={{ flexDirection: 'row', justifyContent: 'space-evenly' }}>
+          <Button
+            testID="filter_tab"
+            dark
+            icon="filter-variant"
+            mode={showFilter ? 'contained' : 'outlined'}
+            onPress={() => this.onFilterPressed()}>
             Filter
           </Button>
-          <Button testID="actions_tab" dark icon="open-with" mode={!showFilter ? 'contained' : 'outlined'} onPress={() => this.onActionsPressed()}>
+          <Button
+            testID="actions_tab"
+            dark
+            icon="arrow-expand-all"
+            mode={!showFilter ? 'contained' : 'outlined'}
+            onPress={() => this.onActionsPressed()}>
             Actions
           </Button>
         </View>
-        <View style={container}>
-          {this.renderSettings()}
-        </View>
+        <View style={container}>{this.renderSettings()}</View>
       </ItScreenContainer>
     );
   }

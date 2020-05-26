@@ -18,7 +18,7 @@ import {
 class ItEntryScreen extends Component {
   static navigationOptions = ({ navigation }) => ({
     title: 'Swiper',
-    headerRight: (
+    headerRight: () => (
       <ItHeaderButtons>
         <HeaderItem testID="header_settings_button" title="settings" iconName="settings" onPress={() => navigation.navigate('Settings')} />
       </ItHeaderButtons>
@@ -113,7 +113,7 @@ class ItEntryScreen extends Component {
             </Paragraph>
             <Button
               testID="open_link"
-              icon="open-in-browser"
+              icon="open-in-app"
               onPress={() => this.openLink(skippedObservations)}
               disabled={skippedObservations.length === 0}
             >

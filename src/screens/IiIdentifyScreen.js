@@ -28,7 +28,7 @@ import {
 class IiIdentifyScreen extends Component {
   static navigationOptions = ({ navigation }) => ({
     title: navigation.getParam('title'),
-    headerRight: (
+    headerRight: () => (
       <ItHeaderButtons>
         <HeaderItem
           testID="header_info_button"
@@ -358,7 +358,7 @@ class IiIdentifyScreen extends Component {
       <FAB.Group
         color="#FFFFFF"
         open={fabOpen}
-        icon={fabOpen ? 'close' : 'build'}
+        icon={fabOpen ? 'close' : 'toolbox'}
         actions={[
           {
             icon: 'link',
@@ -372,13 +372,13 @@ class IiIdentifyScreen extends Component {
           },
           {
             icon: currentObservationCaptive
-              ? 'check-box'
-              : 'check-box-outline-blank',
+              ? 'check-box-outline'
+              : 'checkbox-blank-outline',
             label: 'Mark as captive/cultivated',
             onPress: () => this.cultivate(),
           },
           {
-            icon: 'keyboard-arrow-down',
+            icon: 'arrow-down-bold',
             label: 'Skip and review',
             onPress: () => this.skipAndReview(),
           },
@@ -399,15 +399,15 @@ class IiIdentifyScreen extends Component {
           <Dialog.Content>
             <List.Item
               title={swipeTop.label}
-              left={() => <List.Icon icon="keyboard-arrow-up" />}
+              left={() => <List.Icon icon="arrow-up-bold" />}
             />
             <List.Item
               title={swipeLeft.label}
-              left={() => <List.Icon icon="keyboard-arrow-left" />}
+              left={() => <List.Icon icon="arrow-left-bold" />}
             />
             <List.Item
               title={swipeRight.label}
-              left={() => <List.Icon icon="keyboard-arrow-right" />}
+              left={() => <List.Icon icon="arrow-right-bold" />}
             />
           </Dialog.Content>
           <Dialog.Actions>
