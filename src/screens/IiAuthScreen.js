@@ -6,7 +6,7 @@ import {
   ScrollView,
 } from 'react-native';
 import { Button, Paragraph } from 'react-native-paper';
-import { AuthSession } from 'expo';
+import * as AuthSession from 'expo-auth-session';
 import axios from 'axios';
 
 import oauth from '../../secrets/oauth';
