@@ -29,8 +29,8 @@ const AuthStack = createStackNavigator(
   {
     initialRouteName: 'Auth',
     defaultNavigationOptions: {
-      header: null,
-      gesturesEnabled: false,
+      headerShown: false,
+      gestureEnabled: false,
     },
   },
 );
@@ -68,8 +68,8 @@ const RootNavigator = createSwitchNavigator(
     resetOnBlur: true,
     backBehavior: 'none',
     defaultNavigationOptions: {
-      header: null,
-      gesturesEnabled: false,
+      headerShown: false,
+      gestureEnabled: false,
     },
   },
 );
