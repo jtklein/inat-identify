@@ -6,6 +6,7 @@ import {
   ScrollView,
 } from 'react-native';
 import { Button, Paragraph } from 'react-native-paper';
+import { connect } from 'react-redux';
 import * as AuthSession from 'expo-auth-session';
 import axios from 'axios';
 
@@ -13,9 +14,13 @@ import oauth from '../../secrets/oauth';
 import api from '../../secrets/api_token';
 import { ItScreenContainer } from '../components/common';
 
+import {
+  SIGNED_IN,
+} from '../actions/types';
+
 const INATURALIST_OAUTH_API = 'https://www.inaturalist.org/oauth';
 
-export default class IiAuthScreen extends React.Component {
+class IiAuthScreen extends React.Component {
   INITIAL_STATE = {
     isAuthenticating: false,
   };
@@ -26,7 +31,7 @@ export default class IiAuthScreen extends React.Component {
   }
 
   loginAsync = async () => {
-    const { navigation } = this.props;
+    const { signIn } = this.props;
 
     this.setState({ isAuthenticating: true });
     // AuthFlow is handled by Expo.AuthSession
@@ -77,7 +82,7 @@ export default class IiAuthScreen extends React.Component {
         console.log('apiTokenResponse', apiTokenResponse);
         if (apiTokenResponse.data && apiTokenResponse.data.api_token) {
           // Navigate to next screen with api_token
-          navigation.navigate('Entry', { apiToken: apiTokenResponse.data.api_token });
+          signIn(apiTokenResponse.data.api_token);
         } else {
           // Show alert for failure of getting api token
           Alert.alert(
@@ -117,7 +122,7 @@ export default class IiAuthScreen extends React.Component {
   };
 
   render() {
-    const { navigation } = this.props;
+    const { signIn } = this.props;
     const { isAuthenticating } = this.state;
     const { paragraph } = styles;
     return (
@@ -161,12 +166,7 @@ export default class IiAuthScreen extends React.Component {
           {__DEV__ ? (
             <Button
               testID="dev_skip_login"
-              onPress={() => navigation.navigate(
-                'Entry',
-                {
-                  apiToken: api.api_token,
-                },
-              )}
+              onPress={() => signIn(api.api_token)}
             >
               !!DEV Skip
             </Button>
@@ -183,3 +183,15 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
   },
 });
+
+const mapStateToProps = state => ({
+  auth: state.auth,
+});
+
+const mapDispatchToProps = dispatch => ({
+  signIn: (payload) => {
+    dispatch({ type: SIGNED_IN, payload });
+  },
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(IiAuthScreen);

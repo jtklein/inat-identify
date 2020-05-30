@@ -26,7 +26,6 @@ class ItEntryScreen extends Component {
   });
 
   INITIAL_STATE = {
-    apiToken: this.props.navigation.state.params.apiToken,
   };
 
   constructor(props) {
@@ -66,7 +65,6 @@ class ItEntryScreen extends Component {
 
   render() {
     const { navigation, skippedObservations } = this.props;
-    const { apiToken } = this.state;
     const { paragraph } = styles;
     return (
       <ItScreenContainer>
@@ -101,7 +99,7 @@ class ItEntryScreen extends Component {
           </View>
           <Button
             testID="start_swiper"
-            onPress={() => navigation.navigate('Identify', { apiToken })}
+            onPress={() => navigation.navigate('Identify')}
           >
             OK, got it
           </Button>

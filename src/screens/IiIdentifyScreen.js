@@ -42,7 +42,7 @@ class IiIdentifyScreen extends Component {
 
   INITIAL_STATE = {
     user: {},
-    apiToken: this.props.navigation.state.params.apiToken,
+    apiToken: this.props.auth.apiToken,
     swipeDirection: '',
     cardIndex: 0,
     observations: [],
@@ -127,7 +127,8 @@ class IiIdentifyScreen extends Component {
   };
 
   getCurrentUser = async () => {
-    const { apiToken } = this.state;
+    const { auth } = this.props;
+    const { apiToken } = auth;
     const options = { api_token: apiToken };
     return await inatjs.users
       .me(options)
@@ -203,7 +204,7 @@ class IiIdentifyScreen extends Component {
 
   identify(observation, swipeOption) {
     console.log('observation', observation);
-    const { apiToken } = this.state;
+    const { apiToken } = this.props.auth;
     /*
     {
       "identification": {
@@ -271,7 +272,8 @@ class IiIdentifyScreen extends Component {
   };
 
   skipAndReview = () => {
-    const { observations, cardIndex, apiToken } = this.state;
+    const { apiToken } = this.props.auth;
+    const { observations, cardIndex } = this.state;
     const options = { api_token: apiToken };
     inatjs.observations
       .review(observations[cardIndex], options)
@@ -291,9 +293,9 @@ class IiIdentifyScreen extends Component {
     const {
       observations,
       cardIndex,
-      apiToken,
       currentObservationCaptive,
     } = this.state;
+    const { apiToken } = this.props.auth;
     const options = { api_token: apiToken };
     inatjs.observations
       .setQualityMetric(
@@ -319,7 +321,8 @@ class IiIdentifyScreen extends Component {
   };
 
   addComment = (commentText) => {
-    const { observations, cardIndex, apiToken } = this.state;
+    const { observations, cardIndex } = this.state;
+    const { apiToken } = this.props.auth; 
     this.setState({ commentLoading: true });
     const params = {
       comment: {
@@ -501,6 +504,7 @@ class IiIdentifyScreen extends Component {
 }
 
 const mapStateToProps = state => ({
+  auth: state.auth,
   swiper: state.swiper,
   predefinedComments: state.comment.predefinedComments,
 });
