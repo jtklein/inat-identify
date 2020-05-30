@@ -11,20 +11,9 @@ import { connect } from 'react-redux';
 
 import {
   ItScreenContainer,
-  ItHeaderButtons,
-  HeaderItem,
 } from '../components/common';
 
 class ItEntryScreen extends Component {
-  static navigationOptions = ({ navigation }) => ({
-    title: 'Swiper',
-    headerRight: () => (
-      <ItHeaderButtons>
-        <HeaderItem testID="header_settings_button" title="settings" iconName="settings" onPress={() => navigation.navigate('Settings')} />
-      </ItHeaderButtons>
-    ),
-  });
-
   INITIAL_STATE = {
   };
 

@@ -88,10 +88,6 @@ const sortOptions = [
 ];
 
 class ItSettingsScreen extends Component {
-  static navigationOptions = () => ({
-    title: 'Swiper settings',
-  });
-
   INITIAL_STATE = {
     showFilter: true,
   };

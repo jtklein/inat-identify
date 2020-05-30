@@ -26,20 +26,6 @@ import {
 } from '../actions/types';
 
 class IiIdentifyScreen extends Component {
-  static navigationOptions = ({ navigation }) => ({
-    title: navigation.getParam('title'),
-    headerRight: () => (
-      <ItHeaderButtons>
-        <HeaderItem
-          testID="header_info_button"
-          title="info"
-          iconName="info"
-          onPress={() => navigation.getParam('showDialog')()}
-        />
-      </ItHeaderButtons>
-    ),
-  });
-
   INITIAL_STATE = {
     user: {},
     apiToken: this.props.auth.apiToken,
@@ -59,7 +45,19 @@ class IiIdentifyScreen extends Component {
   componentDidMount = async () => {
     const { navigation, swiper } = this.props;
     const { place } = swiper;
-    navigation.setParams({ title: place.label, showDialog: this.showDialog });
+    navigation.setOptions({
+      title: place.label,
+      headerRight: () => (
+        <ItHeaderButtons>
+          <HeaderItem
+            testID="header_info_button"
+            title="info"
+            iconName="info"
+            onPress={() => this.showDialog()}
+          />
+        </ItHeaderButtons>
+      ),
+    });
     // TODO: refactor to app start up, if we ever have different screens
     const user = await this.getCurrentUser();
     console.log('user', user);
