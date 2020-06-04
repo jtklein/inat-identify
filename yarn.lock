@@ -8301,10 +8301,10 @@ react-native-screens@~2.2.0:
   dependencies:
     debounce "^1.2.0"
 
-react-native-testing-library@^1.14.0:
-  version "1.14.0"
-  resolved "https://registry.yarnpkg.com/react-native-testing-library/-/react-native-testing-library-1.14.0.tgz#d3f3d39225d2f0c1ed4d857a187b787307cd96c0"
-  integrity sha512-AzWmhe4VfkaWAvetqsbQkPVC/aMcixj26WMxtiOpXRXsKuqwR3ijQMAG/OjO5IXNixueO0VoPhvL4FeDfDtBKQ==
+react-native-testing-library@^2.0.1:
+  version "2.0.1"
+  resolved "https://registry.yarnpkg.com/react-native-testing-library/-/react-native-testing-library-2.0.1.tgz#ff2aa9fd065f964ddae4e92c3e361b84276d236a"
+  integrity sha512-GyUn3G14TGXCH5g8szsMGneNfWR0Nxy03igQnljwYBun84iF9fyf9DZZp9iUrfyTVxII2VjbAFdBPFcKFXzHYQ==
   dependencies:
     pretty-format "^26.0.1"
 
