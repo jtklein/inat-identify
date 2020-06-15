@@ -3349,10 +3349,10 @@ detox-expo-helpers@^0.6.0:
     semver "^5.6.0"
     xdl "^51.5.0"
 
-detox@^16.7.1:
-  version "16.7.1"
-  resolved "https://registry.yarnpkg.com/detox/-/detox-16.7.1.tgz#f027809839b43c8a58e156dd8ea2267b8d36a744"
-  integrity sha512-TrxANje18ztxdqBv+YmC8H5vVab6m6v36p96ZvtBmuMkRfeoWBjVNKJH0bsA7zqoSu5C28gE77tfu/hahAkM5A==
+detox@^16.8.1:
+  version "16.8.1"
+  resolved "https://registry.yarnpkg.com/detox/-/detox-16.8.1.tgz#f4e7b62a08e19d6009c50138cc425253fc541eb2"
+  integrity sha512-Mle2knsufJFzangJPX8Fmi9aZoLz9vlYwe+oBLA0hwO7n9AUuC/N4N21VRE7zSSP07nkkLDx/AMy730u8/z4vw==
   dependencies:
     "@babel/core" "^7.4.5"
     bunyan "^1.8.12"
@@ -3369,6 +3369,7 @@ detox@^16.7.1:
     proper-lockfile "^3.0.2"
     sanitize-filename "^1.6.1"
     shell-utils "^1.0.9"
+    signal-exit "^3.0.3"
     tail "^2.0.0"
     telnet-client "1.2.8"
     tempfile "^2.0.0"
@@ -9189,7 +9190,7 @@ side-channel@^1.0.2:
     es-abstract "^1.17.0-next.1"
     object-inspect "^1.7.0"
 
-signal-exit@^3.0.0, signal-exit@^3.0.2:
+signal-exit@^3.0.0, signal-exit@^3.0.2, signal-exit@^3.0.3:
   version "3.0.3"
   resolved "https://registry.yarnpkg.com/signal-exit/-/signal-exit-3.0.3.tgz#a1410c2edd8f077b08b4e253c8eacfcaf057461c"
   integrity sha512-VUJ49FC8U1OxwZLxIbTTrDvLnf/6TDgxZcK8wxR8zs13xpx7xbG60ndBlhNrFi2EMuFRoeDoJO7wthSLq42EjA==
