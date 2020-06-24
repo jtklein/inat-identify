@@ -14,7 +14,7 @@
     "babel-preset-expo": "^8.2.1",
     "expo": "^37.0.0",
     "expo-auth-session": "~1.2.1",
-    "expo-web-browser": "~8.2.1",
+    "expo-web-browser": "~8.3.1",
     "inaturalistjs": "github:inaturalist/inaturalistjs",
     "lodash": "^4.17.15",
     "react": "16.9.0",
