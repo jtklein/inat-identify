@@ -163,6 +163,7 @@ class IiIdentifyScreen extends Component {
       photos: 'true',
       order: sortOrder,
       order_by: 'created_at',
+      without_taxon_id: [67333, 131236, 151817],
     };
 
     inatjs.observations
