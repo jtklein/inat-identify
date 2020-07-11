@@ -1,15 +1,24 @@
 import { compose, createStore, applyMiddleware } from 'redux';
+import { persistStore, persistReducer } from 'redux-persist';
+import AsyncStorage from '@react-native-community/async-storage';
 
 import rootReducer from '../reducers';
 import middlewares from '../middleware';
 
-export default function configureStore() {
+const persistConfig = {
+  key: 'root',
+  storage: AsyncStorage,
+  whitelist: ['swiper'],
+};
+
+const persistedReducer = persistReducer(persistConfig, rootReducer);
+
+export default () => {
   const store = createStore(
-    rootReducer,
+    persistedReducer,
     undefined,
-    compose(
-      applyMiddleware(...middlewares),
-    ),
+    compose(applyMiddleware(...middlewares)),
   );
-  return store;
-}
+  const persistor = persistStore(store);
+  return { store, persistor };
+};
