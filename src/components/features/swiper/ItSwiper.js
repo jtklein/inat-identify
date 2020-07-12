@@ -207,10 +207,9 @@ class ItSwiper extends Component {
       });
     }
 
-    return Animated.event([null, this.createAnimatedEvent()])(
-      event,
-      gestureState,
-    );
+    return Animated.event([null, this.createAnimatedEvent()], {
+      useNativeDriver: false,
+    })(event, gestureState);
   }
 
   onPanResponderGrant = (event, gestureState) => {
@@ -356,6 +355,7 @@ class ItSwiper extends Component {
   resetTopCard = (cb) => {
     Animated.spring(this.state.pan, {
       toValue: 0,
+      useNativeDriver: false,
     }).start(cb);
 
     this.state.pan.setOffset({
@@ -428,6 +428,7 @@ class ItSwiper extends Component {
         y: y * SWIPE_MULTIPLY_FACTOR,
       },
       duration: this.props.swipeAnimationDuration,
+      useNativeDriver: false,
     }).start(() => {
       mustDecrementCardIndex = mustDecrementCardIndex
         ? true
