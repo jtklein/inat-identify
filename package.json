@@ -17,7 +17,7 @@
     "expo-auth-session": "~1.4.0",
     "expo-web-browser": "~8.3.1",
     "inaturalistjs": "github:inaturalist/inaturalistjs",
-    "lodash": "^4.17.15",
+    "lodash": "^4.17.19",
     "react": "16.11.0",
     "react-native": "https://github.com/expo/react-native/archive/sdk-38.0.2.tar.gz",
     "react-native-gesture-handler": "~1.6.0",
