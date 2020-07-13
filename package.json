@@ -34,7 +34,7 @@
   },
   "devDependencies": {
     "babel-eslint": "^10.1.0",
-    "chalk": "^4.0.0",
+    "chalk": "^4.1.0",
     "detox": "^16.8.2",
     "detox-expo-helpers": "^0.6.0",
     "eslint": "^7.4.0",
