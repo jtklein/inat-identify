@@ -5643,7 +5643,8 @@ imurmurhash@^0.1.4:
 
 "inaturalistjs@github:inaturalist/inaturalistjs":
   version "1.9.1"
-  resolved "https://codeload.github.com/inaturalist/inaturalistjs/tar.gz/f69e0c00c57106f2384aa261606e85fdcbc9f312"
+  uid "03de2d60c578f37823d0dfd51413a828b03bf48d"
+  resolved "https://codeload.github.com/inaturalist/inaturalistjs/tar.gz/03de2d60c578f37823d0dfd51413a828b03bf48d"
   dependencies:
     cross-fetch "^2.2.3"
 
