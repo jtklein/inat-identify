@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
+import { createNativeStackNavigator } from 'react-native-screens/native-stack';
 import { connect } from 'react-redux';
 
 import IiAuthScreen from './screens/IiAuthScreen';
@@ -26,7 +27,6 @@ const headerTitleStyle = {
   fontWeight: 'bold',
 };
 
-
 // /**
 //  * The {@link SwitchNavigator} entry point of the entire app. Consists of launcher stack with
 //  * user authentication logic, and the main navigation object for the app.
@@ -50,7 +50,7 @@ const headerTitleStyle = {
 //   },
 // );
 
-const AppStack = createStackNavigator();
+const AppStack = createNativeStackNavigator();
 
 class App extends Component {
   render() {
@@ -59,6 +59,7 @@ class App extends Component {
     return (
       <NavigationContainer>
         <AppStack.Navigator
+          initialRouteName={'Auth'}
           screenOptions={{
             headerStyle,
             headerTintColor,
