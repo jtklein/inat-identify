@@ -14,7 +14,5 @@ Then, in another terminal, run Detox:
 $ detox test
 ```
 
-
-
-expo build:ios
-expo build:android
+expo build:ios --type archive
+expo build:android --type app-bundle
