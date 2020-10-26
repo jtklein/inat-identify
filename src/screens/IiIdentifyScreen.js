@@ -146,10 +146,76 @@ class IiIdentifyScreen extends Component {
       });
   };
 
+  commentOnObservation = (commentText) => {
+    const { observations, cardIndex } = this.state;
+    const { apiToken } = this.props.auth; 
+    this.setState({ commentLoading: true });
+    const params = {
+      comment: {
+        body: commentText,
+        parent_type: 'Observation',
+        parent_id: observations[cardIndex].id,
+      },
+    };
+    const options = { api_token: apiToken };
+    inatjs.comments
+      .create(params, options)
+      .then((c) => {
+        console.log('New comment', c);
+        Alert.alert(
+          'Success',
+          'The comment was added. However, it will not show here only in the website.',
+        );
+        this.setState({ commentLoading: false });
+        this.hideCommentDialog();
+      })
+      .catch((e) => {
+        console.log('Error in adding comment', e);
+        console.log(e.response);
+        Alert.alert(
+          'Sorry',
+          'Unfortunately, something went wrong. The comment could not be added.',
+        );
+        this.setState({ commentLoading: false });
+        this.hideCommentDialog();
+      });
+  };
+
+  cultivate = () => {
+    const {
+      observations,
+      cardIndex,
+      currentObservationCaptive,
+    } = this.state;
+    const { apiToken } = this.props.auth;
+    const options = { api_token: apiToken };
+    inatjs.observations
+      .setQualityMetric(
+        {
+          ...observations[cardIndex],
+          metric: 'wild',
+          agree: currentObservationCaptive.toString(),
+        },
+        options,
+      )
+      .then((rsp) => {
+        this.setState({ currentObservationCaptive: !currentObservationCaptive });
+        console.log('Marked as captive: ', rsp);
+      })
+      .catch((e) => {
+        console.log('Error in marked as captive', e);
+        console.log(e.response);
+        Alert.alert(
+          'Sorry',
+          'Unfortunately, something went wrong. The observation was not marked as captive.',
+        );
+      });
+  };
+
   searchObservations() {
     const { user, page } = this.state;
     const { swiper } = this.props;
-    const { place, maxPhotos, sortOrder } = swiper;
+    const { place, maxPhotos, sortOrder, isCaptive } = swiper;
     const params = {
       iconic_taxa: 'unknown',
       quality_grade: 'needs_id',
@@ -164,6 +230,7 @@ class IiIdentifyScreen extends Component {
       order: sortOrder,
       order_by: 'created_at',
       without_taxon_id: [67333, 131236, 151817],
+      captive: isCaptive,
     };
 
     inatjs.observations
@@ -288,72 +355,6 @@ class IiIdentifyScreen extends Component {
     this.swiper.swipeBottom();
   };
 
-  cultivate = () => {
-    const {
-      observations,
-      cardIndex,
-      currentObservationCaptive,
-    } = this.state;
-    const { apiToken } = this.props.auth;
-    const options = { api_token: apiToken };
-    inatjs.observations
-      .setQualityMetric(
-        {
-          ...observations[cardIndex],
-          metric: 'wild',
-          agree: currentObservationCaptive.toString(),
-        },
-        options,
-      )
-      .then((rsp) => {
-        this.setState({ currentObservationCaptive: !currentObservationCaptive });
-        console.log('Marked as captive: ', rsp);
-      })
-      .catch((e) => {
-        console.log('Error in marked as captive', e);
-        console.log(e.response);
-        Alert.alert(
-          'Sorry',
-          'Unfortunately, something went wrong. The observation was not marked as captive.',
-        );
-      });
-  };
-
-  addComment = (commentText) => {
-    const { observations, cardIndex } = this.state;
-    const { apiToken } = this.props.auth; 
-    this.setState({ commentLoading: true });
-    const params = {
-      comment: {
-        body: commentText,
-        parent_type: 'Observation',
-        parent_id: observations[cardIndex].id,
-      },
-    };
-    const options = { api_token: apiToken };
-    inatjs.comments
-      .create(params, options)
-      .then((c) => {
-        console.log('New comment', c);
-        Alert.alert(
-          'Success',
-          'The comment was added. However, it will not show here only in the website.',
-        );
-        this.setState({ commentLoading: false });
-        this.hideCommentDialog();
-      })
-      .catch((e) => {
-        console.log('Error in adding comment', e);
-        console.log(e.response);
-        Alert.alert(
-          'Sorry',
-          'Unfortunately, something went wrong. The comment could not be added.',
-        );
-        this.setState({ commentLoading: false });
-        this.hideCommentDialog();
-      });
-  };
-
   renderFAB() {
     const { fabOpen, currentObservationCaptive } = this.state;
     return (
@@ -462,9 +463,10 @@ class IiIdentifyScreen extends Component {
           <Dialog.Actions>
             <Button onPress={this.hideCommentDialog}>Cancel</Button>
             <Button
-              onPress={() => this.addComment(predefinedComments[checkedIndex])}
+              onPress={() => this.commentOnObservation(predefinedComments[checkedIndex])}
               disabled={!checkedIndex || commentLoading}
-              loading={commentLoading}>
+              loading={commentLoading}
+            >
               Add Comment
             </Button>
           </Dialog.Actions>

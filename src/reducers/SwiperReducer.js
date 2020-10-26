@@ -11,6 +11,7 @@ import {
   SWIPER_TOP_UNSUBSCRIBED,
   SWIPER_PHOTOS_CHANGED,
   SWIPER_SORT_CHANGED,
+  SWIPER_CAPTIVE_CHANGED,
 } from '../actions/types';
 
 const INITIAL_STATE = {
@@ -36,6 +37,7 @@ const INITIAL_STATE = {
   },
   maxPhotos: Infinity,
   sortOrder: 'asc',
+  isCaptive: false,
 };
 
 export default (state = INITIAL_STATE, action) => {
@@ -96,6 +98,11 @@ export default (state = INITIAL_STATE, action) => {
       return {
         ...state,
         sortOrder: action.payload.value,
+      };
+    case SWIPER_CAPTIVE_CHANGED:
+      return {
+        ...state,
+        isCaptive: action.payload.value,
       };
     default:
       return state;

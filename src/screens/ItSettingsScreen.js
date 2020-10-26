@@ -18,6 +18,7 @@ import {
   SWIPER_TOP_SUBSCRIBED,
   SWIPER_PHOTOS_CHANGED,
   SWIPER_SORT_CHANGED,
+  SWIPER_CAPTIVE_CHANGED,
 } from '../actions/types';
 
 const places = [
@@ -87,6 +88,17 @@ const sortOptions = [
   },
 ];
 
+const captiveOptions = [
+  {
+    value: true,
+    label: 'true',
+  },
+  {
+    value: false,
+    label: 'false',
+  },
+];
+
 class ItSettingsScreen extends Component {
   INITIAL_STATE = {
     showFilter: true,
@@ -110,15 +122,17 @@ class ItSettingsScreen extends Component {
       changeSwipePlace,
       changeSwipePhotos,
       changeSwipeSort,
+      changeSwipeIsCaptive,
       swiper,
     } = this.props;
-    const { place, maxPhotos, sortOrder } = swiper;
+    const { place, maxPhotos, sortOrder, isCaptive } = swiper;
     const { container } = styles;
     return (
       <View style={container}>
         <List.Accordion
           title={`by place = ${place.label}`}
-          left={(props) => <List.Icon {...props} icon="map-marker" />}>
+          left={(props) => <List.Icon {...props} icon="map-marker" />}
+        >
           {places.map((p) => (
             <List.Item
               key={p.id}
@@ -129,7 +143,8 @@ class ItSettingsScreen extends Component {
         </List.Accordion>
         <List.Accordion
           title={`by number photos = ${maxPhotos}`}
-          left={(props) => <List.Icon {...props} icon="image" />}>
+          left={(props) => <List.Icon {...props} icon="image" />}
+        >
           {photosOptions.map((p) => (
             <List.Item
               key={p.label}
@@ -140,12 +155,25 @@ class ItSettingsScreen extends Component {
         </List.Accordion>
         <List.Accordion
           title={`sorted by creation date = ${sortOrder}`}
-          left={(props) => <List.Icon {...props} icon="sort" />}>
+          left={(props) => <List.Icon {...props} icon="sort" />}
+        >
           {sortOptions.map((p) => (
             <List.Item
               key={p.label}
               title={p.label}
               onPress={() => changeSwipeSort(p)}
+            />
+          ))}
+        </List.Accordion>
+        <List.Accordion
+          title={`is captive/cultivated = ${isCaptive}`}
+          left={(props) => <List.Icon {...props} icon="sort" />}
+        >
+          {captiveOptions.map((p) => (
+            <List.Item
+              key={p.label}
+              title={p.label}
+              onPress={() => changeSwipeIsCaptive(p)}
             />
           ))}
         </List.Accordion>
@@ -342,6 +370,9 @@ const mapDispatchToProps = dispatch => ({
   },
   changeSwipeSort: (payload) => {
     dispatch({ type: SWIPER_SORT_CHANGED, payload });
+  },
+  changeSwipeIsCaptive: (payload) => {
+    dispatch({ type: SWIPER_CAPTIVE_CHANGED, payload });
   },
 });
 
