@@ -2,7 +2,8 @@ import React, { Component } from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 import * as WebBrowser from 'expo-web-browser';
 import { connect } from 'react-redux';
-import { Switch, List, Button } from 'react-native-paper';
+import { Switch, List, Button, Searchbar } from 'react-native-paper';
+import inatjs from 'inaturalistjs';
 
 import { ItScreenContainer } from '../components/common';
 import {
@@ -21,7 +22,7 @@ import {
   SWIPER_CAPTIVE_CHANGED,
 } from '../actions/types';
 
-const places = [
+const defaultPlaces = [
   {
     id: 97389,
     label: 'South America',
@@ -102,6 +103,7 @@ const captiveOptions = [
 class ItSettingsScreen extends Component {
   INITIAL_STATE = {
     showFilter: true,
+    placeSearchText: undefined,
   };
 
   constructor(props) {
@@ -117,7 +119,15 @@ class ItSettingsScreen extends Component {
     this.setState({ showFilter: false });
   }
 
+  onChangePlaceSearch = (text) => {
+    this.setState({ placeSearchText: text });
+    inatjs.places
+      .autocomplete({ q: text, order_by: 'area' })
+      .then((rsp) => this.setState({ places: rsp.results }));
+  }
+
   renderFilterSettings = () => {
+    const { placeSearchText, places } = this.state;
     const {
       changeSwipePlace,
       changeSwipePhotos,
@@ -129,54 +139,71 @@ class ItSettingsScreen extends Component {
     const { container } = styles;
     return (
       <View style={container}>
-        <List.Accordion
-          title={`by place = ${place.label}`}
-          left={(props) => <List.Icon {...props} icon="map-marker" />}
-        >
-          {places.map((p) => (
-            <List.Item
-              key={p.id}
-              title={p.label}
-              onPress={() => changeSwipePlace(p)}
+        <List.AccordionGroup>
+          <List.Accordion
+            id="places"
+            title={`by place = ${place.label}`}
+            left={(props) => <List.Icon {...props} icon="map-marker" />}
+          >
+            <Searchbar
+              placeholder="Search"
+              onChangeText={this.onChangePlaceSearch}
+              value={placeSearchText}
             />
-          ))}
-        </List.Accordion>
-        <List.Accordion
-          title={`by number photos = ${maxPhotos}`}
-          left={(props) => <List.Icon {...props} icon="image" />}
-        >
-          {photosOptions.map((p) => (
-            <List.Item
-              key={p.label}
-              title={p.label}
-              onPress={() => changeSwipePhotos(p)}
-            />
-          ))}
-        </List.Accordion>
-        <List.Accordion
-          title={`sorted by creation date = ${sortOrder}`}
-          left={(props) => <List.Icon {...props} icon="sort" />}
-        >
-          {sortOptions.map((p) => (
-            <List.Item
-              key={p.label}
-              title={p.label}
-              onPress={() => changeSwipeSort(p)}
-            />
-          ))}
-        </List.Accordion>
-        <List.Accordion
-          title={`is captive/cultivated = ${isCaptive}`}
-          left={(props) => <List.Icon {...props} icon="sort" />}
-        >
-          {captiveOptions.map((p) => (
-            <List.Item
-              key={p.label}
-              title={p.label}
-              onPress={() => changeSwipeIsCaptive(p)}
-            />
-          ))}
-        </List.Accordion>
+            {places ? places.map((p) => (
+              <List.Item
+                key={p.id}
+                title={p.name}
+                onPress={() => changeSwipePlace({ ...p, label: p.name })}
+              />
+            )) : defaultPlaces.map((p) => (
+              <List.Item
+                key={p.id}
+                title={p.label}
+                onPress={() => changeSwipePlace(p)}
+              />
+            ))}
+          </List.Accordion>
+          <List.Accordion
+            id="photos"
+            title={`by number photos = ${maxPhotos}`}
+            left={(props) => <List.Icon {...props} icon="image" />}
+          >
+            {photosOptions.map((p) => (
+              <List.Item
+                key={p.label}
+                title={p.label}
+                onPress={() => changeSwipePhotos(p)}
+              />
+            ))}
+          </List.Accordion>
+          <List.Accordion
+            id="sort"
+            title={`sorted by creation date = ${sortOrder}`}
+            left={(props) => <List.Icon {...props} icon="sort" />}
+          >
+            {sortOptions.map((p) => (
+              <List.Item
+                key={p.label}
+                title={p.label}
+                onPress={() => changeSwipeSort(p)}
+              />
+            ))}
+          </List.Accordion>
+          <List.Accordion
+            id="captive"
+            title={`is captive/cultivated = ${isCaptive}`}
+            left={(props) => <List.Icon {...props} icon="flower" />}
+          >
+            {captiveOptions.map((p) => (
+              <List.Item
+                key={p.label}
+                title={p.label}
+                onPress={() => changeSwipeIsCaptive(p)}
+              />
+            ))}
+          </List.Accordion>
+        </List.AccordionGroup>
       </View>
     );
   }
