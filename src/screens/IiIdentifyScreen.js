@@ -343,7 +343,7 @@ class IiIdentifyScreen extends Component {
     const options = { api_token: apiToken };
     inatjs.observations
       .review(observations[cardIndex], options)
-      .then(rsp => console.log('Reviewed: ', rsp))
+      .then(rsp => console.log('Reviewed: ', rsp, observations[cardIndex]))
       .catch((e) => {
         console.log('Error in reviewing observation', e);
         console.log(e.response);
