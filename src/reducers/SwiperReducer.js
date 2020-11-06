@@ -35,7 +35,7 @@ const INITIAL_STATE = {
     label: 'Europe',
     subscribe: true,
   },
-  maxPhotos: Infinity,
+  maxPhotos: 1,
   sortOrder: 'asc',
   isCaptive: false,
 };
