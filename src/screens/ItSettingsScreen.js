@@ -153,8 +153,8 @@ class ItSettingsScreen extends Component {
             {places ? places.map((p) => (
               <List.Item
                 key={p.id}
-                title={p.name}
-                onPress={() => changeSwipePlace({ ...p, label: p.name })}
+                title={p.display_name}
+                onPress={() => changeSwipePlace({ ...p, label: p.display_name })}
               />
             )) : defaultPlaces.map((p) => (
               <List.Item
