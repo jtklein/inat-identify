@@ -3,20 +3,22 @@ import {
   Alert,
   StyleSheet,
   View,
-  ScrollView,
 } from 'react-native';
 import { Button, Paragraph } from 'react-native-paper';
 import { connect } from 'react-redux';
 import * as AuthSession from 'expo-auth-session';
 import axios from 'axios';
+import AppIntro from 'rn-falcon-app-intro';
 
 import oauth from '../../secrets/oauth';
 import api from '../../secrets/api_token';
 import { ItScreenContainer } from '../components/common';
-
+import { colors } from '../styles';
 import {
   SIGNED_IN,
 } from '../actions/types';
+
+const { primaryColor, transparentPrimaryColor } = colors;
 
 const INATURALIST_OAUTH_API = 'https://www.inaturalist.org/oauth';
 
@@ -124,54 +126,77 @@ class IiAuthScreen extends React.Component {
   render() {
     const { signIn } = this.props;
     const { isAuthenticating } = this.state;
-    const { paragraph } = styles;
+    const { paragraph, slide } = styles;
     return (
-      <ItScreenContainer barStyle="dark-content">
-        <ScrollView testID="auth_screen">
-          <View style={paragraph}>
-            <Paragraph>What can I do with this app?</Paragraph>
-            <Paragraph>
-            You will be able to identify a large batch of hitherto unknown observations.
-            That is all. For now. If you like this feature, or have some requests, let me know.
-            </Paragraph>
+      <ItScreenContainer barStyle="dark-content" testID="auth_screen">
+        <AppIntro
+          dotColor={transparentPrimaryColor}
+          activeDotColor={primaryColor}
+          doneBtnLabel="Login"
+          rightTextColor={primaryColor}
+          onDoneBtnClick={() => this.loginAsync()}
+          skipBtnLabel="Login"
+          leftTextColor={primaryColor}
+          onSkipBtnClick={() => this.loginAsync()}
+        >
+          <View style={slide}>
+            <View level={10} style={paragraph}>
+              <Paragraph>What can I do with this app?</Paragraph>
+              <Paragraph>
+              You will be able to identify a large batch of hitherto unknown observations.
+              That is all. For now. If you like this feature, or have some requests, let me know.
+              </Paragraph>
+            </View>
+            {__DEV__ ? (
+              <Button
+                testID="dev_skip_login"
+                onPress={() => signIn(api.api_token)}
+              >
+                !!DEV Skip
+              </Button>
+            ) : null}
           </View>
-          <View style={paragraph}>
-            <Paragraph>How does it work?</Paragraph>
-            <Paragraph>
-            First, in order to use this app in combination with iNaturalist, you have to
-            authenticate yourself on the iNaturalist homepage. This will give this app here the
-            permission to send identifications made here back to iNaturalist on your behalf.
-            In other words, all identifications will be performed with your user account.
-            Once this was successfull you will be guided back here.
-            </Paragraph>
+          <View style={slide}>
+            <View level={20} style={paragraph}>
+              <Paragraph>How does it work?</Paragraph>
+              <Paragraph>
+              First, in order to use this app in combination with iNaturalist, you have to
+              authenticate yourself on the iNaturalist homepage. This will give this app here the
+              permission to send identifications made here back to iNaturalist on your behalf.
+              In other words, all identifications will be performed with your user account.
+              Once this was successfull you will be guided back here.
+              </Paragraph>
+            </View>
+            <View level={-5} style={paragraph}>
+              <Paragraph>Why do I see this screen every time?</Paragraph>
+              <Paragraph>
+              Handling your authentication with iNaturalist is a task that
+              has to be done with utmost care. I made this app here in my spare time,
+              and I have no time and resources to store your user account credentials securely enough
+              within this app. For this reason, as of now, I am merely
+              guiding you to iNaturalist's very own authentication and am not storing any
+              of your credentials for future use.
+              </Paragraph>
+            </View>
           </View>
-          <Button
-            testID="login_button"
-            onPress={() => this.loginAsync()}
-            loading={isAuthenticating}
-          >
-            Login with iNaturalist
-          </Button>
-          <View style={paragraph}>
-            <Paragraph>Why do I see this screen every time?</Paragraph>
-            <Paragraph>
-            Handling your authentication with iNaturalist is a task that
-            has to be done with utmost care. I made this app here in my spare time,
-            and I have no time and resources to store your user account credentials securely enough
-            within this app. For this reason, as of now, I am merely
-            guiding you to iNaturalist's very own authentication and am not storing any
-            of your credentials for future use.
-            </Paragraph>
-          </View>
-          {__DEV__ ? (
+          <View style={slide}>
             <Button
-              testID="dev_skip_login"
-              onPress={() => signIn(api.api_token)}
+              testID="login_button"
+              onPress={() => this.loginAsync()}
+              loading={isAuthenticating}
             >
-              !!DEV Skip
+              Login with iNaturalist
             </Button>
-          ) : null}
-        </ScrollView>
+            {__DEV__ ? (
+              <Button
+                testID="dev_skip_login"
+                onPress={() => signIn(api.api_token)}
+              >
+                !!DEV Skip
+              </Button>
+            ) : null}
+          </View>
+        </AppIntro>
       </ItScreenContainer>
     );
   }
@@ -181,6 +206,13 @@ const styles = StyleSheet.create({
   paragraph: {
     alignItems: 'center',
     justifyContent: 'center',
+  },
+  slide: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+    backgroundColor: '#FFFFFF',
+    padding: 15,
   },
 });
 
