@@ -236,6 +236,15 @@ class IiIdentifyScreen extends Component {
     inatjs.observations
       .search(params)
       .then(rsp => {
+        if (rsp.results.length === 0) {
+          console.log('No results');
+          Alert.alert(
+            'Great news!',
+            'There are no observations found with this fiter settings. Everything in this batch is identified. Check back at a later time.',
+          );
+          return;
+        }
+
         const filteredResults = rsp.results
           .filter(d => !d.species_guess)
           .filter(d => d.photos.length <= maxPhotos);
