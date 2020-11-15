@@ -9,6 +9,7 @@ import { connect } from 'react-redux';
 import * as AuthSession from 'expo-auth-session';
 import axios from 'axios';
 import AppIntro from 'rn-falcon-app-intro';
+import LottieView from 'lottie-react-native';
 
 import oauth from '../../secrets/oauth';
 import api from '../../secrets/api_token';
@@ -155,6 +156,18 @@ class IiAuthScreen extends React.Component {
                 !!DEV Skip
               </Button>
             ) : null}
+            <LottieView
+              ref={animation => {
+                this.animation = animation;
+              }}
+              speed={0.7}
+              autoPlay
+              style={{
+                width: null,
+                backgroundColor: '#ffffff',
+              }}
+              source={require('../../assets/animations/swiper.json')}
+            />
           </View>
           <View style={slide}>
             <View level={20} style={paragraph}>
