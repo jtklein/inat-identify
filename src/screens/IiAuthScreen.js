@@ -4,7 +4,7 @@ import {
   StyleSheet,
   View,
 } from 'react-native';
-import { Button, Paragraph } from 'react-native-paper';
+import { Button, Paragraph, Headline, Caption } from 'react-native-paper';
 import { connect } from 'react-redux';
 import * as AuthSession from 'expo-auth-session';
 import axios from 'axios';
@@ -127,7 +127,7 @@ class IiAuthScreen extends React.Component {
   render() {
     const { signIn } = this.props;
     const { isAuthenticating } = this.state;
-    const { paragraph, slide } = styles;
+    const { paragraph, slide, headline, caption } = styles;
     return (
       <ItScreenContainer barStyle="dark-content" testID="auth_screen">
         <AppIntro
@@ -141,13 +141,6 @@ class IiAuthScreen extends React.Component {
           onSkipBtnClick={() => this.loginAsync()}
         >
           <View style={slide}>
-            <View level={10} style={paragraph}>
-              <Paragraph>What can I do with this app?</Paragraph>
-              <Paragraph>
-              You will be able to identify a large batch of hitherto unknown observations.
-              That is all. For now. If you like this feature, or have some requests, let me know.
-              </Paragraph>
-            </View>
             {__DEV__ ? (
               <Button
                 testID="dev_skip_login"
@@ -168,6 +161,13 @@ class IiAuthScreen extends React.Component {
               }}
               source={require('../../assets/animations/swiper.json')}
             />
+            <View level={10} style={[paragraph, {position: 'absolute', left: 0, right: 0, top: 40}]}>
+              <Headline level={10} style={headline} >Identify observations by swiping</Headline>
+            </View>
+            <View level={10} style={[paragraph, {position: 'absolute', left: 0, right: 0, bottom: 50}]}>
+            <Headline level={10} style={headline}>Plant</Headline>
+            <Caption level={10} style={caption}>Swipe right</Caption>
+            </View>
           </View>
           <View style={slide}>
             <View level={20} style={paragraph}>
@@ -226,6 +226,14 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     backgroundColor: '#FFFFFF',
     padding: 15,
+  },
+  headline: {
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  caption: {
+    alignItems: 'center',
+    justifyContent: 'center',
   },
 });
 
