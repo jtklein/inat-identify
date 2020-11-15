@@ -3,6 +3,8 @@ import {
   Alert,
   StyleSheet,
   View,
+  Animated,
+  Easing,
 } from 'react-native';
 import { Button, Paragraph, Headline, Caption } from 'react-native-paper';
 import { connect } from 'react-redux';
@@ -26,11 +28,33 @@ const INATURALIST_OAUTH_API = 'https://www.inaturalist.org/oauth';
 class IiAuthScreen extends React.Component {
   INITIAL_STATE = {
     isAuthenticating: false,
+    swiperAnimationProgress: new Animated.Value(0),
+    progress: 0,
   };
 
   constructor(props) {
     super(props);
     this.state = this.INITIAL_STATE;
+  }
+
+  componentDidMount() {
+    this.startSwiperAnimation();
+    this.state.swiperAnimationProgress.addListener((progress) => {
+      this.setState({ progress: progress.value });
+    });
+  }
+
+  startSwiperAnimation = () => {
+    Animated.loop(
+      Animated.sequence([
+        Animated.timing(this.state.swiperAnimationProgress, {
+          toValue: 1,
+          duration: 10000,
+          easing: Easing.linear,
+          useNativeDriver: false,
+        })
+      ])
+    ).start();
   }
 
   loginAsync = async () => {
@@ -126,7 +150,7 @@ class IiAuthScreen extends React.Component {
 
   render() {
     const { signIn } = this.props;
-    const { isAuthenticating } = this.state;
+    const { isAuthenticating, swiperAnimationProgress, progress } = this.state;
     const { paragraph, slide, headline, caption } = styles;
     return (
       <ItScreenContainer barStyle="dark-content" testID="auth_screen">
@@ -153,13 +177,12 @@ class IiAuthScreen extends React.Component {
               ref={animation => {
                 this.animation = animation;
               }}
-              speed={0.7}
-              autoPlay
               style={{
                 width: null,
                 backgroundColor: '#ffffff',
               }}
               source={require('../../assets/animations/swiper.json')}
+              progress={swiperAnimationProgress}
             />
             <View level={10} style={[paragraph, {position: 'absolute', left: 0, right: 0, top: 40}]}>
               <Headline level={10} style={headline} >Identify observations by swiping</Headline>
