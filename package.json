@@ -18,6 +18,7 @@
     "expo-web-browser": "~8.5.0",
     "inaturalistjs": "github:inaturalist/inaturalistjs",
     "lodash": "^4.17.20",
+    "lottie-react-native": "~2.6.1",
     "react": "16.13.1",
     "react-native": "https://github.com/expo/react-native/archive/sdk-39.0.3.tar.gz",
     "react-native-gesture-handler": "~1.7.0",
