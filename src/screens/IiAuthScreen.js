@@ -205,26 +205,8 @@ class IiAuthScreen extends React.Component {
             </View> : <View></View> }
           </View>
           <View style={slide}>
-            <View level={20} style={paragraph}>
-              <Paragraph>How does it work?</Paragraph>
-              <Paragraph>
-              First, in order to use this app in combination with iNaturalist, you have to
-              authenticate yourself on the iNaturalist homepage. This will give this app here the
-              permission to send identifications made here back to iNaturalist on your behalf.
-              In other words, all identifications will be performed with your user account.
-              Once this was successfull you will be guided back here.
-              </Paragraph>
-            </View>
-            <View level={-5} style={paragraph}>
-              <Paragraph>Why do I see this screen every time?</Paragraph>
-              <Paragraph>
-              Handling your authentication with iNaturalist is a task that
-              has to be done with utmost care. I made this app here in my spare time,
-              and I have no time and resources to store your user account credentials securely enough
-              within this app. For this reason, as of now, I am merely
-              guiding you to iNaturalist's very own authentication and am not storing any
-              of your credentials for future use.
-              </Paragraph>
+            <View level={10} style={[paragraph, {position: 'absolute', left: 0, right: 0, top: 40}]}>
+              <Headline style={headline} >Login to your iNaturalist account to start</Headline>
             </View>
             <Button
               testID="login_button"
