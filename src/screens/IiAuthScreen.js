@@ -187,10 +187,22 @@ class IiAuthScreen extends React.Component {
             <View level={10} style={[paragraph, {position: 'absolute', left: 0, right: 0, top: 40}]}>
               <Headline level={10} style={headline} >Identify observations by swiping</Headline>
             </View>
-            <View level={10} style={[paragraph, {position: 'absolute', left: 0, right: 0, bottom: 50}]}>
-            <Headline level={10} style={headline}>Plant</Headline>
-            <Caption level={10} style={caption}>Swipe right</Caption>
-            </View>
+            {progress < 0.25 ? <View level={10} style={[paragraph, {position: 'absolute', left: 0, right: 0, bottom: 70}]}>
+              <Headline level={10} style={headline}>Plant</Headline>
+              <Caption level={5} style={caption}>Swipe right</Caption>
+            </View> : <View></View> }
+            {progress > 0.25 && progress < 0.5 ? <View level={10} style={[paragraph, {position: 'absolute', left: 0, right: 0, bottom: 70}]}>
+              <Headline level={10} style={headline}>Animal</Headline>
+              <Caption level={5} style={caption}>Swipe left</Caption>
+            </View> : <View></View> }
+            {progress > 0.5 && progress < 0.75 ? <View level={10} style={[paragraph, {position: 'absolute', left: 0, right: 0, bottom: 70}]}>
+              <Headline level={10} style={headline}>Fungi</Headline>
+              <Caption level={5} style={caption}>Swipe up</Caption>
+            </View> : <View></View> }
+            {progress > 0.75 ? <View level={10} style={[paragraph, {position: 'absolute', left: 0, right: 0, bottom: 70}]}>
+              <Headline level={10} style={headline}>Don't know?</Headline>
+              <Caption level={5} style={caption}>Swipe down to skip</Caption>
+            </View> : <View></View> }
           </View>
           <View style={slide}>
             <View level={20} style={paragraph}>
@@ -214,8 +226,6 @@ class IiAuthScreen extends React.Component {
               of your credentials for future use.
               </Paragraph>
             </View>
-          </View>
-          <View style={slide}>
             <Button
               testID="login_button"
               onPress={() => this.loginAsync()}
@@ -253,10 +263,14 @@ const styles = StyleSheet.create({
   headline: {
     alignItems: 'center',
     justifyContent: 'center',
+    color: primaryColor,
+    fontSize: 32,
+    textAlign: 'center'
   },
   caption: {
     alignItems: 'center',
     justifyContent: 'center',
+    fontSize: 18,
   },
 });
 
