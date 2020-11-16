@@ -32,6 +32,17 @@ class ItSupportScreen extends Component {
     });
   }
 
+  openPatreon = () => {
+    const url = 'https://www.patreon.com/jtklein';
+    Linking.canOpenURL(url).then((supported) => {
+      if (supported) {
+        Linking.openURL(url);
+      } else {
+        console.log("Don't know how to open URI", url);
+      }
+    });
+  }
+
   render() {
     const { headline, paragraph } = styles;
     return (
@@ -46,6 +57,15 @@ class ItSupportScreen extends Component {
               Join the forum
             </Button>
           </View>
+          {/* <View style={paragraph}>
+            <Headline style={headline}>Want to get preferred support?</Headline>
+            <Button
+              testID="patreon"
+              onPress={() => this.openPatreon()}
+            >
+              Join my Patreon!
+            </Button>
+          </View> */}
         </View>
       </ItScreenContainer>
     );
