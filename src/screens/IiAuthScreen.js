@@ -6,7 +6,7 @@ import {
   Animated,
   Easing,
 } from 'react-native';
-import { Button, Paragraph, Headline, Caption } from 'react-native-paper';
+import { Button, Headline, Caption } from 'react-native-paper';
 import { connect } from 'react-redux';
 import * as AuthSession from 'expo-auth-session';
 import axios from 'axios';
@@ -172,7 +172,7 @@ class IiAuthScreen extends React.Component {
               >
                 !!DEV Skip
               </Button>
-            ) : null}
+            ) : <View></View>}
             <LottieView
               ref={animation => {
                 this.animation = animation;
@@ -206,7 +206,7 @@ class IiAuthScreen extends React.Component {
           </View>
           <View style={slide}>
             <View level={10} style={[paragraph, {position: 'absolute', left: 0, right: 0, top: 40}]}>
-              <Headline style={headline} >Login to your iNaturalist account to start</Headline>
+              <Headline style={headline} >Log in to your iNaturalist account to start</Headline>
             </View>
             <Button
               testID="login_button"
@@ -222,7 +222,7 @@ class IiAuthScreen extends React.Component {
               >
                 !!DEV Skip
               </Button>
-            ) : null}
+            ) : <View></View>}
           </View>
         </AppIntro>
       </ItScreenContainer>
