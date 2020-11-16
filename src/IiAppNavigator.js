@@ -9,6 +9,7 @@ import IiAuthScreen from './screens/IiAuthScreen';
 import ItEntryScreen from './screens/ItEntryScreen';
 import IiIdentifyScreen from './screens/IiIdentifyScreen';
 import ItSettingsScreen from './screens/ItSettingsScreen';
+import ItSupportScreen from './screens/ItSupportScreen';
 
 import {
   ItHeaderButtons,
@@ -75,7 +76,7 @@ class App extends Component {
                   title: 'Swiper',
                   headerRight: () => (
                     <ItHeaderButtons>
-                      <HeaderItem testID="header_settings_button" title="settings" iconName="settings" onPress={() => navigation.navigate('Settings')} />
+                      <HeaderItem testID="header_settings_button" title="settings" iconName="add-circle-outline" onPress={() => navigation.navigate('Settings')} />
                     </ItHeaderButtons>
                   ),
                 })}
@@ -83,7 +84,12 @@ class App extends Component {
               <AppStack.Screen
                 name="Settings"
                 component={ItSettingsScreen}
-                options={{ title: 'Swiper settings' }}
+                options={{ title: 'Extras' }}
+              />
+              <AppStack.Screen
+                name="Support"
+                component={ItSupportScreen}
+                options={{ title: 'Support' }}
               />
               <AppStack.Screen
                 name="Identify"
