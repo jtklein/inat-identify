@@ -19,6 +19,7 @@ import {
   ItSpinner,
   ItHeaderButtons,
   HeaderItem,
+  ItText,
 } from '../components/common';
 
 import {
@@ -35,6 +36,7 @@ class IiIdentifyScreen extends Component {
     page: 0,
     visible: false,
     currentObservationCaptive: false,
+    totalResults: 0,
   };
 
   constructor(props) {
@@ -212,6 +214,49 @@ class IiIdentifyScreen extends Component {
       });
   };
 
+  skipAndReview = () => {
+    const { apiToken } = this.props.auth;
+    const { observations, cardIndex } = this.state;
+    const options = { api_token: apiToken };
+    inatjs.observations
+      .review(observations[cardIndex], options)
+      .then(rsp => console.log('Reviewed: ', rsp, observations[cardIndex]))
+      .catch((e) => {
+        console.log('Error in reviewing observation', e);
+        console.log(e.response);
+        Alert.alert(
+          'Sorry',
+          'Unfortunately, something went wrong. The observation was skipped but not marked as reviewed.',
+        );
+      });
+    this.swiper.swipeBottom();
+  };
+
+  showDialog = () => {
+    this.setState({ visible: true });
+  };
+
+  hideDialog = () => {
+    this.setState({ visible: false });
+  };
+
+  showCommentDialog = () => {
+    this.setState({ commentVisible: true });
+  };
+
+  hideCommentDialog = () => {
+    this.setState({ commentVisible: false });
+  };
+
+  showWeb = () => {
+    const { observations, cardIndex } = this.state;
+    const observation = observations[cardIndex];
+    const baseURL = 'https://www.inaturalist.org/observations/';
+    const url = `${baseURL}${observation.id}`;
+    WebBrowser.openBrowserAsync(url);
+    this.swiper.swipeBottom();
+  };
+
   searchObservations() {
     const { user, page } = this.state;
     const { swiper } = this.props;
@@ -236,15 +281,16 @@ class IiIdentifyScreen extends Component {
     inatjs.observations
       .search(params)
       .then(rsp => {
+        console.log('rsp', rsp);
         if (rsp.results.length === 0) {
           console.log('No results');
           Alert.alert(
             'Great news!',
-            'There are no observations found with this fiter settings. Everything in this batch is identified. Check back at a later time.',
+            'There are no observations found with this filter settings. Everything in this batch is identified. Check back at a later time.',
           );
           return;
         }
-
+        this.setState({ totalResults: rsp.total_results });
         const filteredResults = rsp.results
           .filter(d => !d.species_guess)
           .filter(d => d.photos.length <= maxPhotos);
@@ -321,49 +367,6 @@ class IiIdentifyScreen extends Component {
       });
   }
 
-  showDialog = () => {
-    this.setState({ visible: true });
-  };
-
-  hideDialog = () => {
-    this.setState({ visible: false });
-  };
-
-  showCommentDialog = () => {
-    this.setState({ commentVisible: true });
-  };
-
-  hideCommentDialog = () => {
-    this.setState({ commentVisible: false });
-  };
-
-  showWeb = () => {
-    const { observations, cardIndex } = this.state;
-    const observation = observations[cardIndex];
-    const baseURL = 'https://www.inaturalist.org/observations/';
-    const url = `${baseURL}${observation.id}`;
-    WebBrowser.openBrowserAsync(url);
-    this.swiper.swipeBottom();
-  };
-
-  skipAndReview = () => {
-    const { apiToken } = this.props.auth;
-    const { observations, cardIndex } = this.state;
-    const options = { api_token: apiToken };
-    inatjs.observations
-      .review(observations[cardIndex], options)
-      .then(rsp => console.log('Reviewed: ', rsp, observations[cardIndex]))
-      .catch((e) => {
-        console.log('Error in reviewing observation', e);
-        console.log(e.response);
-        Alert.alert(
-          'Sorry',
-          'Unfortunately, something went wrong. The observation was skipped but not marked as reviewed.',
-        );
-      });
-    this.swiper.swipeBottom();
-  };
-
   renderFAB() {
     const { fabOpen, currentObservationCaptive } = this.state;
     return (
@@ -421,6 +424,7 @@ class IiIdentifyScreen extends Component {
               title={swipeRight.label}
               left={() => <List.Icon icon="arrow-right-bold" />}
             />
+            <ItText>There are {this.state.totalResults} observations in this batch.</ItText>
           </Dialog.Content>
           <Dialog.Actions>
             <Button onPress={this.hideDialog}>Thanks</Button>
