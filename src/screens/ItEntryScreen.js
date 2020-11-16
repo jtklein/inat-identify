@@ -2,19 +2,119 @@ import React, { Component } from 'react';
 import {
   StyleSheet,
   View,
-  Share,
-  Linking,
   ScrollView,
 } from 'react-native';
-import { Button, Paragraph } from 'react-native-paper';
 import { connect } from 'react-redux';
+import {
+  Switch,
+  List,
+  Button,
+  Searchbar,
+} from 'react-native-paper';
+import inatjs from 'inaturalistjs';
 
 import {
   ItScreenContainer,
+  ItText,
 } from '../components/common';
+import {
+  SWIPER_LEFT_CHANGED,
+  SWIPER_RIGHT_CHANGED,
+  SWIPER_TOP_CHANGED,
+  SWIPER_PLACE_CHANGED,
+  SWIPER_LEFT_SUBSCRIBED,
+  SWIPER_LEFT_UNSUBSCRIBED,
+  SWIPER_RIGHT_UNSUBSCRIBED,
+  SWIPER_RIGHT_SUBSCRIBED,
+  SWIPER_TOP_UNSUBSCRIBED,
+  SWIPER_TOP_SUBSCRIBED,
+  SWIPER_PHOTOS_CHANGED,
+  SWIPER_SORT_CHANGED,
+  SWIPER_CAPTIVE_CHANGED,
+} from '../actions/types';
+
+const defaultPlaces = [
+  {
+    id: 97389,
+    label: 'South America',
+  },
+  {
+    id: 97391,
+    label: 'Europe',
+  },
+  {
+    id: 97392,
+    label: 'Africa',
+  },
+  {
+    id: 97393,
+    label: 'Oceania',
+  },
+  {
+    id: 97394,
+    label: 'North America',
+  },
+  {
+    id: 97395,
+    label: 'Asia',
+  },
+];
+
+const taxa = [
+  {
+    id: 1,
+    label: 'Animalia',
+    subscribe: true,
+  },
+  {
+    id: 47126,
+    label: 'Plantae',
+    subscribe: true,
+  },
+  {
+    id: 47170,
+    label: 'Fungi',
+    subscribe: true,
+  },
+];
+
+const photosOptions = [
+  {
+    value: 1,
+    label: 'One',
+  },
+  {
+    value: Infinity,
+    label: 'One or more',
+  },
+];
+
+const sortOptions = [
+  {
+    value: 'asc',
+    label: 'Oldest first',
+  },
+  {
+    value: 'desc',
+    label: 'Newest first',
+  },
+];
+
+const captiveOptions = [
+  {
+    value: true,
+    label: 'Only captive/cultivated',
+  },
+  {
+    value: false,
+    label: "Don't show captive/cultivated",
+  },
+];
 
 class ItEntryScreen extends Component {
   INITIAL_STATE = {
+    showFilter: true,
+    placeSearchText: undefined,
   };
 
   constructor(props) {
@@ -22,99 +122,260 @@ class ItEntryScreen extends Component {
     this.state = this.INITIAL_STATE;
   }
 
-  shareLink = (ids) => {
-    const baseURL = 'https://www.inaturalist.org/observations/identify?reviewed=any&quality_grade=needs_id%2Cresearch%2Ccasual&id=';
-    const url = `${baseURL}${ids}`;
-    Share.share({ url })
-      .then((result) => {
-        if (result.action === Share.sharedAction) {
-          if (result.activityType) {
-            // shared with activity type of result.activityType
-          } else {
-            // shared
-          }
-        } else if (result.action === Share.dismissedAction) {
-          // dismissed
-        }
-      })
-      .catch(error => console.log(error.message));
+  onFilterPressed = () => {
+    this.setState({ showFilter: true });
   }
 
-  openLink = (ids) => {
-    const baseURL = 'https://www.inaturalist.org/observations/identify?reviewed=any&quality_grade=needs_id%2Cresearch%2Ccasual&id=';
-    const url = `${baseURL}${ids}`;
-    Linking.canOpenURL(url).then((supported) => {
-      if (supported) {
-        Linking.openURL(url);
-      } else {
-        console.log("Don't know how to open URI", url);
-      }
-    });
+  onActionsPressed = () => {
+    this.setState({ showFilter: false });
+  }
+
+  onChangePlaceSearch = (text) => {
+    this.setState({ placeSearchText: text });
+    inatjs.places
+      .autocomplete({ q: text, order_by: 'area' })
+      .then((rsp) => this.setState({ places: rsp.results }));
+  }
+
+  renderFilterSettings = () => {
+    const { placeSearchText, places } = this.state;
+    const {
+      changeSwipePlace,
+      changeSwipePhotos,
+      changeSwipeSort,
+      changeSwipeIsCaptive,
+      swiper,
+    } = this.props;
+    const {
+      place,
+      maxPhotos,
+      sortOrder,
+      isCaptive,
+    } = swiper;
+    const { container } = styles;
+    return (
+      <View style={container}>
+        <List.AccordionGroup>
+          <List.Accordion
+            id="places"
+            title={`Only from ${place.label}`}
+            description="Show observations from a certain place only."
+            descriptionNumberOfLines={10}
+            left={(props) => <List.Icon {...props} icon="map-marker" />}
+          >
+            <Searchbar
+              placeholder="Search"
+              onChangeText={this.onChangePlaceSearch}
+              value={placeSearchText}
+            />
+            {places ? places.map((p) => (
+              <List.Item
+                key={p.id}
+                title={p.display_name}
+                onPress={() => changeSwipePlace({ ...p, label: p.display_name })}
+              />
+            )) : defaultPlaces.map((p) => (
+              <List.Item
+                key={p.id}
+                title={p.label}
+                onPress={() => changeSwipePlace(p)}
+              />
+            ))}
+          </List.Accordion>
+          <List.Accordion
+            id="photos"
+            title={`Observations with ${maxPhotos === 1 ? 'one' : 'one or'} photo(s)`}
+            description="Show observations with only one photo, or don't filter by number of photos."
+            descriptionNumberOfLines={10}
+            left={(props) => <List.Icon {...props} icon="image" />}
+          >
+            {photosOptions.map((p) => (
+              <List.Item
+                key={p.label}
+                title={p.label}
+                onPress={() => changeSwipePhotos(p)}
+              />
+            ))}
+          </List.Accordion>
+          <List.Accordion
+            id="sort"
+            title={`First show ${sortOrder === 'asc' ? 'oldest' : 'newest'} observations`}
+            description="Sort observations by date of creation."
+            descriptionNumberOfLines={10}
+            left={(props) => <List.Icon {...props} icon="sort" />}
+          >
+            {sortOptions.map((p) => (
+              <List.Item
+                key={p.label}
+                title={p.label}
+                onPress={() => changeSwipeSort(p)}
+              />
+            ))}
+          </List.Accordion>
+          <List.Accordion
+            id="captive"
+            title={`Show ${isCaptive ? 'only' : 'no'} captive/cultivated`}
+            description="Show observations that are marked as cultivated, or not, or both (i.e. doesn't matter)."
+            descriptionNumberOfLines={10}
+            left={(props) => <List.Icon {...props} icon="flower" />}
+          >
+            {captiveOptions.map((p) => (
+              <List.Item
+                key={p.label}
+                title={p.label}
+                onPress={() => changeSwipeIsCaptive(p)}
+              />
+            ))}
+          </List.Accordion>
+        </List.AccordionGroup>
+      </View>
+    );
+  }
+
+  renderActionsSettings = () => {
+    const {
+      changeSwipeLeft,
+      subscribeSwipeLeft,
+      unsubscribeSwipeLeft,
+      changeSwipeRight,
+      subscribeSwipeRight,
+      unsubscribeSwipeRight,
+      changeSwipeTop,
+      subscribeSwipeTop,
+      unsubscribeSwipeTop,
+      swiper,
+    } = this.props;
+    const {
+      swipeLeft, swipeRight, swipeTop,
+    } = swiper;
+
+    const { container, subscriptionContainer } = styles;
+    return (
+      <View style={container}>
+        <List.AccordionGroup>
+          <List.Accordion
+            id="left"
+            title={`Swipe left = ${swipeLeft.label}`}
+            description="The observation will be identified as this taxon when swiped to the left."
+            descriptionNumberOfLines={10}
+            left={props => <List.Icon {...props} icon="arrow-left-bold" />}
+          >
+            {taxa.map(taxon => (
+              <List.Item
+                key={taxon.id}
+                title={taxon.label}
+                onPress={() => changeSwipeLeft(taxon)}
+              />
+            ))}
+          </List.Accordion>
+          <View style={subscriptionContainer}>
+            <ItText>{`Subscribe to ${swipeLeft.label} identifications`}</ItText>
+            <Switch
+              testID="subscribe_left"
+              value={swipeLeft.subscribe}
+              onValueChange={() => (swipeLeft.subscribe
+                ? unsubscribeSwipeLeft()
+                : subscribeSwipeLeft())
+              }
+            />
+          </View>
+
+          <List.Accordion
+            id="right"
+            title={`Swipe right = ${swipeRight.label}`}
+            description="The observation will be identified as this taxon when swiped to the right."
+            descriptionNumberOfLines={10}
+            left={props => <List.Icon {...props} icon="arrow-right-bold" />}
+          >
+            {taxa.map(taxon => (
+              <List.Item
+                key={taxon.id}
+                title={taxon.label}
+                onPress={() => changeSwipeRight(taxon)}
+              />
+            ))}
+          </List.Accordion>
+          <View style={subscriptionContainer}>
+            <ItText>{`Subscribe to ${swipeRight.label} identifications`}</ItText>
+            <Switch
+              testID="subscribe_right"
+              value={swipeRight.subscribe}
+              onValueChange={() => (swipeRight.subscribe
+                ? unsubscribeSwipeRight()
+                : subscribeSwipeRight())
+              }
+            />
+          </View>
+
+          <List.Accordion
+            id="top"
+            title={`Swipe top = ${swipeTop.label}`}
+            description="The observation will be identified as this taxon when swiped to the top."
+            descriptionNumberOfLines={10}
+            left={(props) => <List.Icon {...props} icon="arrow-up-bold" />}
+          >
+            {taxa.map(taxon => (
+              <List.Item
+                key={taxon.id}
+                title={taxon.label}
+                onPress={() => changeSwipeTop(taxon)}
+              />
+            ))}
+          </List.Accordion>
+          <View style={subscriptionContainer}>
+            <ItText>{`Subscribe to ${swipeTop.label} identifications`}</ItText>
+            <Switch
+              testID="subscribe_top"
+              value={swipeTop.subscribe}
+              onValueChange={() => (swipeTop.subscribe ? unsubscribeSwipeTop() : subscribeSwipeTop())}
+            />
+          </View>
+        </List.AccordionGroup>
+      </View>
+    );
+  }
+
+  renderSettings = () => {
+    const { showFilter } = this.state;
+    return showFilter ? this.renderFilterSettings() : this.renderActionsSettings();
   }
 
   render() {
-    const { navigation, skippedObservations } = this.props;
-    const { paragraph } = styles;
+    const { navigation } = this.props;
+    const { showFilter } = this.state;
+    const { container, screenContainer } = styles;
     return (
       <ItScreenContainer>
-        <ScrollView testID="entry_screen">
-          <View style={paragraph}>
-            <Paragraph>How does it work?</Paragraph>
-            <Paragraph>
-              The app will show you a stack of cards. These are true
-              iNaturalist observations, so don't mess around. In the basic
-              example you can swipe right if you want to identify the
-              observation as a plant, left for animal and up to the top for
-              fungi. These represent the main branches of life and should
-              suffice for now. You can always swipe to the bottom to skip an
-              observation.
-            </Paragraph>
-            <Paragraph>
-              Press on the image in the card to page through the images.
-            </Paragraph>
-            <Paragraph>
-              For now, you can customize to a small extent in the settings
-              menu (top right). You can change the place from where to look
-              for observations. You can change the directions in which
-              observations are identified into the three main branches of
-              life. You can further set if you want to be subscribed to the
-              observations you identified in each of the directions
-              separately.
-            </Paragraph>
-            <Paragraph>
-              If you like the app let me know, then I can make it so that
-              you can customize the swipe directions even further.
-            </Paragraph>
+        <ScrollView style={screenContainer}>
+          <View
+            testID="settings_screen"
+            style={{ flexDirection: 'row', justifyContent: 'space-evenly' }}>
+            <Button
+              testID="filter_tab"
+              dark
+              icon="filter-variant"
+              mode={showFilter ? 'contained' : 'outlined'}
+              onPress={() => this.onFilterPressed()}
+            >
+              Filter
+            </Button>
+            <Button
+              testID="actions_tab"
+              dark
+              icon="arrow-expand-all"
+              mode={!showFilter ? 'contained' : 'outlined'}
+              onPress={() => this.onActionsPressed()}
+            >
+              Actions
+            </Button>
           </View>
+          <View style={container}>{this.renderSettings()}</View>
           <Button
             testID="start_swiper"
             onPress={() => navigation.navigate('Identify')}
           >
-            OK, got it
+            Start swiping
           </Button>
-          <View style={paragraph}>
-            <Paragraph>
-              If you are finished for this session come back here and you
-              can send yourself a link with the skipped observations to open
-              those on the iNaturalist website.
-            </Paragraph>
-            <Button
-              testID="open_link"
-              icon="open-in-app"
-              onPress={() => this.openLink(skippedObservations)}
-              disabled={skippedObservations.length === 0}
-            >
-              Open in browser
-            </Button>
-            <Button
-              testID="share_link"
-              icon="share"
-              onPress={() => this.shareLink(skippedObservations)}
-              disabled={skippedObservations.length === 0}
-            >
-              Share the link
-            </Button>
-          </View>
         </ScrollView>
       </ItScreenContainer>
     );
@@ -122,14 +383,66 @@ class ItEntryScreen extends Component {
 }
 
 const styles = StyleSheet.create({
-  paragraph: {
+  container: {
+    flex: 1,
+    width: '100%',
+  },
+  screenContainer: {
+    flex: 1,
+  },
+  subscriptionContainer: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
     alignItems: 'center',
-    justifyContent: 'center',
+    paddingLeft: 16,
+    paddingRight: 16,
   },
 });
 
 const mapStateToProps = state => ({
-  skippedObservations: state.observations.skippedObservations,
+  swiper: state.swiper,
 });
 
-export default connect(mapStateToProps, undefined)(ItEntryScreen);
+const mapDispatchToProps = dispatch => ({
+  changeSwipeLeft: (payload) => {
+    dispatch({ type: SWIPER_LEFT_CHANGED, payload });
+  },
+  subscribeSwipeLeft: (payload) => {
+    dispatch({ type: SWIPER_LEFT_SUBSCRIBED, payload });
+  },
+  unsubscribeSwipeLeft: (payload) => {
+    dispatch({ type: SWIPER_LEFT_UNSUBSCRIBED, payload });
+  },
+  changeSwipeRight: (payload) => {
+    dispatch({ type: SWIPER_RIGHT_CHANGED, payload });
+  },
+  subscribeSwipeRight: (payload) => {
+    dispatch({ type: SWIPER_RIGHT_SUBSCRIBED, payload });
+  },
+  unsubscribeSwipeRight: (payload) => {
+    dispatch({ type: SWIPER_RIGHT_UNSUBSCRIBED, payload });
+  },
+  changeSwipeTop: (payload) => {
+    dispatch({ type: SWIPER_TOP_CHANGED, payload });
+  },
+  subscribeSwipeTop: (payload) => {
+    dispatch({ type: SWIPER_TOP_SUBSCRIBED, payload });
+  },
+  unsubscribeSwipeTop: (payload) => {
+    dispatch({ type: SWIPER_TOP_UNSUBSCRIBED, payload });
+  },
+  changeSwipePlace: (payload) => {
+    dispatch({ type: SWIPER_PLACE_CHANGED, payload });
+  },
+  changeSwipePhotos: (payload) => {
+    dispatch({ type: SWIPER_PHOTOS_CHANGED, payload });
+  },
+  changeSwipeSort: (payload) => {
+    dispatch({ type: SWIPER_SORT_CHANGED, payload });
+  },
+  changeSwipeIsCaptive: (payload) => {
+    dispatch({ type: SWIPER_CAPTIVE_CHANGED, payload });
+  },
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(ItEntryScreen);
