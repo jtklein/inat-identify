@@ -5,7 +5,7 @@ import {
   Linking,
 } from 'react-native';
 import { connect } from 'react-redux';
-import { Button, Headline, Caption, Paragraph } from 'react-native-paper';
+import { Button, Headline } from 'react-native-paper';
 
 import { ItScreenContainer } from '../components/common';
 import { colors } from '../styles';
