@@ -4118,10 +4118,10 @@ detox-expo-helpers@^0.6.0:
     semver "^5.6.0"
     xdl "^51.5.0"
 
-detox@^17.10.3:
-  version "17.11.4"
-  resolved "https://registry.yarnpkg.com/detox/-/detox-17.11.4.tgz#f3a925179b13bb5a031b0e1d609d2ba78b89e010"
-  integrity sha512-duZpv5JHTSqEwDt/RFkGz18qIbgBDdAX/ktQZLHljtezeF0G2Cp+DF/b964ULRY48kaPBhovzfN/ChCq1lq3lQ==
+detox@^17.14.6:
+  version "17.14.6"
+  resolved "https://registry.yarnpkg.com/detox/-/detox-17.14.6.tgz#5a64e802aad176baf1d52bb860046d8c39aa0262"
+  integrity sha512-YvO24ZhiiGgNSTBQ9orqhb4iVGGjygRp+m4DbHyB8OyPb4l4MwcTsMlCbKK4hfyy5cCCDosmvtwqdhbVmHr1jQ==
   dependencies:
     bunyan "^1.8.12"
     bunyan-debug-stream "^1.1.0"
@@ -7494,12 +7494,7 @@ lodash.upperfirst@^4.3.1:
   resolved "https://registry.yarnpkg.com/lodash.upperfirst/-/lodash.upperfirst-4.3.1.tgz#1365edf431480481ef0d1c68957a5ed99d49f7ce"
   integrity sha1-E2Xt9DFIBIHvDRxolXpe2Z1J984=
 
-lodash@^4.14.1, lodash@^4.2.1, lodash@^4.3.0:
-  version "4.17.15"
-  resolved "https://registry.yarnpkg.com/lodash/-/lodash-4.17.15.tgz#b447f6670a0455bbfeedd11392eff330ea097548"
-  integrity sha512-8xOcRHvCjnocdS5cpwXQXVzmmh5e5+saE2QGoeQmbKmRS6J3VQppPOIt0MnmE+4xlZoumy0GPG0D0MVIQbNA1A==
-
-lodash@^4.17.13, lodash@^4.17.14, lodash@^4.17.15, lodash@^4.17.19, lodash@^4.17.20, lodash@^4.17.4, lodash@^4.17.5, lodash@^4.5.0, lodash@^4.6.0:
+lodash@^4.14.1, lodash@^4.17.13, lodash@^4.17.14, lodash@^4.17.15, lodash@^4.17.19, lodash@^4.17.20, lodash@^4.17.4, lodash@^4.17.5, lodash@^4.2.1, lodash@^4.3.0, lodash@^4.5.0, lodash@^4.6.0:
   version "4.17.20"
   resolved "https://registry.yarnpkg.com/lodash/-/lodash-4.17.20.tgz#b44a9b6297bcb698f1c51a3545a2b3b368d59c52"
   integrity sha512-PlhdFcillOINfeV7Ni6oF1TAEayyZBoZ8bcshTHqOYJYlrqzRK5hagpagky5o4HfCzzd1TRkXPMFq6cKk9rGmA==
