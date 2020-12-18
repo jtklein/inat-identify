@@ -6012,8 +6012,8 @@ imurmurhash@^0.1.4:
   integrity sha1-khi5srkoojixPcT7a21XbyMUU+o=
 
 "inaturalistjs@github:inaturalist/inaturalistjs":
-  version "1.11.0"
-  resolved "https://codeload.github.com/inaturalist/inaturalistjs/tar.gz/df31c8cf98e89bd2cee4b79e9d1fee496eae86a6"
+  version "1.11.1"
+  resolved "https://codeload.github.com/inaturalist/inaturalistjs/tar.gz/8df734b52c2281bdcb6e8396de972292cb32757f"
   dependencies:
     cross-fetch "^2.2.3"
     form-data "^3.0.0"
