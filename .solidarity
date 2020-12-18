@@ -5,7 +5,7 @@
       {
         "rule": "cli",
         "binary": "node",
-        "semver": "12.18.3"
+        "semver": "15.4.0"
       }
     ],
     "Watchman": [
@@ -49,7 +49,7 @@
       {
         "rule": "cli",
         "binary": "npm",
-        "semver": "6.14.6"
+        "semver": "7.0.15"
       }
     ],
     "Yarn": [
