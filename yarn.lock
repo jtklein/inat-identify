@@ -9452,11 +9452,6 @@ react-native-paper@^4.2.0:
     color "^3.1.2"
     react-native-safe-area-view "^0.14.9"
 
-react-native-platform-touchable@^1.1.1:
-  version "1.1.1"
-  resolved "https://registry.yarnpkg.com/react-native-platform-touchable/-/react-native-platform-touchable-1.1.1.tgz#fde4acc65eea585d28b164d0c3716a42129a68e4"
-  integrity sha1-/eSsxl7qWF0osWTQw3FqQhKaaOQ=
-
 react-native-reanimated@~1.13.0:
   version "1.13.1"
   resolved "https://registry.yarnpkg.com/react-native-reanimated/-/react-native-reanimated-1.13.1.tgz#c370c32cc4d447ae896cb029bb9c6a2f7608c5b4"
@@ -9534,13 +9529,12 @@ react-native-testing-library@^2.1.1:
     use-subscription "^1.0.0"
     whatwg-fetch "^3.0.0"
 
-react-navigation-header-buttons@^4.0.2:
-  version "4.0.3"
-  resolved "https://registry.yarnpkg.com/react-navigation-header-buttons/-/react-navigation-header-buttons-4.0.3.tgz#faa8d4a6a41b56550ae51e925b6722336c3813e7"
-  integrity sha512-fW22BuinpXPQfnat9nDBBcROB83lNfw5QF3wPfKpbxYUDXMT3l9QDQODKGChVggWfqba5tRKwPepkuVNlzVUSQ==
+react-navigation-header-buttons@^6.2.1:
+  version "6.2.1"
+  resolved "https://registry.yarnpkg.com/react-navigation-header-buttons/-/react-navigation-header-buttons-6.2.1.tgz#ceaf080dac2ddaace19bf03ba12b420162ef0f00"
+  integrity sha512-1UYxuZ29oNfXhgc4x4ZzaH8pcqiYd3WJGE0zldqdiFW3D/Anr08zH50eegl0uHrnTjZIt+qcGhPWP9C0Cxf4UA==
   dependencies:
     invariant ">=2"
-    react-native-platform-touchable "^1.1.1"
 
 react-redux@^5.0.2:
   version "5.1.2"
