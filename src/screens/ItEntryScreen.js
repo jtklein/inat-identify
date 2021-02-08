@@ -184,7 +184,7 @@ class ItEntryScreen extends Component {
           </List.Accordion>
           <List.Accordion
             id="photos"
-            title={`Observations with ${maxPhotos === 1 ? 'one' : 'one or'} photo(s)`}
+            title={`Observations with ${maxPhotos === 1 ? 'one photo' : 'one or more photos'}`}
             description="Show observations with only one photo, or don't filter by number of photos."
             descriptionNumberOfLines={10}
             left={(props) => <List.Icon {...props} icon="image" />}
@@ -199,7 +199,7 @@ class ItEntryScreen extends Component {
           </List.Accordion>
           <List.Accordion
             id="sort"
-            title={`First show ${sortOrder === 'asc' ? 'oldest' : 'newest'} observations`}
+            title={`Show ${sortOrder === 'asc' ? 'oldest' : 'newest'} observations first`}
             description="Sort observations by date of creation."
             descriptionNumberOfLines={10}
             left={(props) => <List.Icon {...props} icon="sort" />}
@@ -215,7 +215,7 @@ class ItEntryScreen extends Component {
           <List.Accordion
             id="captive"
             title={`Show ${isCaptive ? 'only' : 'no'} captive/cultivated`}
-            description="Show observations that are marked as cultivated, or not, or both (i.e. doesn't matter)."
+            description="Show only observations that are marked as cultivated, or exclude those"
             descriptionNumberOfLines={10}
             left={(props) => <List.Icon {...props} icon="flower" />}
           >
