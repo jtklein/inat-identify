@@ -1,0 +1,73 @@
+version: 2
+updates:
+- package-ecosystem: npm
+  directory: "/"
+  schedule:
+    interval: daily
+  open-pull-requests-limit: 10
+  ignore:
+  - dependency-name: detox
+    versions:
+    - 18.10.0
+    - 18.11.1
+    - 18.11.2
+    - 18.12.0
+    - 18.12.1
+    - 18.3.1
+    - 18.6.0
+    - 18.6.2
+    - 18.7.0
+    - 18.7.1
+    - 18.8.0
+    - 18.8.1
+    - 18.9.0
+  - dependency-name: eslint
+    versions:
+    - 7.20.0
+    - 7.21.0
+    - 7.22.0
+    - 7.23.0
+    - 7.24.0
+  - dependency-name: react-native-screens
+    versions:
+    - 2.17.1
+    - 2.18.0
+    - 2.18.1
+    - 3.0.0
+    - 3.1.0
+  - dependency-name: react-native-reanimated
+    versions:
+    - 1.13.2
+    - 2.0.0
+    - 2.0.1
+  - dependency-name: react-native-gesture-handler
+    versions:
+    - 1.10.0
+    - 1.10.1
+    - 1.10.2
+    - 1.9.0
+  - dependency-name: expo-auth-session
+    versions:
+    - 3.1.0
+  - dependency-name: expo-web-browser
+    versions:
+    - 9.0.0
+  - dependency-name: react-navigation-header-buttons
+    versions:
+    - 6.0.2
+    - 6.1.0
+    - 6.2.0
+    - 6.2.1
+  - dependency-name: flow-bin
+    versions:
+    - 0.143.1
+    - 0.144.0
+  - dependency-name: react-native-paper
+    versions:
+    - 4.7.1
+  - dependency-name: axios
+    versions:
+    - 0.21.1
+  - dependency-name: react-test-renderer
+    versions:
+    - 17.0.1
