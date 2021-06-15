@@ -65,8 +65,7 @@ class App extends Component {
             headerStyle,
             headerTintColor,
             headerTitleStyle,
-          }}
-        >
+          }}>
           {signedIn ? (
             <>
               <AppStack.Screen
@@ -76,7 +75,12 @@ class App extends Component {
                   title: 'Swiper',
                   headerRight: () => (
                     <ItHeaderButtons>
-                      <HeaderItem testID="header_settings_button" title="settings" iconName="add-circle-outline" onPress={() => navigation.navigate('Settings')} />
+                      <HeaderItem
+                        testID="header_settings_button"
+                        title="settings"
+                        iconName="more-horiz"
+                        onPress={() => navigation.navigate('Settings')}
+                      />
                     </ItHeaderButtons>
                   ),
                 })}
