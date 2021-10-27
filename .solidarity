@@ -5,7 +5,7 @@
       {
         "rule": "cli",
         "binary": "node",
-        "semver": "15.14.0"
+        "semver": "14.18.0"
       }
     ],
     "Watchman": [
@@ -28,7 +28,7 @@
       {
         "rule": "cli",
         "binary": "react-native",
-        "semver": "0.63.2",
+        "semver": "0.64.2",
         "line": 2
       }
     ],
@@ -36,7 +36,7 @@
       {
         "rule": "cli",
         "binary": "expo",
-        "semver": "4.11.0"
+        "semver": "4.12.10"
       }
     ],
     "Package JSON": [
@@ -49,7 +49,7 @@
       {
         "rule": "cli",
         "binary": "npm",
-        "semver": "7.7.6"
+        "semver": "6.14.15"
       }
     ],
     "Yarn": [
@@ -57,7 +57,7 @@
         "rule": "cli",
         "binary": "yarn",
         "version": "--version",
-        "semver": "1.22.10"
+        "semver": "1.22.15"
       }
     ],
     "Detox": [
