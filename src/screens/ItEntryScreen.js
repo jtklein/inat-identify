@@ -146,7 +146,7 @@ class ItEntryScreen extends Component {
     this.setState({ dateOpen: true, dateMode });
   };
 
-  clearDate = (dateMode) => {
+  clearDate = () => {
     const { changeSwipeStartDate, changeSwipeEndDate } = this.props;
     changeSwipeStartDate(null);
     changeSwipeEndDate(null);
@@ -260,8 +260,8 @@ class ItEntryScreen extends Component {
             title={`${
               !startDate
                 ? 'Show all observations'
-                : 'From ' + startDate.toDateString()
-            }${!endDate ? '' : ' to ' + endDate.toDateString()}`}
+                : ('From ' + startDate.toDateString())
+            }${!endDate ? '' : (' to ' + endDate.toDateString())}`}
             description="Show only observations that are from a specified date range"
             descriptionNumberOfLines={10}
             left={(props) => <List.Icon {...props} icon="calendar" />}>
