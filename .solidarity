@@ -28,7 +28,7 @@
       {
         "rule": "cli",
         "binary": "react-native",
-        "semver": "0.64.2",
+        "semver": "0.64.3",
         "line": 2
       }
     ],
