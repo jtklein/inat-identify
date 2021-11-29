@@ -4,6 +4,8 @@ import { Provider } from 'react-redux';
 import { Provider as PaperProvider } from 'react-native-paper';
 import { enableScreens } from 'react-native-screens';
 import { PersistGate } from 'redux-persist/integration/react';
+import { en, registerTranslation } from 'react-native-paper-dates';
+
 import configureStore from './store';
 
 import ItAppContainer from './ItAppContainer';
@@ -17,6 +19,8 @@ if (!__DEV__) {
 enableScreens();
 
 const { store, persistor } = configureStore();
+
+registerTranslation('en', en);
 
 class ItApp extends React.Component {
   render() {

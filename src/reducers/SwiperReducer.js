@@ -12,6 +12,8 @@ import {
   SWIPER_PHOTOS_CHANGED,
   SWIPER_SORT_CHANGED,
   SWIPER_CAPTIVE_CHANGED,
+  SWIPER_START_DATE_CHANGED,
+  SWIPER_END_DATE_CHANGED,
 } from '../actions/types';
 
 const INITIAL_STATE = {
@@ -38,6 +40,8 @@ const INITIAL_STATE = {
   maxPhotos: 1,
   sortOrder: 'asc',
   isCaptive: false,
+  startDate: undefined,
+  endDate: undefined,
 };
 
 export default (state = INITIAL_STATE, action) => {
@@ -68,7 +72,10 @@ export default (state = INITIAL_STATE, action) => {
         },
       };
     case SWIPER_RIGHT_UNSUBSCRIBED:
-      return { ...state, swipeRight: { ...state.swipeRight, subscribe: false } };
+      return {
+        ...state,
+        swipeRight: { ...state.swipeRight, subscribe: false },
+      };
     case SWIPER_TOP_CHANGED:
       return {
         ...state,
@@ -103,6 +110,16 @@ export default (state = INITIAL_STATE, action) => {
       return {
         ...state,
         isCaptive: action.payload.value,
+      };
+    case SWIPER_START_DATE_CHANGED:
+      return {
+        ...state,
+        startDate: action.payload,
+      };
+    case SWIPER_END_DATE_CHANGED:
+      return {
+        ...state,
+        endDate: action.payload,
       };
     default:
       return state;

@@ -12,6 +12,7 @@ import {
   Searchbar,
 } from 'react-native-paper';
 import inatjs from 'inaturalistjs';
+import { DatePickerModal } from 'react-native-paper-dates';
 
 import {
   ItScreenContainer,
@@ -31,6 +32,8 @@ import {
   SWIPER_PHOTOS_CHANGED,
   SWIPER_SORT_CHANGED,
   SWIPER_CAPTIVE_CHANGED,
+  SWIPER_START_DATE_CHANGED,
+  SWIPER_END_DATE_CHANGED,
 } from '../actions/types';
 
 const defaultPlaces = [
@@ -115,6 +118,8 @@ class ItEntryScreen extends Component {
   INITIAL_STATE = {
     showFilter: true,
     placeSearchText: undefined,
+    dateOpen: false,
+    dateMode: 'start',
   };
 
   constructor(props) {
@@ -124,18 +129,40 @@ class ItEntryScreen extends Component {
 
   onFilterPressed = () => {
     this.setState({ showFilter: true });
-  }
+  };
 
   onActionsPressed = () => {
     this.setState({ showFilter: false });
-  }
+  };
 
   onChangePlaceSearch = (text) => {
     this.setState({ placeSearchText: text });
     inatjs.places
       .autocomplete({ q: text, order_by: 'area' })
       .then((rsp) => this.setState({ places: rsp.results }));
-  }
+  };
+
+  openDate = (dateMode) => {
+    this.setState({ dateOpen: true, dateMode });
+  };
+
+  clearDate = (dateMode) => {
+    const { changeSwipeStartDate, changeSwipeEndDate } = this.props;
+    changeSwipeStartDate(null);
+    changeSwipeEndDate(null);
+  };
+
+  onConfirmDate = (date) => {
+    const { dateMode } = this.state;
+    const { changeSwipeStartDate, changeSwipeEndDate } = this.props;
+    if (dateMode === 'start') {
+      changeSwipeStartDate(date);
+    }
+    if (dateMode === 'end') {
+      changeSwipeEndDate(date);
+    }
+    this.setState({ dateOpen: false });
+  };
 
   renderFilterSettings = () => {
     const { placeSearchText, places } = this.state;
@@ -146,12 +173,8 @@ class ItEntryScreen extends Component {
       changeSwipeIsCaptive,
       swiper,
     } = this.props;
-    const {
-      place,
-      maxPhotos,
-      sortOrder,
-      isCaptive,
-    } = swiper;
+    const { place, maxPhotos, sortOrder, isCaptive, startDate, endDate } =
+      swiper;
     const { container } = styles;
     return (
       <View style={container}>
@@ -161,34 +184,38 @@ class ItEntryScreen extends Component {
             title={`Only from ${place.label}`}
             description="Show observations from a certain place only."
             descriptionNumberOfLines={10}
-            left={(props) => <List.Icon {...props} icon="map-marker" />}
-          >
+            left={(props) => <List.Icon {...props} icon="map-marker" />}>
             <Searchbar
               placeholder="Search"
               onChangeText={this.onChangePlaceSearch}
               value={placeSearchText}
             />
-            {places ? places.map((p) => (
-              <List.Item
-                key={p.id}
-                title={p.display_name}
-                onPress={() => changeSwipePlace({ ...p, label: p.display_name })}
-              />
-            )) : defaultPlaces.map((p) => (
-              <List.Item
-                key={p.id}
-                title={p.label}
-                onPress={() => changeSwipePlace(p)}
-              />
-            ))}
+            {places
+              ? places.map((p) => (
+                  <List.Item
+                    key={p.id}
+                    title={p.display_name}
+                    onPress={() =>
+                      changeSwipePlace({ ...p, label: p.display_name })
+                    }
+                  />
+                ))
+              : defaultPlaces.map((p) => (
+                  <List.Item
+                    key={p.id}
+                    title={p.label}
+                    onPress={() => changeSwipePlace(p)}
+                  />
+                ))}
           </List.Accordion>
           <List.Accordion
             id="photos"
-            title={`Observations with ${maxPhotos === 1 ? 'one photo' : 'one or more photos'}`}
+            title={`Observations with ${
+              maxPhotos === 1 ? 'one photo' : 'one or more photos'
+            }`}
             description="Show observations with only one photo, or don't filter by number of photos."
             descriptionNumberOfLines={10}
-            left={(props) => <List.Icon {...props} icon="image" />}
-          >
+            left={(props) => <List.Icon {...props} icon="image" />}>
             {photosOptions.map((p) => (
               <List.Item
                 key={p.label}
@@ -199,11 +226,12 @@ class ItEntryScreen extends Component {
           </List.Accordion>
           <List.Accordion
             id="sort"
-            title={`Show ${sortOrder === 'asc' ? 'oldest' : 'newest'} observations first`}
+            title={`Show ${
+              sortOrder === 'asc' ? 'oldest' : 'newest'
+            } observations first`}
             description="Sort observations by date of creation."
             descriptionNumberOfLines={10}
-            left={(props) => <List.Icon {...props} icon="sort" />}
-          >
+            left={(props) => <List.Icon {...props} icon="sort" />}>
             {sortOptions.map((p) => (
               <List.Item
                 key={p.label}
@@ -217,8 +245,7 @@ class ItEntryScreen extends Component {
             title={`Show ${isCaptive ? 'only' : 'no'} captive/cultivated`}
             description="Show only observations that are marked as cultivated, or exclude those"
             descriptionNumberOfLines={10}
-            left={(props) => <List.Icon {...props} icon="flower" />}
-          >
+            left={(props) => <List.Icon {...props} icon="flower" />}>
             {captiveOptions.map((p) => (
               <List.Item
                 key={p.label}
@@ -227,10 +254,34 @@ class ItEntryScreen extends Component {
               />
             ))}
           </List.Accordion>
+          <List.Accordion
+            id="date"
+            title={`${!startDate ? "Show all observations" : 'From ' + startDate}${
+              !endDate ? "" : ' to ' + endDate
+            }`}
+            description="Show only observations that are from a specified date range"
+            descriptionNumberOfLines={10}
+            left={(props) => <List.Icon {...props} icon="calendar" />}>
+            <List.Item
+              key="start"
+              title="Set start date"
+              onPress={() => this.openDate('start')}
+            />
+            <List.Item
+              key="end"
+              title="Set end date"
+              onPress={() => this.openDate('end')}
+            />
+            <List.Item
+              key="clear"
+              title="Clear date range"
+              onPress={() => this.clearDate()}
+            />
+          </List.Accordion>
         </List.AccordionGroup>
       </View>
     );
-  }
+  };
 
   renderActionsSettings = () => {
     const {
@@ -245,9 +296,7 @@ class ItEntryScreen extends Component {
       unsubscribeSwipeTop,
       swiper,
     } = this.props;
-    const {
-      swipeLeft, swipeRight, swipeTop,
-    } = swiper;
+    const { swipeLeft, swipeRight, swipeTop } = swiper;
 
     const { container, subscriptionContainer } = styles;
     return (
@@ -258,9 +307,8 @@ class ItEntryScreen extends Component {
             title={`Swipe left = ${swipeLeft.label}`}
             description="The observation will be identified as this taxon when swiped to the left."
             descriptionNumberOfLines={10}
-            left={props => <List.Icon {...props} icon="arrow-left-bold" />}
-          >
-            {taxa.map(taxon => (
+            left={(props) => <List.Icon {...props} icon="arrow-left-bold" />}>
+            {taxa.map((taxon) => (
               <List.Item
                 key={taxon.id}
                 title={taxon.label}
@@ -273,9 +321,10 @@ class ItEntryScreen extends Component {
             <Switch
               testID="subscribe_left"
               value={swipeLeft.subscribe}
-              onValueChange={() => (swipeLeft.subscribe
-                ? unsubscribeSwipeLeft()
-                : subscribeSwipeLeft())
+              onValueChange={() =>
+                swipeLeft.subscribe
+                  ? unsubscribeSwipeLeft()
+                  : subscribeSwipeLeft()
               }
             />
           </View>
@@ -285,9 +334,8 @@ class ItEntryScreen extends Component {
             title={`Swipe right = ${swipeRight.label}`}
             description="The observation will be identified as this taxon when swiped to the right."
             descriptionNumberOfLines={10}
-            left={props => <List.Icon {...props} icon="arrow-right-bold" />}
-          >
-            {taxa.map(taxon => (
+            left={(props) => <List.Icon {...props} icon="arrow-right-bold" />}>
+            {taxa.map((taxon) => (
               <List.Item
                 key={taxon.id}
                 title={taxon.label}
@@ -300,9 +348,10 @@ class ItEntryScreen extends Component {
             <Switch
               testID="subscribe_right"
               value={swipeRight.subscribe}
-              onValueChange={() => (swipeRight.subscribe
-                ? unsubscribeSwipeRight()
-                : subscribeSwipeRight())
+              onValueChange={() =>
+                swipeRight.subscribe
+                  ? unsubscribeSwipeRight()
+                  : subscribeSwipeRight()
               }
             />
           </View>
@@ -312,9 +361,8 @@ class ItEntryScreen extends Component {
             title={`Swipe top = ${swipeTop.label}`}
             description="The observation will be identified as this taxon when swiped to the top."
             descriptionNumberOfLines={10}
-            left={(props) => <List.Icon {...props} icon="arrow-up-bold" />}
-          >
-            {taxa.map(taxon => (
+            left={(props) => <List.Icon {...props} icon="arrow-up-bold" />}>
+            {taxa.map((taxon) => (
               <List.Item
                 key={taxon.id}
                 title={taxon.label}
@@ -327,22 +375,26 @@ class ItEntryScreen extends Component {
             <Switch
               testID="subscribe_top"
               value={swipeTop.subscribe}
-              onValueChange={() => (swipeTop.subscribe ? unsubscribeSwipeTop() : subscribeSwipeTop())}
+              onValueChange={() =>
+                swipeTop.subscribe ? unsubscribeSwipeTop() : subscribeSwipeTop()
+              }
             />
           </View>
         </List.AccordionGroup>
       </View>
     );
-  }
+  };
 
   renderSettings = () => {
     const { showFilter } = this.state;
-    return showFilter ? this.renderFilterSettings() : this.renderActionsSettings();
-  }
+    return showFilter
+      ? this.renderFilterSettings()
+      : this.renderActionsSettings();
+  };
 
   render() {
     const { navigation } = this.props;
-    const { showFilter } = this.state;
+    const { showFilter, date, dateOpen } = this.state;
     const { container, screenContainer } = styles;
     return (
       <ItScreenContainer>
@@ -355,8 +407,7 @@ class ItEntryScreen extends Component {
               dark
               icon="filter-variant"
               mode={showFilter ? 'contained' : 'outlined'}
-              onPress={() => this.onFilterPressed()}
-            >
+              onPress={() => this.onFilterPressed()}>
               Filter
             </Button>
             <Button
@@ -364,19 +415,25 @@ class ItEntryScreen extends Component {
               dark
               icon="arrow-expand-all"
               mode={!showFilter ? 'contained' : 'outlined'}
-              onPress={() => this.onActionsPressed()}
-            >
+              onPress={() => this.onActionsPressed()}>
               Actions
             </Button>
           </View>
           <View style={container}>{this.renderSettings()}</View>
           <Button
             testID="start_swiper"
-            onPress={() => navigation.navigate('Identify')}
-          >
+            onPress={() => navigation.navigate('Identify')}>
             Start swiping
           </Button>
         </ScrollView>
+        <DatePickerModal
+          locale="en"
+          mode="single"
+          visible={dateOpen}
+          onDismiss={() => this.setState({ dateOpen: false })}
+          date={date}
+          onConfirm={(p) => this.onConfirmDate(p.date)}
+        />
       </ItScreenContainer>
     );
   }
@@ -403,7 +460,7 @@ const mapStateToProps = state => ({
   swiper: state.swiper,
 });
 
-const mapDispatchToProps = dispatch => ({
+const mapDispatchToProps = (dispatch) => ({
   changeSwipeLeft: (payload) => {
     dispatch({ type: SWIPER_LEFT_CHANGED, payload });
   },
@@ -442,6 +499,12 @@ const mapDispatchToProps = dispatch => ({
   },
   changeSwipeIsCaptive: (payload) => {
     dispatch({ type: SWIPER_CAPTIVE_CHANGED, payload });
+  },
+  changeSwipeStartDate: (payload) => {
+    dispatch({ type: SWIPER_START_DATE_CHANGED, payload });
+  },
+  changeSwipeEndDate: (payload) => {
+    dispatch({ type: SWIPER_END_DATE_CHANGED, payload });
   },
 });
 
