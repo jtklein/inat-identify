@@ -155,12 +155,11 @@ class ItEntryScreen extends Component {
   onConfirmDate = (date) => {
     const { dateMode } = this.state;
     const { changeSwipeStartDate, changeSwipeEndDate } = this.props;
-    const saveDate = new Date(date);
     if (dateMode === 'start') {
-      changeSwipeStartDate(saveDate);
+      changeSwipeStartDate(date.toISOString());
     }
     if (dateMode === 'end') {
-      changeSwipeEndDate(saveDate);
+      changeSwipeEndDate(date.toISOString());
     }
     this.setState({ dateOpen: false });
   };
@@ -260,8 +259,8 @@ class ItEntryScreen extends Component {
             title={`${
               !startDate
                 ? 'Show all observations'
-                : ('From ' + startDate.toDateString())
-            }${!endDate ? '' : (' to ' + endDate.toDateString())}`}
+                : ('From ' + new Date(startDate).toDateString())
+            }${!endDate ? '' : (' to ' + new Date(endDate).toDateString())}`}
             description="Show only observations that are from a specified date range"
             descriptionNumberOfLines={10}
             left={(props) => <List.Icon {...props} icon="calendar" />}>

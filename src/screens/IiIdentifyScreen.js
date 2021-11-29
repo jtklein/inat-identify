@@ -276,8 +276,8 @@ class IiIdentifyScreen extends Component {
       order_by: 'created_at',
       without_taxon_id: [67333, 131236, 151817],
       captive: isCaptive,
-      d1: startDate.toISOString(),
-      d2: endDate.toISOString(),
+      d1: startDate,
+      d2: endDate,
     };
 
     inatjs.observations
