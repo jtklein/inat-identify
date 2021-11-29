@@ -260,7 +260,7 @@ class IiIdentifyScreen extends Component {
   searchObservations() {
     const { user, page } = this.state;
     const { swiper } = this.props;
-    const { place, maxPhotos, sortOrder, isCaptive } = swiper;
+    const { place, maxPhotos, sortOrder, isCaptive, startDate, endDate } = swiper;
     const params = {
       iconic_taxa: 'unknown',
       quality_grade: 'needs_id',
@@ -276,6 +276,8 @@ class IiIdentifyScreen extends Component {
       order_by: 'created_at',
       without_taxon_id: [67333, 131236, 151817],
       captive: isCaptive,
+      d1: startDate.toISOString(),
+      d2: endDate.toISOString(),
     };
 
     inatjs.observations
@@ -286,7 +288,7 @@ class IiIdentifyScreen extends Component {
           console.log('No results');
           Alert.alert(
             'Great news!',
-            'There are no observations found with this filter settings. Everything in this batch is identified. Check back at a later time.',
+            'There are no observations found with this filter settings. Everything in this batch is identified. Check back at a later time or change your filter settings now.',
           );
           return;
         }
