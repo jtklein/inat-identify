@@ -23,20 +23,14 @@
       {
         "rule": "cli",
         "binary": "react-native",
-        "semver": "2.0.1"
-      },
-      {
-        "rule": "cli",
-        "binary": "react-native",
-        "semver": "0.68.2",
-        "line": 2
+        "semver": "7.0.3"
       }
     ],
     "Expo": [
       {
         "rule": "cli",
         "binary": "expo",
-        "semver": "5.4.11"
+        "semver": "5.4.12"
       }
     ],
     "Package JSON": [
