@@ -1,23 +1,11 @@
-import React, { Component } from 'react';
-import {
-  StyleSheet,
-  View,
-  ScrollView,
-} from 'react-native';
+import React, { useState } from 'react';
+import { StyleSheet, View, ScrollView } from 'react-native';
 import { connect } from 'react-redux';
-import {
-  Switch,
-  List,
-  Button,
-  Searchbar,
-} from 'react-native-paper';
+import { Switch, List, Button, Searchbar } from 'react-native-paper';
 import inatjs from 'inaturalistjs';
 import { DatePickerModal } from 'react-native-paper-dates';
 
-import {
-  ItScreenContainer,
-  ItText,
-} from '../components/common';
+import { ItScreenContainer, ItText } from '../components/common';
 import {
   SWIPER_LEFT_CHANGED,
   SWIPER_RIGHT_CHANGED,
@@ -114,65 +102,61 @@ const captiveOptions = [
   },
 ];
 
-class ItEntryScreen extends Component {
-  INITIAL_STATE = {
-    showFilter: true,
-    placeSearchText: undefined,
-    dateOpen: false,
-    dateMode: 'start',
-  };
+const ItEntryScreen = (props) => {
+  const [showFilter, setShowFilter] = useState(true);
+  const [placeSearchText, setPlaceSearchText] = useState(undefined);
+  const [dateOpen, setDateOpen] = useState(false);
+  const [dateMode, setDateMode] = useState('start');
+  const [places, setPlaces] = useState();
 
-  constructor(props) {
-    super(props);
-    this.state = this.INITIAL_STATE;
-  }
+  const { navigation } = props;
+  const { container, screenContainer } = styles;
 
   onFilterPressed = () => {
-    this.setState({ showFilter: true });
+    setShowFilter(true);
   };
 
   onActionsPressed = () => {
-    this.setState({ showFilter: false });
+    setShowFilter(false);
   };
 
   onChangePlaceSearch = (text) => {
-    this.setState({ placeSearchText: text });
+    setPlaceSearchText(text);
     inatjs.places
       .autocomplete({ q: text, order_by: 'area' })
-      .then((rsp) => this.setState({ places: rsp.results }));
+      .then((rsp) => setPlaces(rsp.results));
   };
 
   openDate = (dateMode) => {
-    this.setState({ dateOpen: true, dateMode });
+    setDateOpen(true);
+    setDateMode(dateMode);
   };
 
   clearDate = () => {
-    const { changeSwipeStartDate, changeSwipeEndDate } = this.props;
+    const { changeSwipeStartDate, changeSwipeEndDate } = props;
     changeSwipeStartDate(null);
     changeSwipeEndDate(null);
   };
 
   onConfirmDate = (date) => {
-    const { dateMode } = this.state;
-    const { changeSwipeStartDate, changeSwipeEndDate } = this.props;
+    const { changeSwipeStartDate, changeSwipeEndDate } = props;
     if (dateMode === 'start') {
       changeSwipeStartDate(date.toISOString());
     }
     if (dateMode === 'end') {
       changeSwipeEndDate(date.toISOString());
     }
-    this.setState({ dateOpen: false });
+    setDateOpen(false);
   };
 
   renderFilterSettings = () => {
-    const { placeSearchText, places } = this.state;
     const {
       changeSwipePlace,
       changeSwipePhotos,
       changeSwipeSort,
       changeSwipeIsCaptive,
       swiper,
-    } = this.props;
+    } = props;
     const { place, maxPhotos, sortOrder, isCaptive, startDate, endDate } =
       swiper;
     const { container } = styles;
@@ -187,7 +171,7 @@ class ItEntryScreen extends Component {
             left={(props) => <List.Icon {...props} icon="map-marker" />}>
             <Searchbar
               placeholder="Search"
-              onChangeText={this.onChangePlaceSearch}
+              onChangeText={onChangePlaceSearch}
               value={placeSearchText}
             />
             {places
@@ -259,25 +243,25 @@ class ItEntryScreen extends Component {
             title={`${
               !startDate
                 ? 'Show all observations'
-                : ('From ' + new Date(startDate).toDateString())
-            }${!endDate ? '' : (' to ' + new Date(endDate).toDateString())}`}
+                : 'From ' + new Date(startDate).toDateString()
+            }${!endDate ? '' : ' to ' + new Date(endDate).toDateString()}`}
             description="Show only observations that are from a specified date range"
             descriptionNumberOfLines={10}
             left={(props) => <List.Icon {...props} icon="calendar" />}>
             <List.Item
               key="start"
               title="Set start date"
-              onPress={() => this.openDate('start')}
+              onPress={() => openDate('start')}
             />
             <List.Item
               key="end"
               title="Set end date"
-              onPress={() => this.openDate('end')}
+              onPress={() => openDate('end')}
             />
             <List.Item
               key="clear"
               title="Clear date range"
-              onPress={() => this.clearDate()}
+              onPress={() => clearDate()}
             />
           </List.Accordion>
         </List.AccordionGroup>
@@ -297,7 +281,7 @@ class ItEntryScreen extends Component {
       subscribeSwipeTop,
       unsubscribeSwipeTop,
       swiper,
-    } = this.props;
+    } = props;
     const { swipeLeft, swipeRight, swipeTop } = swiper;
 
     const { container, subscriptionContainer } = styles;
@@ -388,58 +372,49 @@ class ItEntryScreen extends Component {
   };
 
   renderSettings = () => {
-    const { showFilter } = this.state;
-    return showFilter
-      ? this.renderFilterSettings()
-      : this.renderActionsSettings();
+    return showFilter ? renderFilterSettings() : renderActionsSettings();
   };
 
-  render() {
-    const { navigation } = this.props;
-    const { showFilter, date, dateOpen } = this.state;
-    const { container, screenContainer } = styles;
-    return (
-      <ItScreenContainer>
-        <ScrollView style={screenContainer}>
-          <View
-            testID="settings_screen"
-            style={{ flexDirection: 'row', justifyContent: 'space-evenly' }}>
-            <Button
-              testID="filter_tab"
-              dark
-              icon="filter-variant"
-              mode={showFilter ? 'contained' : 'outlined'}
-              onPress={() => this.onFilterPressed()}>
-              Filter
-            </Button>
-            <Button
-              testID="actions_tab"
-              dark
-              icon="arrow-expand-all"
-              mode={!showFilter ? 'contained' : 'outlined'}
-              onPress={() => this.onActionsPressed()}>
-              Actions
-            </Button>
-          </View>
-          <View style={container}>{this.renderSettings()}</View>
+  return (
+    <ItScreenContainer>
+      <ScrollView style={screenContainer}>
+        <View
+          testID="settings_screen"
+          style={{ flexDirection: 'row', justifyContent: 'space-evenly' }}>
           <Button
-            testID="start_swiper"
-            onPress={() => navigation.navigate('Identify')}>
-            Start swiping
+            testID="filter_tab"
+            dark
+            icon="filter-variant"
+            mode={showFilter ? 'contained' : 'outlined'}
+            onPress={() => onFilterPressed()}>
+            Filter
           </Button>
-        </ScrollView>
-        <DatePickerModal
-          locale="en"
-          mode="single"
-          visible={dateOpen}
-          onDismiss={() => this.setState({ dateOpen: false })}
-          date={date}
-          onConfirm={(p) => this.onConfirmDate(p.date)}
-        />
-      </ItScreenContainer>
-    );
-  }
-}
+          <Button
+            testID="actions_tab"
+            dark
+            icon="arrow-expand-all"
+            mode={!showFilter ? 'contained' : 'outlined'}
+            onPress={() => onActionsPressed()}>
+            Actions
+          </Button>
+        </View>
+        <View style={container}>{renderSettings()}</View>
+        <Button
+          testID="start_swiper"
+          onPress={() => navigation.navigate('Identify')}>
+          Start swiping
+        </Button>
+      </ScrollView>
+      <DatePickerModal
+        locale="en"
+        mode="single"
+        visible={dateOpen}
+        onDismiss={() => setDateOpen(false)}
+        onConfirm={(p) => onConfirmDate(p.date)}
+      />
+    </ItScreenContainer>
+  );
+};
 
 const styles = StyleSheet.create({
   container: {
@@ -458,7 +433,7 @@ const styles = StyleSheet.create({
   },
 });
 
-const mapStateToProps = state => ({
+const mapStateToProps = (state) => ({
   swiper: state.swiper,
 });
 
