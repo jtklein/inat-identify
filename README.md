@@ -14,28 +14,35 @@ iNat-Toolcat is an open-source smartphone application for identifying large batc
 If you like iNat-Toolcat and want to help make it better then you are warmly welcome to contribute to this repository.
 
 ## Prerequisites
-
+You need to have the expo-cli globally on your system.
 ```bash
-$ npm install -g expo-cli
+npm install -g expo-cli
 ```
 
-## Install packages
-
-1. Run `yarn install`
+## Install packagess
+1. Run
+```bash
+yarn install
+```
 
 ## Run build
+1. Run
+```bash
+yarn start
+```
+This will check if you have relevant keys, tokens, or otherwise required secrets in your repository.
 
-1. Run `yarn start`
+
 
 # E2e testing
 If Expo and the iOS Simulator aren’t still running, start them:
 
 ```bash
-$ yarn ios
+yarn ios
 ```
 
 Then, in another terminal, run Detox:
 
 ```bash
-$ detox test
+detox test
 ```
