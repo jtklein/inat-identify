@@ -127,9 +127,9 @@ const ItEntryScreen = (props) => {
       .then((rsp) => setPlaces(rsp.results));
   };
 
-  openDate = (dateMode) => {
+  openDate = (newDateMode) => {
     setDateOpen(true);
-    setDateMode(dateMode);
+    setDateMode(newDateMode);
   };
 
   clearDate = () => {
