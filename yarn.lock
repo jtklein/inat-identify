@@ -5889,7 +5889,7 @@ expo-web-browser@~10.2.0, expo-web-browser@~10.2.1:
   dependencies:
     compare-urls "^2.0.0"
 
-expo@^45.0.0:
+expo@^45.0.6:
   version "45.0.6"
   resolved "https://registry.yarnpkg.com/expo/-/expo-45.0.6.tgz#9c336d2052022b0606b07d02e2bd0f41d39109ab"
   integrity sha512-QOemudowFuzgxmK/bNMdOngpBOf6yLkkA9zWBcMQYEDyaz16GLVm1IpzZ2nAFuUKuwUkzvB62QzQDIFS7jdN5g==
