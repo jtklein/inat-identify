@@ -10,8 +10,22 @@ iNat-Toolcat is an open-source smartphone application for identifying large batc
 - [`e2e`](/e2e) Source code for end-to-end testing.
 - [`src`](/src) React-native source code for the app.
 
-## 👏 Contributing
+# 👏 Contributing
 If you like iNat-Toolcat and want to help make it better then you are warmly welcome to contribute to this repository.
+
+## Prerequisites
+
+```bash
+$ npm install -g expo-cli
+```
+
+## Install packages
+
+1. Run `yarn install`
+
+## Run build
+
+1. Run `yarn start`
 
 # E2e testing
 If Expo and the iOS Simulator aren’t still running, start them:
@@ -25,6 +39,3 @@ Then, in another terminal, run Detox:
 ```bash
 $ detox test
 ```
-
-expo build:ios --type archive
-expo build:android --type app-bundle
