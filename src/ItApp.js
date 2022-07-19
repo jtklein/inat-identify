@@ -11,10 +11,13 @@ import configureStore from './store';
 import ItAppContainer from './ItAppContainer';
 
 import { theme } from './styles';
+import { LogBox } from 'react-native';
 
 if (!__DEV__) {
   console.log = () => {};
 }
+
+LogBox.ignoreAllLogs();
 
 enableScreens();
 
