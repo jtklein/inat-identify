@@ -19,6 +19,13 @@ You need to have the expo-cli globally on your system.
 npm install -g expo-cli
 ```
 
+You need to have access tokens to an app that you created on iNaturalist and your JWT for quicker development. Paste them into the files created by this script in the secrets folder.
+```bash
+mkdir secrets
+cp oauth_example.json ./secrets/oauth.json
+cp api_token_example.json ./secrets/api_token.json
+```
+
 ## Install packagess
 1. Run
 ```bash
